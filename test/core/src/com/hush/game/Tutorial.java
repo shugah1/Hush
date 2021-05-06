@@ -1,13 +1,14 @@
 package com.hush.game;
 
-import Entities.Player;
-import World.TiledGameMap;
+import com.hush.game.Entities.Player;
+import com.hush.game.World.TiledGameMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -15,12 +16,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Tutorial implements Screen {
 
-    private World world;
+    public static World world;
     private OrthographicCamera cam;
     SpriteBatch batch;
     private Player player;
     private Viewport gamePort;
     private Settings game;
+    private Box2DDebugRenderer b2dr;
 
     TiledGameMap gameMap;
 
@@ -29,13 +31,15 @@ public class Tutorial implements Screen {
         //Gdx.graphics.setWindowedMode(1920, 1080);
         batch = new SpriteBatch();
         cam = new OrthographicCamera();
-        gameMap = new TiledGameMap("C:\\Users\\stupp\\Desktop\\untitled.tmx");
+        world = new World(new Vector2(0, 0/ Settings.PPM), true);
+        gameMap = new TiledGameMap("C:\\Users\\stupp\\Desktop\\untitled.tmx", this);
         gamePort = new FitViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         //cam.setToOrtho(false, Gdx.graphics.getWidth()/ Settings.PPM, Gdx.graphics.getHeight()/ Settings.PPM);
         cam.update();
 
-        world = new World(new Vector2(0, 0/ Settings.PPM), true);
+        b2dr = new Box2DDebugRenderer();
+
 
 
         player = new Player(world);
@@ -48,7 +52,7 @@ public class Tutorial implements Screen {
     }
 
     public void update(float dt){
-        Player.handleInput(dt);
+        player.update(dt);
         cam.update();
         world.step(1/60f,6,2);
 
@@ -63,13 +67,13 @@ public class Tutorial implements Screen {
         game.batch.setProjectionMatrix(cam.combined);
 
         batch.begin();
-        //player.draw(batch);
+        player.draw(batch);
         cam.position.x = player.b2body.getPosition().x;
         cam.position.y = player.b2body.getPosition().y;
         cam.update();
         gameMap.update(Gdx.graphics.getDeltaTime());
         gameMap.render(cam, batch);
-        gameMap.b2dr.render(TiledGameMap.world, cam.combined);
+        b2dr.render(world, cam.combined);
 
 
 
@@ -103,6 +107,7 @@ public class Tutorial implements Screen {
     public void dispose() {
         batch.dispose();
         gameMap.dispose();
+        world.dispose();
 
     }
 }

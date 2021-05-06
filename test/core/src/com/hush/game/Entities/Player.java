@@ -1,4 +1,4 @@
-package Entities;
+package com.hush.game.Entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,22 +6,23 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.hush.game.MainMenu;
 import com.hush.game.Settings;
 
 public class Player extends Sprite {
 
-    private static final int SPEEDX = 80;
-    private static final int SPEEDY = 80;
+    private static final float  SPEEDX = 6.9f;
+    private static final float SPEEDY = 80;
     public World world;
     public static Body b2body;
+    private Vector2 moveVector = new Vector2();
+    Texture image = new Texture("badlogic.jpg");
 
 
 
     public Player(World world) {
         this.world = world;
         definePlayer();
-        update(1);
+        setRegion(image);
     }
 
     public void definePlayer(){
@@ -32,29 +33,39 @@ public class Player extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5 / Settings.PPM);
+        shape.setRadius(100 / Settings.PPM);
 
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
+
     }
 
-    public static void handleInput(float dt){
+    public void handleInput(float dt){
         //control our player using immediate impulses
-        if(Gdx.input.isKeyPressed(Input.Keys.W) && b2body.getLinearVelocity().y <= 2)
-            b2body.applyLinearImpulse(new Vector2(0,0.1f), b2body.getWorldCenter(), true);
-        if(Gdx.input.isKeyPressed(Input.Keys.D) && b2body.getLinearVelocity().x <= 2)
-            b2body.applyLinearImpulse(new Vector2(0.1f,0), b2body.getWorldCenter(), true);
-        if(Gdx.input.isKeyPressed(Input.Keys.A)&& b2body.getLinearVelocity().x >= -2)
-            b2body.applyLinearImpulse(new Vector2(-0.1f,0), b2body.getWorldCenter(), true);
-        if(Gdx.input.isKeyPressed(Input.Keys.S) && b2body.getLinearVelocity().y >= -2)
-            b2body.applyLinearImpulse(new Vector2(0,-0.1f), b2body.getWorldCenter(), true);
+        moveVector.set(0,0);
+        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+            moveVector.add(new Vector2(0,1));
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.S)){
+            moveVector.add(new Vector2(0,-1));
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+            moveVector.add(new Vector2(-1,0));
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+            moveVector.add(new Vector2(1,0));
+        }
+
 
     }
 
 
     //@Override
     public void update(float deltaTime){
+        handleInput(deltaTime);
+        b2body.setLinearVelocity(moveVector.scl(SPEEDX));
+        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, 1,2);
 
 
 
