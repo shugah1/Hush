@@ -1,5 +1,6 @@
 package com.hush.game;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.hush.game.Entities.Player;
 import com.hush.game.World.TiledGameMap;
 import com.badlogic.gdx.Gdx;
@@ -23,10 +24,12 @@ public class Tutorial implements Screen {
     private Viewport gamePort;
     private Settings game;
     private Box2DDebugRenderer b2dr;
+    private TextureAtlas atlas;
 
     TiledGameMap gameMap;
 
     public Tutorial(Settings game){
+        atlas = new TextureAtlas("test/core/assets/Sprites/Ninja.atlas");
         this.game = game;
         //Gdx.graphics.setWindowedMode(1920, 1080);
         batch = new SpriteBatch();
@@ -40,10 +43,12 @@ public class Tutorial implements Screen {
 
         b2dr = new Box2DDebugRenderer();
 
+        player = new Player(world, this);
 
+    }
 
-        player = new Player(world);
-
+    public TextureAtlas getAtlas(){
+        return atlas;
     }
 
     @Override
@@ -108,6 +113,7 @@ public class Tutorial implements Screen {
         batch.dispose();
         gameMap.dispose();
         world.dispose();
+        b2dr.dispose();
 
     }
 }
