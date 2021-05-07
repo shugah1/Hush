@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Settings extends Game {
 	public SpriteBatch batch;
-	public static final int V_WIDTH = 1920;
-	public static final int V_HEIGHT = 1080;
+	public static final int V_WIDTH = 800;
+	public static final int V_HEIGHT = 400;
 	public static final float PPM = 100;
 
 

@@ -1,6 +1,7 @@
 package com.hush.game;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.hush.game.Entities.Player;
 import com.hush.game.World.TiledGameMap;
 import com.badlogic.gdx.Gdx;
@@ -36,7 +37,7 @@ public class Tutorial implements Screen {
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
         gameMap = new TiledGameMap("C:\\Users\\stupp\\Desktop\\untitled.tmx", this);
-        gamePort = new FitViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
+        gamePort = new StretchViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         //cam.setToOrtho(false, Gdx.graphics.getWidth()/ Settings.PPM, Gdx.graphics.getHeight()/ Settings.PPM);
         cam.update();

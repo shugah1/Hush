@@ -1,5 +1,6 @@
 package com.hush.game.World;
 
+import com.hush.game.Settings;
 import com.hush.game.Tools.B2WorldCreator;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,7 +22,7 @@ public class TiledGameMap {
     public TiledGameMap(String map, Tutorial tut) {
         this.tut = tut;
         tiledMap = new TmxMapLoader().load(map);
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,1/16f);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,1/ Settings.PPM);
 
         b2dr = new Box2DDebugRenderer();
         new B2WorldCreator(tut, tiledMap);

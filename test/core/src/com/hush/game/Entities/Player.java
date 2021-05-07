@@ -81,7 +81,7 @@ public class Player extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(100 / Settings.PPM);
+        shape.setRadius(50 / Settings.PPM);
 
 
         fdef.shape = shape;
