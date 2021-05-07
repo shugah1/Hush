@@ -5,7 +5,7 @@ import com.hush.game.Settings;
 import com.hush.game.Tutorial;
 import com.hush.game.World.TiledGameMap;
 
-public class Wall {
+public class StaticWall {
 
     //declaring and initializing variables
     public World world;
@@ -17,7 +17,7 @@ public class Wall {
     public Body b2body;
 
 
-    public Wall(int x, int y, float w, float h, Tutorial screen) {
+    public StaticWall(int x, int y, float w, float h, Tutorial screen) {
         this.world = Tutorial.world;
 
         this.x = x;

@@ -1,5 +1,7 @@
 package com.hush.game;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.hush.game.Entities.Player;
 import com.hush.game.World.TiledGameMap;
 import com.badlogic.gdx.Gdx;
@@ -23,27 +25,31 @@ public class Tutorial implements Screen {
     private Viewport gamePort;
     private Settings game;
     private Box2DDebugRenderer b2dr;
+    private TextureAtlas atlas;
 
     TiledGameMap gameMap;
 
     public Tutorial(Settings game){
+        atlas = new TextureAtlas("test/core/assets/Sprites/Ninja.atlas");
         this.game = game;
         //Gdx.graphics.setWindowedMode(1920, 1080);
         batch = new SpriteBatch();
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
         gameMap = new TiledGameMap("C:\\Users\\stupp\\Desktop\\untitled.tmx", this);
-        gamePort = new FitViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
+        gamePort = new StretchViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         //cam.setToOrtho(false, Gdx.graphics.getWidth()/ Settings.PPM, Gdx.graphics.getHeight()/ Settings.PPM);
         cam.update();
 
         b2dr = new Box2DDebugRenderer();
 
+        player = new Player(world, this);
 
+    }
 
-        player = new Player(world);
-
+    public TextureAtlas getAtlas(){
+        return atlas;
     }
 
     @Override
@@ -108,6 +114,7 @@ public class Tutorial implements Screen {
         batch.dispose();
         gameMap.dispose();
         world.dispose();
+        b2dr.dispose();
 
     }
 }
