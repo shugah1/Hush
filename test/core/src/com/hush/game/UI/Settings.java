@@ -20,8 +20,6 @@ public class Settings extends Game {
 		Gdx.graphics.setWindowedMode(1920, 1080);
 
 
-
-
 	}
 
 	@Override

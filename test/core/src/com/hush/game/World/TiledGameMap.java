@@ -12,19 +12,19 @@ public class TiledGameMap {
 
     TiledMap tiledMap;
     public static OrthogonalTiledMapRenderer tiledMapRenderer;
-    Main tut;
+    Main main;
 
 
     //public static World world;
     public static Box2DDebugRenderer b2dr;
 
-    public TiledGameMap(String map, Main tut) {
-        this.tut = tut;
+    public TiledGameMap(String map, Main main) {
+        this.main = main;
         tiledMap = new TmxMapLoader().load(map);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,1/ Settings.PPM);
 
         b2dr = new Box2DDebugRenderer();
-        new B2WorldCreator(tut, tiledMap);
+        new B2WorldCreator(main, tiledMap);
 
     }
 
