@@ -9,8 +9,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.hush.game.Settings;
-import com.hush.game.Tutorial;
+import com.hush.game.UI.Settings;
+import com.hush.game.Screens.Main;
+import com.hush.game.World.Tags;
 
 public class Player extends Sprite {
     public enum State {IDLE, MOVING_ACROSS, MOVING_UP, MOVING_DOWN, ATTACKING}
@@ -29,7 +30,7 @@ public class Player extends Sprite {
 
 
 
-    public Player(World world, Tutorial screen) {
+    public Player(World world, Main screen) {
         super(screen.getAtlas().findRegion("SpriteSheet"));
         this.world = world;
         currentState = State.IDLE;
@@ -83,9 +84,13 @@ public class Player extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(50 / Settings.PPM);
 
+        fdef.filter.categoryBits = Tags.PLAYER_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT;
+
+
 
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData(this);
 
     }
 

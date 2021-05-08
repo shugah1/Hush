@@ -1,25 +1,24 @@
 package com.hush.game.World;
 
-import com.hush.game.Settings;
-import com.hush.game.Tools.B2WorldCreator;
+import com.hush.game.UI.Settings;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.*;
-import com.hush.game.Tutorial;
+import com.hush.game.Screens.Main;
 
 public class TiledGameMap {
 
     TiledMap tiledMap;
     public static OrthogonalTiledMapRenderer tiledMapRenderer;
-    Tutorial tut;
+    Main tut;
 
 
     //public static World world;
     public static Box2DDebugRenderer b2dr;
 
-    public TiledGameMap(String map, Tutorial tut) {
+    public TiledGameMap(String map, Main tut) {
         this.tut = tut;
         tiledMap = new TmxMapLoader().load(map);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,1/ Settings.PPM);

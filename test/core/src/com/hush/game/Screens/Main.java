@@ -1,8 +1,10 @@
-package com.hush.game;
+package com.hush.game.Screens;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.hush.game.Entities.Player;
+import com.hush.game.UI.Settings;
+import com.hush.game.World.WorldContactListener;
 import com.hush.game.World.TiledGameMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,11 +14,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 
-public class Tutorial implements Screen {
+public class Main implements Screen {
 
     public static World world;
     private OrthographicCamera cam;
@@ -29,7 +30,7 @@ public class Tutorial implements Screen {
 
     TiledGameMap gameMap;
 
-    public Tutorial(Settings game){
+    public Main(Settings game){
         atlas = new TextureAtlas("test/core/assets/Sprites/Ninja.atlas");
         this.game = game;
         //Gdx.graphics.setWindowedMode(1920, 1080);
@@ -45,6 +46,8 @@ public class Tutorial implements Screen {
         b2dr = new Box2DDebugRenderer();
 
         player = new Player(world, this);
+
+        world.setContactListener(new WorldContactListener());
 
     }
 

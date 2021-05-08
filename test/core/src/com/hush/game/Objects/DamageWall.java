@@ -1,11 +1,12 @@
-package com.hush.game.Tools;
+package com.hush.game.Objects;
 
 import com.badlogic.gdx.physics.box2d.*;
-import com.hush.game.Settings;
-import com.hush.game.Tutorial;
-import com.hush.game.World.TiledGameMap;
+import com.hush.game.Entities.Player;
+import com.hush.game.UI.Settings;
+import com.hush.game.Screens.Main;
+import com.hush.game.World.Tags;
 
-public class StaticWall {
+public class DamageWall {
 
     //declaring and initializing variables
     public World world;
@@ -17,8 +18,8 @@ public class StaticWall {
     public Body b2body;
 
 
-    public StaticWall(int x, int y, float w, float h, Tutorial screen) {
-        this.world = Tutorial.world;
+    public DamageWall(int x, int y, float w, float h, Main screen) {
+        this.world = Main.world;
 
         this.x = x;
         this.y = y;
@@ -34,12 +35,16 @@ public class StaticWall {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(this.w / Settings.PPM,this.h / Settings.PPM);
         fdef.friction = 0;
+
+        fdef.filter.categoryBits = Tags.DAMAGE_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT;
+
         fdef.shape = shape;
+        b2body.createFixture(fdef).setUserData(this);
         fix = b2body.createFixture(fdef);
-        fix.setUserData(this);
     }
 
-    public void contact() {
-        //
+    public void contact(Player player) {
+        System.exit(0);
     }
 }

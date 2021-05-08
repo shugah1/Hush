@@ -1,9 +1,8 @@
-package com.hush.game.Tools;
+package com.hush.game.Objects;
 
 import com.badlogic.gdx.physics.box2d.*;
-import com.hush.game.Settings;
-import com.hush.game.Tutorial;
-import com.hush.game.World.TiledGameMap;
+import com.hush.game.UI.Settings;
+import com.hush.game.Screens.Main;
 
 public class MovingWall {
 
@@ -17,8 +16,8 @@ public class MovingWall {
     public Body b2body;
 
 
-    public MovingWall(int x, int y, float w, float h, Tutorial screen) {
-        this.world = Tutorial.world;
+    public MovingWall(int x, int y, float w, float h, Main screen) {
+        this.world = Main.world;
 
         this.x = x;
         this.y = y;
