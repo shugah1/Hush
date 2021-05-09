@@ -1,8 +1,12 @@
 package com.hush.game.Objects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.hush.game.Entities.Player;
 import com.hush.game.UI.Settings;
 import com.hush.game.Screens.Main;
+import com.hush.game.World.Tags;
 
 public class MovingWall {
 
@@ -13,7 +17,9 @@ public class MovingWall {
     public float w;
     public float h;
     public Fixture fix;
-    public Body b2body;
+    public static Body b2body;
+    private Vector2 moveVector = new Vector2();
+    private static final float  SPEEDX = 6.9f;
 
 
     public MovingWall(int x, int y, float w, float h, Main screen) {
@@ -32,13 +38,19 @@ public class MovingWall {
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(this.w / Settings.PPM,this.h / Settings.PPM);
-        fdef.friction = 0;
+        fdef.density = 300f;
+        fdef.friction = 0f;
+
+        fdef.filter.categoryBits = Tags.WALL_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT;
+
         fdef.shape = shape;
+        b2body.createFixture(fdef).setUserData(this);
         fix = b2body.createFixture(fdef);
-        fix.setUserData(this);
     }
 
-    public void contact() {
-        //
+    public static void contact(Player player){
+        b2body.setLinearVelocity(0f,0f);
+        b2body.setFixedRotation(true);
     }
 }

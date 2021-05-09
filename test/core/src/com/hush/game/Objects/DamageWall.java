@@ -37,7 +37,7 @@ public class DamageWall {
         fdef.friction = 0;
 
         fdef.filter.categoryBits = Tags.DAMAGE_BIT;
-        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

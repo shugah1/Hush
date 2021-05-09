@@ -3,6 +3,7 @@ package com.hush.game.World;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.DamageWall;
+import com.hush.game.Objects.MovingWall;
 
 public class WorldContactListener implements ContactListener {
     /**
@@ -16,6 +17,7 @@ public class WorldContactListener implements ContactListener {
 
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         DamageWall damageWall;
+        MovingWall movingWall;
         Player player;
 
         switch (cDef){
@@ -27,8 +29,10 @@ public class WorldContactListener implements ContactListener {
                     damageWall = ((DamageWall) fixA.getUserData());
                     player = ((Player) fixB.getUserData());
                 }
-                damageWall.contact(player);
+                //damageWall.contact(player);
                 break;
+
+
         }
 
     }
@@ -39,7 +43,25 @@ public class WorldContactListener implements ContactListener {
      */
     @Override
     public void endContact(Contact contact) {
+        Fixture fixA = contact.getFixtureA();
+        Fixture fixB = contact.getFixtureB();
 
+        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
+        DamageWall damageWall;
+        MovingWall movingWall;
+        Player player;
+        switch (cDef) {
+            case Tags.PLAYER_BIT | Tags.WALL_BIT:
+                if (fixA.getFilterData().categoryBits == Tags.PLAYER_BIT) {
+                    movingWall = ((MovingWall) fixB.getUserData());
+                    player = ((Player) fixA.getUserData());
+                } else {
+                    movingWall = ((MovingWall) fixA.getUserData());
+                    player = ((Player) fixB.getUserData());
+                }
+                movingWall.contact(player);
+                break;
+        }
     }
 
     /**

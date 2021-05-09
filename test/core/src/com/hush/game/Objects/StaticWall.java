@@ -1,5 +1,6 @@
 package com.hush.game.Objects;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.UI.Settings;
 import com.hush.game.Screens.Main;
@@ -14,6 +15,7 @@ public class StaticWall {
     public float h;
     public Fixture fix;
     public Body b2body;
+    private Vector2 moveVector = new Vector2();
 
 
     public StaticWall(int x, int y, float w, float h, Main screen) {
@@ -36,6 +38,7 @@ public class StaticWall {
         fdef.shape = shape;
         fix = b2body.createFixture(fdef);
         fix.setUserData(this);
+
     }
 
     public void contact() {

@@ -85,7 +85,7 @@ public class Player extends Sprite {
         shape.setRadius(50 / Settings.PPM);
 
         fdef.filter.categoryBits = Tags.PLAYER_BIT;
-        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT;
 
 
 
