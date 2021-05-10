@@ -13,7 +13,7 @@ public class TiledGameMap {
     TiledMap tiledMap;
     public static OrthogonalTiledMapRenderer tiledMapRenderer;
     Main main;
-
+    public static B2WorldCreator creator;
 
     //public static World world;
     public static Box2DDebugRenderer b2dr;
@@ -24,7 +24,7 @@ public class TiledGameMap {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,1/ Settings.PPM);
 
         b2dr = new Box2DDebugRenderer();
-        new B2WorldCreator(main, tiledMap);
+        creator = new B2WorldCreator(main, tiledMap);
 
     }
 

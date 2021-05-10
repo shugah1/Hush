@@ -17,5 +17,6 @@ public abstract class Enemy extends Sprite {
     }
 
     protected abstract void defineEnemy();
+    public abstract void update();
     public abstract void update(float dt);
 }

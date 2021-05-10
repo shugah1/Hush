@@ -3,6 +3,7 @@ package com.hush.game.Screens;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.hush.game.Entities.Player;
+import com.hush.game.Objects.MovingWall;
 import com.hush.game.UI.Settings;
 import com.hush.game.World.WorldContactListener;
 import com.hush.game.World.TiledGameMap;
@@ -16,6 +17,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import static com.hush.game.World.TiledGameMap.creator;
+
 
 public class Main implements Screen {
 
@@ -27,8 +30,9 @@ public class Main implements Screen {
     private Settings game;
     private Box2DDebugRenderer b2dr;
     private TextureAtlas atlas;
+    public MovingWall movingWall;
 
-    TiledGameMap gameMap;
+    public TiledGameMap gameMap;
 
     public Main(Settings game){
         atlas = new TextureAtlas("test/core/assets/Sprites/Ninja.atlas");
@@ -37,16 +41,13 @@ public class Main implements Screen {
         batch = new SpriteBatch();
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
-        gameMap = new TiledGameMap("C:\\Users\\stupp\\Desktop\\untitled.tmx", this);
+        gameMap = new TiledGameMap("test/core/assets/TiledMaps/untitled.tmx", this);
         gamePort = new StretchViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         //cam.setToOrtho(false, Gdx.graphics.getWidth()/ Settings.PPM, Gdx.graphics.getHeight()/ Settings.PPM);
         cam.update();
 
         b2dr = new Box2DDebugRenderer();
-
-        player = new Player(world, this);
-
         world.setContactListener(new WorldContactListener());
 
     }
@@ -61,7 +62,11 @@ public class Main implements Screen {
     }
 
     public void update(float dt){
-        player.update(dt);
+        for(Player player: creator.getPlayer()){
+            player.update(dt);
+        }
+        //player.update(dt);
+        //movingWall.update(dt);
         cam.update();
         world.step(1/60f,6,2);
 
@@ -76,7 +81,10 @@ public class Main implements Screen {
         game.batch.setProjectionMatrix(cam.combined);
 
         batch.begin();
-        player.draw(batch);
+        for(Player player: creator.getPlayer()){
+            player.draw(batch);
+        }
+        //movingWall.draw(batch);
         cam.position.x = player.b2body.getPosition().x;
         cam.position.y = player.b2body.getPosition().y;
         cam.update();

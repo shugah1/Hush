@@ -26,13 +26,19 @@ public class Player extends Sprite {
     private Animation idle;
     private boolean movingRight;
     private float stateTimer;
+    float x;
+    float y;
     Texture image = new Texture("badlogic.jpg");
 
 
 
-    public Player(World world, Main screen) {
+    public Player(World world, Main screen, float x, float y) {
         super(screen.getAtlas().findRegion("SpriteSheet"));
+        this.x = x;
+        this.y = y;
+        setPosition(x,y);
         this.world = world;
+
         currentState = State.IDLE;
         previousState = State.IDLE;
         stateTimer = 0;
