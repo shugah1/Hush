@@ -93,7 +93,6 @@ public class Main implements Screen {
         gameObject.removeAll(gameObjectBye);
         gameObjectAdd.clear();
         gameObjectBye.clear();
-        gameMap.update(Gdx.graphics.getDeltaTime());
 
 
     }

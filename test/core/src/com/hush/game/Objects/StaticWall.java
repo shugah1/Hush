@@ -36,8 +36,7 @@ public class StaticWall {
         shape.setAsBox(this.w / Settings.PPM,this.h / Settings.PPM);
         fdef.friction = 0;
         fdef.shape = shape;
-        fix = b2body.createFixture(fdef);
-        fix.setUserData(this);
+        b2body.createFixture(fdef).setUserData(this);
 
     }
 
