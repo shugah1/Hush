@@ -29,11 +29,11 @@ public class TiledGameMap {
     }
 
 
-    public static void render(OrthographicCamera camera, SpriteBatch batch) {
+    public static void render(OrthographicCamera camera) {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
 
-        batch.setProjectionMatrix(camera.combined);
+
 
         //batch.begin();
         //render(camera, batch);

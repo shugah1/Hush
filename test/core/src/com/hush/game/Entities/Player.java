@@ -1,5 +1,6 @@
 package com.hush.game.Entities;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
@@ -14,7 +15,7 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Screens.Main;
 import com.hush.game.World.Tags;
 
-public class Player extends Sprite {
+public class Player extends GameObject {
     public enum State {IDLE, MOVING_ACROSS, MOVING_UP, MOVING_DOWN, ATTACKING}
     public State currentState;
     public State previousState;
@@ -36,7 +37,7 @@ public class Player extends Sprite {
 
 
     public Player(World world, Main screen, float x, float y) {
-        super(screen.getAtlas().findRegion("SpriteSheet"));
+        super();
         this.x = x;
         this.y = y;
         setPosition(x,y);
@@ -47,15 +48,15 @@ public class Player extends Sprite {
         stateTimer = 0;
         movingRight =true;
 
-        Array<TextureRegion> frames = new Array<TextureRegion>();
-        for(int i = 1; i < 4; i++)
-            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
-        walking = new Animation(0.1f, frames);
-        frames.clear();
-
-        for(int i = 4; i<6; i++)
-            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
-        frames.clear();
+        //Array<TextureRegion> frames = new Array<TextureRegion>();
+        //for(int i = 1; i < 4; i++)
+        //    frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
+        //walking = new Animation(0.1f, frames);
+        //frames.clear();
+//
+        //for(int i = 4; i<6; i++)
+        //    frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
+        //frames.clear();
         definePlayer();
         setRegion(image);
     }
@@ -85,7 +86,7 @@ public class Player extends Sprite {
 
     public void definePlayer(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(5/ Settings.PPM,15/ Settings.PPM);
+        bdef.position.set(x,y);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -135,8 +136,6 @@ public class Player extends Sprite {
         handleInput(deltaTime);
         b2body.setLinearVelocity(moveVector.scl(SPEEDX));
         setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, 0.25f,0.25f);
-
-
 
 
     }
