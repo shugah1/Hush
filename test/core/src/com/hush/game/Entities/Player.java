@@ -9,8 +9,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.hush.game.Settings;
-import com.hush.game.Tutorial;
+import com.hush.game.UI.Settings;
+import com.hush.game.Screens.Main;
+import com.hush.game.World.Tags;
 
 public class Player extends Sprite {
     public enum State {IDLE, MOVING_ACROSS, MOVING_UP, MOVING_DOWN, ATTACKING}
@@ -25,13 +26,19 @@ public class Player extends Sprite {
     private Animation idle;
     private boolean movingRight;
     private float stateTimer;
+    float x;
+    float y;
     Texture image = new Texture("badlogic.jpg");
 
 
 
-    public Player(World world, Tutorial screen) {
+    public Player(World world, Main screen, float x, float y) {
         super(screen.getAtlas().findRegion("SpriteSheet"));
+        this.x = x;
+        this.y = y;
+        setPosition(x,y);
         this.world = world;
+
         currentState = State.IDLE;
         previousState = State.IDLE;
         stateTimer = 0;
@@ -83,9 +90,13 @@ public class Player extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(50 / Settings.PPM);
 
+        fdef.filter.categoryBits = Tags.PLAYER_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT;
+
+
 
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData(this);
 
     }
 

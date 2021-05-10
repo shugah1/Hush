@@ -1,4 +1,4 @@
-package com.hush.game;
+package com.hush.game.Screens;
 
 import com.badlogic.gdx.Screen;
 

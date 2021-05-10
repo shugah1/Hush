@@ -1,11 +1,12 @@
-package com.hush.game.Tools;
+package com.hush.game.Objects;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.physics.box2d.*;
-import com.hush.game.Settings;
-import com.hush.game.Tutorial;
+import com.hush.game.UI.Settings;
+import com.hush.game.Screens.Main;
 
 import java.awt.*;
 
@@ -18,7 +19,7 @@ public abstract class TouchyObject {
     protected TiledMapTile tile;
     protected Rectangle bounds;
     protected Body body;
-    protected Tutorial tut;
+    protected Main tut;
     protected MapObject object;
     protected Fixture fixture;
 
@@ -39,5 +40,17 @@ public abstract class TouchyObject {
         shape.setAsBox((float) bounds.getWidth() / 2 / Settings.PPM, (float)bounds.getHeight() / 2 / Settings.PPM);
         fdef.shape = shape;
         fixture = body.createFixture(fdef);
+    }
+
+    public abstract void onCollect();
+    public void setCategoryFilter(int fB){
+        Filter filter = new Filter();
+        filter.categoryBits = (short) fB;
+        fixture.setFilterData(filter);
+    }
+
+    public TiledMapTileLayer.Cell getCell(String name){
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(name);
+        return layer.getCell((int) (body.getPosition().x * Settings.PPM/16), (int) (body.getPosition().y * Settings.PPM/16));
     }
 }
