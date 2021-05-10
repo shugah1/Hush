@@ -17,7 +17,6 @@ public class DamageWall {
     public Fixture fix;
     public Body b2body;
 
-
     public DamageWall(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
 
@@ -25,6 +24,7 @@ public class DamageWall {
         this.y = y;
         this.w = w;
         this.h = h;
+
 
         BodyDef bdef = new BodyDef();
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
