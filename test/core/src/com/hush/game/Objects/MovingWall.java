@@ -1,16 +1,18 @@
 package com.hush.game.Objects;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.UI.Settings;
 import com.hush.game.Screens.Main;
 import com.hush.game.World.Tags;
 
-public class MovingWall extends Sprite {
+public class MovingWall extends GameObject {
 
     //declaring and initializing variables
     public World world;
@@ -25,6 +27,7 @@ public class MovingWall extends Sprite {
     Texture image = new Texture("badlogic.jpg");
 
     public MovingWall(int x, int y, float w, float h, Main screen) {
+        super();
         this.world = Main.world;
 
         this.x = x;
