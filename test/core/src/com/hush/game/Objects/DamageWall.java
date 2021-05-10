@@ -41,10 +41,9 @@ public class DamageWall {
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-        fix = b2body.createFixture(fdef);
     }
 
     public void contact(Player player) {
-        System.exit(0);
+        System.out.println("Insert Damage here");
     }
 }

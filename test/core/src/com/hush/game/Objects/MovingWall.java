@@ -21,7 +21,6 @@ public class MovingWall extends GameObject {
     public float w;
     public float h;
     public Fixture fix;
-    public static Body b2body;
     private Vector2 moveVector = new Vector2();
     private static final float  SPEEDX = 6.9f;
     Texture image = new Texture("badlogic.jpg");
@@ -47,21 +46,22 @@ public class MovingWall extends GameObject {
         fdef.friction = 0f;
         b2body.setFixedRotation(true);
         fdef.filter.categoryBits = Tags.WALL_BIT;
-        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-        fix = b2body.createFixture(fdef);
         setRegion(image);
+
     }
 
-    public static void contact(Player player){
+    public void contact(Player player){
         b2body.setLinearVelocity(0f,0f);
 
     }
 
     public void update(float deltaTime){
-        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, 1,2);
+        System.out.println(b2body.getUserData());
+        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, w/Settings.PPM*2,h/Settings.PPM*2);
     }
 
 }

@@ -29,7 +29,7 @@ public class WorldContactListener implements ContactListener {
                     damageWall = ((DamageWall) fixA.getUserData());
                     player = ((Player) fixB.getUserData());
                 }
-                //damageWall.contact(player);
+                damageWall.contact(player);
                 break;
 
 
