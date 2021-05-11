@@ -19,8 +19,7 @@ public class Player extends GameObject {
     public enum State {IDLE, MOVING_ACROSS, MOVING_UP, MOVING_DOWN, ATTACKING}
     public State currentState;
     public State previousState;
-    private static final float  SPEEDX = 3;
-    private static final float SPEEDY = 80;
+    private float SPEED;
     public World world;
     public static Body b2body;
     private Vector2 moveVector = new Vector2();
@@ -32,8 +31,8 @@ public class Player extends GameObject {
     public float maxStamina;
     public boolean running;
     public boolean recharing;
-    public float runSpeed;
-    public float walkSpeed;
+    public float runSpeed = 2f;
+    public float walkSpeed = 1f;
     float x;
     float y;
     Texture image = new Texture("KnightItem.png");
@@ -54,33 +53,10 @@ public class Player extends GameObject {
         maxStamina = 10;
         stamina = maxStamina;
         recharing = false;
-        walkSpeed = 3f;
-        runSpeed = 6f;
 
-        //Array<TextureRegion> frames = new Array<TextureRegion>();
-        //for(int i = 1; i < 4; i++)
-        //    frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
-        //walking = new Animation(0.1f, frames);
-        //frames.clear();
-//
-        //for(int i = 4; i<6; i++)
-        //    frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
-        //frames.clear();
-        definePlayer();
         setRegion(image);
+        definePlayer();
     }
-
-    //public TextureRegion getFrame(float dt){
-    //    currentState = getState();
-//
-    //    TextureRegion region;
-    //    switch (currentState){
-    //        case IDLE:
-    //            region walking.getKeyFrame(stateTimer);
-    //            break;
-//
-    //    }
-    //}
 
     public State getState(){
         if(b2body.getLinearVelocity().y > 0)
@@ -101,7 +77,7 @@ public class Player extends GameObject {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(10 / Settings.PPM);
+        shape.setRadius(getRegionWidth() / Settings.PPM / 2);
 
         fdef.filter.categoryBits = Tags.PLAYER_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT;
@@ -144,6 +120,7 @@ public class Player extends GameObject {
             recharing = !(stamina == maxStamina);
         }
         b2body.setLinearVelocity(moveVector.scl(SPEED));
-        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, 1,2);
+        setRegion(image);
+        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }
 }
