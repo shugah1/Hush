@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.UI.Settings;
-import com.hush.game.Screens.Main;
+import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
 public class MovingWall extends GameObject {
