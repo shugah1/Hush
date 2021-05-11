@@ -28,13 +28,17 @@ public class Player extends GameObject {
     private Animation idle;
     private boolean movingRight;
     private float stateTimer;
+    public float stamina;
+    public float maxStamina;
+    public boolean running;
+    public boolean recharing;
+    public float runSpeed;
+    public float walkSpeed;
     float x;
     float y;
     Texture image = new Texture("KnightItem.png");
     Texture newImage = new Texture("Item.png");
     Sound sound = Gdx.audio.newSound(Gdx.files.internal("PowerUp1.wav"));
-
-
 
     public Player(World world, Main screen, float x, float y) {
         super();
@@ -47,6 +51,11 @@ public class Player extends GameObject {
         previousState = State.IDLE;
         stateTimer = 0;
         movingRight =true;
+        maxStamina = 10;
+        stamina = maxStamina;
+        recharing = false;
+        walkSpeed = 3f;
+        runSpeed = 6f;
 
         //Array<TextureRegion> frames = new Array<TextureRegion>();
         //for(int i = 1; i < 4; i++)
@@ -96,12 +105,8 @@ public class Player extends GameObject {
 
         fdef.filter.categoryBits = Tags.PLAYER_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT;
-
-
-
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-
     }
 
     public void handleInput(float dt){
@@ -119,31 +124,26 @@ public class Player extends GameObject {
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
             moveVector.add(new Vector2(1,0));
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.Q)){
-            long id = sound.play(0.25f);
-            setRegion(newImage);
+        if (!recharing){
+            running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.E)){
-            long id = sound.play(0.25f);
-            setRegion(image);
-        }
-
     }
 
-
-    //@Override
     public void update(float deltaTime){
         handleInput(deltaTime);
-        b2body.setLinearVelocity(moveVector.scl(SPEEDX));
-        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, 0.2f,0.2f);
-
-
+        if(running){
+            stamina = Math.max( stamina - (deltaTime * 10), 0);
+            if (stamina <= 0){
+                running = false;
+                recharing = true;
+            }
+            SPEED = runSpeed;
+        }else{
+            stamina = Math.min(stamina + (deltaTime * 3), maxStamina);
+            SPEED = walkSpeed;
+            recharing = !(stamina == maxStamina);
+        }
+        b2body.setLinearVelocity(moveVector.scl(SPEED));
+        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, 1,2);
     }
-
-
-
-   //@Override
-   //public void render(SpriteBatch batch) {
-   //    batch.draw(image, pos.x, pos.y, getWidth(), getHeight());
-   //}
 }
