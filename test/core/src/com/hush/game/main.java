@@ -23,8 +23,6 @@ public class main extends ApplicationAdapter {
 	@Override
 	public void render() {
 
-
-
 		if(Gdx.input.isKeyPressed(Input.Keys.W)){
 			circleY += 10;
 		}

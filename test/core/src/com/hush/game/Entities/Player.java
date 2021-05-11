@@ -121,6 +121,6 @@ public class Player extends GameObject {
         }
         b2body.setLinearVelocity(moveVector.scl(SPEED));
         setRegion(image);
-        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
+        setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }
 }

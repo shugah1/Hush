@@ -72,7 +72,6 @@ public class Main implements Screen {
         cam.position.x = player.b2body.getPosition().x;
         cam.position.y = player.b2body.getPosition().y;
 
-        world.step(1/60f,6,2);
         for(GameObject gO : gameObject ){
             if (gO.remove){
                 try{
@@ -84,6 +83,7 @@ public class Main implements Screen {
                 gO.update(dt);
             }
         }
+        world.step(1/60f,6,2);
         cam.update();
         gameObject.addAll(gameObjectAdd);
         gameObject.removeAll(gameObjectBye);
