@@ -3,6 +3,7 @@ package com.hush.game.Entities;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -18,7 +19,8 @@ public class Player extends GameObject {
     public enum State {IDLE, MOVING_ACROSS, MOVING_UP, MOVING_DOWN, ATTACKING}
     public State currentState;
     public State previousState;
-    private static float SPEED;
+    private static final float  SPEEDX = 3;
+    private static final float SPEEDY = 80;
     public World world;
     public static Body b2body;
     private Vector2 moveVector = new Vector2();
@@ -34,7 +36,9 @@ public class Player extends GameObject {
     public float walkSpeed;
     float x;
     float y;
-    Texture image = new Texture("badlogic.jpg");
+    Texture image = new Texture("Item.png");
+    Texture newImage = new Texture("Faceset.png");
+    Sound sound = Gdx.audio.newSound(Gdx.files.internal("Success3.wav"));
 
     public Player(World world, Main screen, float x, float y) {
         super();
@@ -97,8 +101,7 @@ public class Player extends GameObject {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(50 / Settings.PPM);
-        fdef.density = 0f;
+        shape.setRadius(10 / Settings.PPM);
         fdef.filter.categoryBits = Tags.PLAYER_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT;
         fdef.shape = shape;
@@ -120,8 +123,14 @@ public class Player extends GameObject {
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
             moveVector.add(new Vector2(1,0));
         }
-        if (!recharing){
-            running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
+      
+        if(Gdx.input.isKeyPressed(Input.Keys.Q)){
+            long id = sound.play(0.25f);
+            setRegion(newImage);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.E)){
+            long id = sound.play(0.25f);
+            setRegion(image);
         }
     }
 
