@@ -58,10 +58,10 @@ public class Player extends GameObject {
         definePlayer();
     }
 
-    public State getState(){
-        if(b2body.getLinearVelocity().y > 0)
+    public State getState() {
+        if (b2body.getLinearVelocity().y > 0)
             return State.MOVING_UP;
-        else if(b2body.getLinearVelocity().y < 0)
+        else if (b2body.getLinearVelocity().y < 0)
             return State.MOVING_DOWN;
         else if (b2body.getLinearVelocity().x != 0)
             return State.MOVING_ACROSS;
@@ -88,33 +88,33 @@ public class Player extends GameObject {
     public void handleInput(float dt){
         //control our player using immediate impulses
         moveVector.set(0,0);
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             moveVector.add(new Vector2(0,1));
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)){
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             moveVector.add(new Vector2(0,-1));
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             moveVector.add(new Vector2(-1,0));
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             moveVector.add(new Vector2(1,0));
         }
-        if (!recharing){
+        if (!recharing) {
             running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
         }
     }
 
     public void update(float deltaTime){
         handleInput(deltaTime);
-        if(running){
+        if (running) {
             stamina = Math.max( stamina - (deltaTime * 10), 0);
             if (stamina <= 0){
                 running = false;
                 recharing = true;
             }
             SPEED = runSpeed;
-        }else{
+        } else {
             stamina = Math.min(stamina + (deltaTime * 3), maxStamina);
             SPEED = walkSpeed;
             recharing = !(stamina == maxStamina);
