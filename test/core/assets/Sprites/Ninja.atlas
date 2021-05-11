@@ -1,0 +1,13 @@
+
+Ninja.png
+size: 128, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+SpriteSheet
+  rotate: false
+  xy: 2, 2
+  size: 64, 112
+  orig: 64, 112
+  offset: 0, 0
+  index: -1
