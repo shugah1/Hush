@@ -11,7 +11,6 @@ public abstract class GameObject extends Sprite {
 
     public GameObject(){
         Main.gameObjectAdd.add(this);
-
     }
 
     public abstract void update(float dt);
@@ -19,6 +18,4 @@ public abstract class GameObject extends Sprite {
     public void destroy(){
         remove = true;
     }
-
-
 }

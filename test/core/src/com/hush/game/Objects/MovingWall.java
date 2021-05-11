@@ -28,7 +28,6 @@ public class MovingWall extends GameObject {
     public MovingWall(int x, int y, float w, float h, Main screen) {
         super();
         this.world = Main.world;
-
         this.x = x;
         this.y = y;
         this.w = w;
@@ -56,11 +55,9 @@ public class MovingWall extends GameObject {
 
     public void contact(Player player){
         b2body.setLinearVelocity(0f,0f);
-
     }
 
     public void update(float deltaTime){
-        System.out.println(b2body.getUserData());
         setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, w/Settings.PPM*2,h/Settings.PPM*2);
     }
 

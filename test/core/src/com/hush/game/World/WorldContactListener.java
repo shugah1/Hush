@@ -31,10 +31,7 @@ public class WorldContactListener implements ContactListener {
                 }
                 damageWall.contact(player);
                 break;
-
-
         }
-
     }
 
     /**
@@ -71,7 +68,7 @@ public class WorldContactListener implements ContactListener {
      */
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-
+        //
     }
 
     /**
@@ -81,6 +78,6 @@ public class WorldContactListener implements ContactListener {
      */
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
-
+        //
     }
 }

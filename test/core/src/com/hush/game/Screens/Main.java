@@ -38,7 +38,6 @@ public class Main implements Screen {
     public static ArrayList<GameObject> gameObject = new ArrayList<>();
     public static ArrayList<GameObject> gameObjectAdd = new ArrayList<>();
     public static ArrayList<GameObject> gameObjectBye = new ArrayList<>();
-
     public TiledGameMap gameMap;
 
     public Main(Settings game){
@@ -51,13 +50,10 @@ public class Main implements Screen {
         gameMap = new TiledGameMap("test/core/assets/TiledMaps/Level1.tmx", this);
         gamePort = new StretchViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
-        //cam.setToOrtho(false, Gdx.graphics.getWidth()/ Settings.PPM, Gdx.graphics.getHeight()/ Settings.PPM);
         cam.update();
-
 
         b2dr = new Box2DDebugRenderer();
         world.setContactListener(new WorldContactListener());
-
     }
 
     public TextureAtlas getAtlas(){
@@ -66,7 +62,7 @@ public class Main implements Screen {
 
     @Override
     public void show() {
-
+        //
     }
 
     public void update(float dt){
@@ -93,8 +89,6 @@ public class Main implements Screen {
         gameObject.removeAll(gameObjectBye);
         gameObjectAdd.clear();
         gameObjectBye.clear();
-
-
     }
 
     @Override
@@ -111,7 +105,6 @@ public class Main implements Screen {
         game.batch.setProjectionMatrix(cam.combined);
         b2dr.render(world, cam.combined);
         game.batch.end();
-
     }
 
     @Override

@@ -19,7 +19,6 @@ public class DamageWall {
 
     public DamageWall(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
-
         this.x = x;
         this.y = y;
         this.w = w;
