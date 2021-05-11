@@ -19,7 +19,7 @@ public class Player extends GameObject {
     public enum State {IDLE, MOVING_ACROSS, MOVING_UP, MOVING_DOWN, ATTACKING}
     public State currentState;
     public State previousState;
-    private static final float  SPEEDX = 3;
+    private float SPEED;
     private static final float SPEEDY = 80;
     public World world;
     public static Body b2body;
