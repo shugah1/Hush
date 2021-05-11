@@ -7,8 +7,8 @@ import com.hush.game.Screens.Main;
 
 public class Settings extends Game {
 	public SpriteBatch batch;
-	public static final int V_WIDTH = 500;
-	public static final int V_HEIGHT = 300;
+	public static final int V_WIDTH = 480;
+	public static final int V_HEIGHT = 270;
 	public static final float PPM = 100;
 
 
