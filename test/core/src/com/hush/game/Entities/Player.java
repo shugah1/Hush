@@ -1,5 +1,6 @@
 package com.hush.game.Entities;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
@@ -14,7 +15,7 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Screens.Main;
 import com.hush.game.World.Tags;
 
-public class Player extends Sprite {
+public class Player extends GameObject {
     public enum State {IDLE, MOVING_ACROSS, MOVING_UP, MOVING_DOWN, ATTACKING}
     public State currentState;
     public State previousState;
@@ -27,16 +28,20 @@ public class Player extends Sprite {
     private Animation idle;
     private boolean movingRight;
     private float stateTimer;
+    public float stamina;
+    public float maxStamina;
+    public boolean running;
+    public boolean recharing;
+    public float runSpeed;
+    public float walkSpeed;
     float x;
     float y;
     Texture image = new Texture("Item.png");
     Texture newImage = new Texture("Faceset.png");
     Sound sound = Gdx.audio.newSound(Gdx.files.internal("Success3.wav"));
 
-
-
     public Player(World world, Main screen, float x, float y) {
-        super(screen.getAtlas().findRegion("SpriteSheet"));
+        super();
         this.x = x;
         this.y = y;
         setPosition(x,y);
@@ -46,16 +51,21 @@ public class Player extends Sprite {
         previousState = State.IDLE;
         stateTimer = 0;
         movingRight =true;
+        maxStamina = 10;
+        stamina = maxStamina;
+        recharing = false;
+        walkSpeed = 3f;
+        runSpeed = 6f;
 
-        Array<TextureRegion> frames = new Array<TextureRegion>();
-        for(int i = 1; i < 4; i++)
-            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
-        walking = new Animation(0.1f, frames);
-        frames.clear();
-
-        for(int i = 4; i<6; i++)
-            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
-        frames.clear();
+        //Array<TextureRegion> frames = new Array<TextureRegion>();
+        //for(int i = 1; i < 4; i++)
+        //    frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
+        //walking = new Animation(0.1f, frames);
+        //frames.clear();
+//
+        //for(int i = 4; i<6; i++)
+        //    frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
+        //frames.clear();
         definePlayer();
         setRegion(image);
     }
@@ -85,22 +95,17 @@ public class Player extends Sprite {
 
     public void definePlayer(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(5/ Settings.PPM,15/ Settings.PPM);
+        bdef.position.set(x,y);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(10 / Settings.PPM);
-
         fdef.filter.categoryBits = Tags.PLAYER_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT;
-
-
-
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-
     }
 
     public void handleInput(float dt){
@@ -118,6 +123,7 @@ public class Player extends Sprite {
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
             moveVector.add(new Vector2(1,0));
         }
+      
         if(Gdx.input.isKeyPressed(Input.Keys.Q)){
             long id = sound.play(0.25f);
             setRegion(newImage);
@@ -126,25 +132,23 @@ public class Player extends Sprite {
             long id = sound.play(0.25f);
             setRegion(image);
         }
-
     }
 
-
-    //@Override
     public void update(float deltaTime){
         handleInput(deltaTime);
-        b2body.setLinearVelocity(moveVector.scl(SPEEDX));
-        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, 0.25f,0.25f);
-
-
-
-
+        if(running){
+            stamina = Math.max( stamina - (deltaTime * 10), 0);
+            if (stamina <= 0){
+                running = false;
+                recharing = true;
+            }
+            SPEED = runSpeed;
+        }else{
+            stamina = Math.min(stamina + (deltaTime * 3), maxStamina);
+            SPEED = walkSpeed;
+            recharing = !(stamina == maxStamina);
+        }
+        b2body.setLinearVelocity(moveVector.scl(SPEED));
+        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, 1,2);
     }
-
-
-
-   //@Override
-   //public void render(SpriteBatch batch) {
-   //    batch.draw(image, pos.x, pos.y, getWidth(), getHeight());
-   //}
 }

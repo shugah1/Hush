@@ -25,27 +25,17 @@ public class TiledGameMap {
 
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(main, tiledMap);
-
     }
 
 
-    public static void render(OrthographicCamera camera, SpriteBatch batch) {
+    public static void render(OrthographicCamera camera) {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
-
-        batch.setProjectionMatrix(camera.combined);
-
-        //batch.begin();
-        //render(camera, batch);
-        //batch.end();
-
     }
 
 
     public static void update(float delta) {
-
-
-
+        //
     }
 
 
@@ -53,10 +43,5 @@ public class TiledGameMap {
         tiledMap.dispose();
         tiledMapRenderer.dispose();
         b2dr.dispose();
-
-
     }
-
-
-
 }

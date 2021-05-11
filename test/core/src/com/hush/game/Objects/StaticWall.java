@@ -20,7 +20,6 @@ public class StaticWall {
 
     public StaticWall(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
-
         this.x = x;
         this.y = y;
         this.w = w;
@@ -36,9 +35,7 @@ public class StaticWall {
         shape.setAsBox(this.w / Settings.PPM,this.h / Settings.PPM);
         fdef.friction = 0;
         fdef.shape = shape;
-        fix = b2body.createFixture(fdef);
-        fix.setUserData(this);
-
+        b2body.createFixture(fdef).setUserData(this);
     }
 
     public void contact() {

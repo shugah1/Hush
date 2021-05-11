@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.hush.game.Screens.Main;
 
-public abstract class Enemy extends Sprite {
+public abstract class Enemy extends GameObject {
     protected World world;
     protected Main screen;
     public Body b2body;

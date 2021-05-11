@@ -19,7 +19,6 @@ public class DamageWall {
 
     public DamageWall(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
-
         this.x = x;
         this.y = y;
         this.w = w;
@@ -41,10 +40,9 @@ public class DamageWall {
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-        fix = b2body.createFixture(fdef);
     }
 
     public void contact(Player player) {
-        System.exit(0);
+        System.out.println("Insert Damage here");
     }
 }
