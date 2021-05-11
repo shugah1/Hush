@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.hush.game.UI.Settings;
-import com.hush.game.Screens.Main;
+import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
 public class Player extends GameObject {

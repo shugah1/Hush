@@ -6,7 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.hush.game.Entities.Player;
-import com.hush.game.Screens.Main;
+import com.hush.game.Main;
 import com.hush.game.Objects.DamageWall;
 import com.hush.game.Objects.MovingWall;
 import com.hush.game.Objects.StaticWall;
