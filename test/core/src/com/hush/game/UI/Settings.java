@@ -26,6 +26,8 @@ public class Settings extends Game {
 	public static double songLoopEnd;
 	public static Music music;
 
+	public static int musicVolume = 5;
+
 	public static AssetManager audioManager= new AssetManager();
 
 	@Override
