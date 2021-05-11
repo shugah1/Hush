@@ -18,8 +18,7 @@ public class Player extends GameObject {
     public enum State {IDLE, MOVING_ACROSS, MOVING_UP, MOVING_DOWN, ATTACKING}
     public State currentState;
     public State previousState;
-    private static final float  SPEEDX = 6.9f;
-    private static final float SPEEDY = 80;
+    private static float SPEED;
     public World world;
     public static Body b2body;
     private Vector2 moveVector = new Vector2();
@@ -27,11 +26,15 @@ public class Player extends GameObject {
     private Animation idle;
     private boolean movingRight;
     private float stateTimer;
+    public float stamina;
+    public float maxStamina;
+    public boolean running;
+    public boolean recharing;
+    public float runSpeed;
+    public float walkSpeed;
     float x;
     float y;
     Texture image = new Texture("badlogic.jpg");
-
-
 
     public Player(World world, Main screen, float x, float y) {
         super();
@@ -44,6 +47,11 @@ public class Player extends GameObject {
         previousState = State.IDLE;
         stateTimer = 0;
         movingRight =true;
+        maxStamina = 10;
+        stamina = maxStamina;
+        recharing = false;
+        walkSpeed = 3f;
+        runSpeed = 6f;
 
         //Array<TextureRegion> frames = new Array<TextureRegion>();
         //for(int i = 1; i < 4; i++)
@@ -91,15 +99,10 @@ public class Player extends GameObject {
         CircleShape shape = new CircleShape();
         shape.setRadius(50 / Settings.PPM);
         fdef.density = 0f;
-
         fdef.filter.categoryBits = Tags.PLAYER_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT;
-
-
-
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-
     }
 
     public void handleInput(float dt){
@@ -117,24 +120,26 @@ public class Player extends GameObject {
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
             moveVector.add(new Vector2(1,0));
         }
-
-
+        if (!recharing){
+            running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
+        }
     }
 
-
-    //@Override
     public void update(float deltaTime){
         handleInput(deltaTime);
-        b2body.setLinearVelocity(moveVector.scl(SPEEDX));
+        if(running){
+            stamina = Math.max( stamina - (deltaTime * 10), 0);
+            if (stamina <= 0){
+                running = false;
+                recharing = true;
+            }
+            SPEED = runSpeed;
+        }else{
+            stamina = Math.min(stamina + (deltaTime * 3), maxStamina);
+            SPEED = walkSpeed;
+            recharing = !(stamina == maxStamina);
+        }
+        b2body.setLinearVelocity(moveVector.scl(SPEED));
         setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, 1,2);
-
-
     }
-
-
-
-   //@Override
-   //public void render(SpriteBatch batch) {
-   //    batch.draw(image, pos.x, pos.y, getWidth(), getHeight());
-   //}
 }

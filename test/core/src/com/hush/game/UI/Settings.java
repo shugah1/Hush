@@ -11,33 +11,23 @@ public class Settings extends Game {
 	public static final int V_HEIGHT = 300;
 	public static final float PPM = 100;
 
-
-
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		setScreen(new Main(this));
 		Gdx.graphics.setWindowedMode(1920, 1080);
-
-
 	}
 
 	@Override
 	public void render () {
 		super.render();
-
-
-
-
 	}
 
 
 	
 	@Override
 	public void dispose () {
-
-
-
+		//
 	}
 
 }

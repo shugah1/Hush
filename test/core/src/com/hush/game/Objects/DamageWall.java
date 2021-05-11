@@ -17,10 +17,8 @@ public class DamageWall {
     public Fixture fix;
     public Body b2body;
 
-
     public DamageWall(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
-
         this.x = x;
         this.y = y;
         this.w = w;
