@@ -6,7 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.hush.game.Entities.Player;
-import com.hush.game.Screens.Main;
+import com.hush.game.Main;
 import com.hush.game.Objects.DamageWall;
 import com.hush.game.Objects.MovingWall;
 import com.hush.game.Objects.StaticWall;
@@ -24,7 +24,6 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new StaticWall((int) (rect.getX() + rect.getWidth() / 2), (int) (rect.getY() + rect.getHeight() / 2), rect.getWidth() / 2f, rect.getHeight() / 2f, world);
-
         }
 
         for (MapObject object : map.getLayers().get("MWall").getObjects().getByType(RectangleMapObject.class)) {
@@ -44,9 +43,5 @@ public class B2WorldCreator {
 
             new Player(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM);
         }
-
-
     }
-
-
 }

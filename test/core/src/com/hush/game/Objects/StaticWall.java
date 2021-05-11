@@ -3,7 +3,7 @@ package com.hush.game.Objects;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.UI.Settings;
-import com.hush.game.Screens.Main;
+import com.hush.game.Main;
 
 public class StaticWall {
 
@@ -20,7 +20,6 @@ public class StaticWall {
 
     public StaticWall(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
-
         this.x = x;
         this.y = y;
         this.w = w;
@@ -37,7 +36,6 @@ public class StaticWall {
         fdef.friction = 0;
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-
     }
 
     public void contact() {

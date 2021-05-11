@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.*;
-import com.hush.game.Screens.Main;
+import com.hush.game.Main;
 
 public class TiledGameMap {
 
@@ -25,27 +25,17 @@ public class TiledGameMap {
 
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(main, tiledMap);
-
     }
 
 
     public static void render(OrthographicCamera camera) {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
-
-
-
-        //batch.begin();
-        //render(camera, batch);
-        //batch.end();
-
     }
 
 
     public static void update(float delta) {
-
-
-
+        //
     }
 
 
@@ -53,10 +43,5 @@ public class TiledGameMap {
         tiledMap.dispose();
         tiledMapRenderer.dispose();
         b2dr.dispose();
-
-
     }
-
-
-
 }

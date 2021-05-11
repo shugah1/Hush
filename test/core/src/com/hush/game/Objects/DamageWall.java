@@ -3,7 +3,7 @@ package com.hush.game.Objects;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.Entities.Player;
 import com.hush.game.UI.Settings;
-import com.hush.game.Screens.Main;
+import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
 public class DamageWall {
@@ -19,7 +19,6 @@ public class DamageWall {
 
     public DamageWall(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
-
         this.x = x;
         this.y = y;
         this.w = w;
