@@ -1,5 +1,6 @@
 package com.hush.game;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -20,10 +21,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.hush.game.constants.Globals;
+import org.ini4j.Wini;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Random;
@@ -48,8 +49,10 @@ public class Main implements Screen {
     public TiledGameMap gameMap;
 
     public Main(Settings game){
-        atlas = new TextureAtlas("test/core/assets/Sprites/Ninja.atlas");
+        Settings.manager.load("sprites/player.atlas", TextureAtlas.class);
+        Settings.manager.finishLoading();
         this.game = game;
+
         //Gdx.graphics.setWindowedMode(1920, 1080);
         //batch = new SpriteBatch();
         cam = new OrthographicCamera();
@@ -63,6 +66,7 @@ public class Main implements Screen {
         world.setContactListener(new WorldContactListener());
         Settings.music = game.newSong("hub");
         Settings.music.play();
+        game.music.setVolume(Settings.musicVolume / 10f);
     }
 
     public TextureAtlas getAtlas(){
@@ -92,6 +96,37 @@ public class Main implements Screen {
                 }
             }else{
                 gO.update(dt);
+            }
+        }
+
+        // Set game.music volume
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            Settings.musicVolume = Settings.musicVolume < 10 ? Settings.musicVolume + 1 : 10;
+
+            // Writes data to the settings file
+            File settings = new File(Globals.workingDirectory + "settings.ini");
+            game.music.setVolume(Settings.musicVolume / 10f);
+
+            try {
+                Wini ini = new Wini(settings);
+                ini.add("Settings", "music volume", Settings.musicVolume);
+                ini.store();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+            Settings.musicVolume = Settings.musicVolume > 0 ? Settings.musicVolume - 1 : 0;
+            game.music.setVolume(Settings.musicVolume / 10f);
+
+            // Writes data to the settings file
+            File settings = new File(Globals.workingDirectory + "settings.ini");
+
+            try {
+                Wini ini = new Wini(settings);
+                ini.add("Settings", "music volume", Settings.musicVolume);
+                ini.store();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
