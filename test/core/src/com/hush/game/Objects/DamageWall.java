@@ -24,6 +24,7 @@ public class DamageWall {
         this.w = w;
         this.h = h;
 
+
         BodyDef bdef = new BodyDef();
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
         bdef.type = BodyDef.BodyType.StaticBody;

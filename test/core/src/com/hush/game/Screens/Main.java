@@ -47,7 +47,7 @@ public class Main implements Screen {
         //batch = new SpriteBatch();
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
-        gameMap = new TiledGameMap("test/core/assets/TiledMaps/untitled.tmx", this);
+        gameMap = new TiledGameMap("test/core/assets/TiledMaps/Level1.tmx", this);
         gamePort = new StretchViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         cam.update();
@@ -72,7 +72,6 @@ public class Main implements Screen {
         cam.position.x = player.b2body.getPosition().x;
         cam.position.y = player.b2body.getPosition().y;
 
-        world.step(1/60f,6,2);
         for(GameObject gO : gameObject ){
             if (gO.remove){
                 try{
@@ -84,6 +83,7 @@ public class Main implements Screen {
                 gO.update(dt);
             }
         }
+        world.step(1/60f,6,2);
         cam.update();
         gameObject.addAll(gameObjectAdd);
         gameObject.removeAll(gameObjectBye);
