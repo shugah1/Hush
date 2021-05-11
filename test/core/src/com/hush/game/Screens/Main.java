@@ -66,9 +66,6 @@ public class Main implements Screen {
     }
 
     public void update(float dt){
-
-        //player.update(dt);
-        //movingWall.update(dt);
         cam.position.x = player.b2body.getPosition().x;
         cam.position.y = player.b2body.getPosition().y;
 
