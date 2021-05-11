@@ -20,7 +20,6 @@ public class Player extends GameObject {
     public State currentState;
     public State previousState;
     private float SPEED;
-    private static final float SPEEDY = 80;
     public World world;
     public static Body b2body;
     private Vector2 moveVector = new Vector2();
@@ -32,13 +31,13 @@ public class Player extends GameObject {
     public float maxStamina;
     public boolean running;
     public boolean recharing;
-    public float runSpeed;
-    public float walkSpeed;
+    public float runSpeed = 2f;
+    public float walkSpeed = 1f;
     float x;
     float y;
-    Texture image = new Texture("Item.png");
-    Texture newImage = new Texture("Faceset.png");
-    Sound sound = Gdx.audio.newSound(Gdx.files.internal("Success3.wav"));
+    Texture image = new Texture("KnightItem.png");
+    Texture newImage = new Texture("Item.png");
+    Sound sound = Gdx.audio.newSound(Gdx.files.internal("PowerUp1.wav"));
 
     public Player(World world, Main screen, float x, float y) {
         super();
@@ -54,38 +53,15 @@ public class Player extends GameObject {
         maxStamina = 10;
         stamina = maxStamina;
         recharing = false;
-        walkSpeed = 3f;
-        runSpeed = 6f;
 
-        //Array<TextureRegion> frames = new Array<TextureRegion>();
-        //for(int i = 1; i < 4; i++)
-        //    frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
-        //walking = new Animation(0.1f, frames);
-        //frames.clear();
-//
-        //for(int i = 4; i<6; i++)
-        //    frames.add(new TextureRegion(getTexture(), i * 16, 0, 16,16));
-        //frames.clear();
-        definePlayer();
         setRegion(image);
+        definePlayer();
     }
 
-    //public TextureRegion getFrame(float dt){
-    //    currentState = getState();
-//
-    //    TextureRegion region;
-    //    switch (currentState){
-    //        case IDLE:
-    //            region walking.getKeyFrame(stateTimer);
-    //            break;
-//
-    //    }
-    //}
-
-    public State getState(){
-        if(b2body.getLinearVelocity().y > 0)
+    public State getState() {
+        if (b2body.getLinearVelocity().y > 0)
             return State.MOVING_UP;
-        else if(b2body.getLinearVelocity().y < 0)
+        else if (b2body.getLinearVelocity().y < 0)
             return State.MOVING_DOWN;
         else if (b2body.getLinearVelocity().x != 0)
             return State.MOVING_ACROSS;
@@ -101,7 +77,8 @@ public class Player extends GameObject {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(10 / Settings.PPM);
+        shape.setRadius(getRegionWidth() / Settings.PPM / 2);
+
         fdef.filter.categoryBits = Tags.PLAYER_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT;
         fdef.shape = shape;
@@ -111,44 +88,39 @@ public class Player extends GameObject {
     public void handleInput(float dt){
         //control our player using immediate impulses
         moveVector.set(0,0);
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             moveVector.add(new Vector2(0,1));
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)){
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             moveVector.add(new Vector2(0,-1));
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             moveVector.add(new Vector2(-1,0));
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             moveVector.add(new Vector2(1,0));
         }
-      
-        if(Gdx.input.isKeyPressed(Input.Keys.Q)){
-            long id = sound.play(0.25f);
-            setRegion(newImage);
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.E)){
-            long id = sound.play(0.25f);
-            setRegion(image);
+        if (!recharing) {
+            running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
         }
     }
 
     public void update(float deltaTime){
         handleInput(deltaTime);
-        if(running){
+        if (running) {
             stamina = Math.max( stamina - (deltaTime * 10), 0);
             if (stamina <= 0){
                 running = false;
                 recharing = true;
             }
             SPEED = runSpeed;
-        }else{
+        } else {
             stamina = Math.min(stamina + (deltaTime * 3), maxStamina);
             SPEED = walkSpeed;
             recharing = !(stamina == maxStamina);
         }
         b2body.setLinearVelocity(moveVector.scl(SPEED));
-        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, 1,2);
+        setRegion(image);
+        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }
 }
