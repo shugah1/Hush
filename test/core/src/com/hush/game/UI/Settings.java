@@ -7,8 +7,11 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.hush.game.Main;
+import com.hush.game.constants.Globals;
+import org.ini4j.Wini;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -26,13 +29,16 @@ public class Settings extends Game {
 	public static double songLoopEnd;
 	public static Music music;
 
-	public static AssetManager audioManager= new AssetManager();
+	public static int musicVolume = 5;
+
+	public static AssetManager audioManager = new AssetManager();
+	public static AssetManager manager = new AssetManager();
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		System.out.println(musicVolume);
 		setScreen(new Main(this));
-		Gdx.graphics.setWindowedMode(1920, 1080);
 	}
 
 	@Override
