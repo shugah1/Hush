@@ -4,9 +4,12 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.Entities.Enemy;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.DamageWall;
+import com.hush.game.Objects.Goal;
 import com.hush.game.Objects.MovingWall;
 
 public class WorldContactListener implements ContactListener {
+
+
     /**
      * called when 2 things start touching
      * @param contact
@@ -19,6 +22,7 @@ public class WorldContactListener implements ContactListener {
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         DamageWall damageWall;
         MovingWall movingWall;
+        Goal goal;
         Enemy enemy;
         Player player;
 
@@ -43,6 +47,15 @@ public class WorldContactListener implements ContactListener {
                 }
                 System.out.println("Help me");
                 break;
+            case Tags.PLAYER_BIT | Tags.GOAL_BIT:
+                if(fixA.getFilterData().categoryBits == Tags.PLAYER_BIT ){
+                    goal = ((Goal) fixB.getUserData());
+                    player = ((Player) fixA.getUserData());
+                }else{
+                    goal = ((Goal) fixA.getUserData());
+                    player = ((Player) fixB.getUserData());
+                }
+                Goal.contact(player);
         }
     }
 

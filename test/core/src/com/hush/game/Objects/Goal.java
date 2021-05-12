@@ -6,8 +6,8 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
-public class DamageWall {
 
+public class Goal {
     //declaring and initializing variables
     public World world;
     public int x;
@@ -17,7 +17,7 @@ public class DamageWall {
     public Fixture fix;
     public Body b2body;
 
-    public DamageWall(int x, int y, float w, float h, Main screen) {
+    public Goal(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
         this.x = x;
         this.y = y;
@@ -35,15 +35,15 @@ public class DamageWall {
         shape.setAsBox(this.w / Settings.PPM,this.h / Settings.PPM);
         fdef.friction = 0;
 
-        fdef.filter.categoryBits = Tags.DAMAGE_BIT;
+        fdef.filter.categoryBits = Tags.GOAL_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public void contact(Player player) {
+    public static void contact(Player player) {
 
-        System.out.println("Insert Damage here");
+        System.out.println("GG");
     }
 }
