@@ -23,7 +23,7 @@ public class Player extends GameObject {
     public float SPEED;
     public float deltaTime;
     public World world;
-    public static Body b2body;
+    public Body b2body;
     public Vector2 moveVector = new Vector2();
 
     private Animation<TextureRegion> walkUp;

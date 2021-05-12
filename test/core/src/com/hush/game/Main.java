@@ -37,7 +37,7 @@ public class Main implements Screen {
     public static World world;
     private OrthographicCamera cam;
     //SpriteBatch batch;
-    private Player player;
+    public Player player;
     private Viewport gamePort;
     private Settings game;
     private Box2DDebugRenderer b2dr;

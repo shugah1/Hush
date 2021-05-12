@@ -11,11 +11,17 @@ import com.hush.game.World.Tags;
 import javax.swing.text.html.HTML;
 
 public abstract class Enemy extends GameObject {
-    Player player;
     protected World world;
     protected Main screen;
+    private Vector2 fromPoint;
+    private Vector2 point;
+    private boolean hit = true;
+    private Vector2 toPoint;
+    private Vector2 normal = new Vector2();
+    private Vector2 collisionPoint = new Vector2();
     float x;
     float y;
+
 
 
     public Enemy(World world, Main screen, float x, float y){
@@ -25,8 +31,6 @@ public abstract class Enemy extends GameObject {
         this.y = y;
         setPosition(x,y);
         defineEnemy();
-
-
     }
 
     public void defineEnemy(){
@@ -49,12 +53,37 @@ public abstract class Enemy extends GameObject {
         CircleShape sensor = new CircleShape();
         sensor.setRadius(100 / Settings.PPM);
         fdef.filter.categoryBits = Tags.SENSOR_BIT;
-        fdef.filter.maskBits = Tags.PLAYER_BIT;
+        fdef.filter.maskBits = Tags.PLAYER_BIT | Tags.DEFAULT_BIT;
         fdef.shape = sensor;
         fdef.isSensor = true;
         b2body.createFixture(fdef).setUserData(this);
 
+    }
 
+    public boolean calculateCollisionPoint(Player player){
+        fromPoint = b2body.getPosition();
+        toPoint = player.b2body.getPosition().cpy();
+        collisionPoint = new Vector2();
+        RayCastCallback callback = new RayCastCallback() {
+            @Override
+            public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
+                //System.out.println("To point" + toPoint);
+                System.out.println(point);
+                if (fixture.getFilterData().categoryBits == Tags.DEFAULT_BIT || fixture.getFilterData().categoryBits == Tags.WALL_BIT ) {
+                    hit = false;
+                    return fraction;
+                }else{
+                    hit = true;
+                }
+
+                return fraction;
+
+            }
+        };
+        //System.out.println(fromPoint + " " + toPoint);
+        world.rayCast(callback, fromPoint, toPoint);
+        System.out.println(hit);
+        return hit;
 
     }
 

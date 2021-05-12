@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.UI.Settings;
 import com.hush.game.Main;
+import com.hush.game.World.Tags;
 
 public class StaticWall {
 
@@ -34,6 +35,8 @@ public class StaticWall {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(this.w / Settings.PPM,this.h / Settings.PPM);
         fdef.friction = 0;
+        fdef.filter.categoryBits = Tags.DEFAULT_BIT;
+        fdef.filter.maskBits = Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT;
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }

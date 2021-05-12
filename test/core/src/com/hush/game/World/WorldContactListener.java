@@ -41,8 +41,11 @@ public class WorldContactListener implements ContactListener {
                     enemy = ((Enemy) fixA.getUserData());
                     player = ((Player) fixB.getUserData());
                 }
-                System.out.println("Help me");
+                if(enemy.calculateCollisionPoint(player)){
+                    //System.exit(1);
+                }
                 break;
+
         }
     }
 
