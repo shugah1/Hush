@@ -49,8 +49,10 @@ public class Main implements Screen {
     public TiledGameMap gameMap;
 
     public Main(Settings game){
-        atlas = new TextureAtlas("test/core/assets/Sprites/Ninja.atlas");
+        Settings.manager.load("sprites/player.atlas", TextureAtlas.class);
+        Settings.manager.finishLoading();
         this.game = game;
+
         //Gdx.graphics.setWindowedMode(1920, 1080);
         //batch = new SpriteBatch();
         cam = new OrthographicCamera();
@@ -64,6 +66,7 @@ public class Main implements Screen {
         world.setContactListener(new WorldContactListener());
         Settings.music = game.newSong("hub");
         Settings.music.play();
+        game.music.setVolume(Settings.musicVolume / 10f);
     }
 
     public TextureAtlas getAtlas(){
