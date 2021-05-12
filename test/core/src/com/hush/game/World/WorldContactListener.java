@@ -1,6 +1,7 @@
 package com.hush.game.World;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.hush.game.Entities.Enemy;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.DamageWall;
 import com.hush.game.Objects.MovingWall;
@@ -18,6 +19,7 @@ public class WorldContactListener implements ContactListener {
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         DamageWall damageWall;
         MovingWall movingWall;
+        Enemy enemy;
         Player player;
 
         switch (cDef){
@@ -30,6 +32,16 @@ public class WorldContactListener implements ContactListener {
                     player = ((Player) fixB.getUserData());
                 }
                 damageWall.contact(player);
+                break;
+            case Tags.PLAYER_BIT | Tags.SENSOR_BIT:
+                if(fixA.getFilterData().categoryBits == Tags.PLAYER_BIT ){
+                    enemy = ((Enemy) fixB.getUserData());
+                    player = ((Player) fixA.getUserData());
+                }else{
+                    enemy = ((Enemy) fixA.getUserData());
+                    player = ((Player) fixB.getUserData());
+                }
+                System.out.println("Help me");
                 break;
         }
     }

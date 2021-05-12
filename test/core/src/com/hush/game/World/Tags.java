@@ -10,4 +10,5 @@ public class Tags {
     public static final int PROJECTILE_BIT = 16;
     public static final int POWERUP_BIT = 32;
     public static final int WALL_BIT = 64;
+    public static final int SENSOR_BIT = 128;
 }
