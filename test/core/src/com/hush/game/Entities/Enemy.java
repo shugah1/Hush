@@ -50,7 +50,7 @@ public abstract class Enemy extends GameObject {
 
         //Enemy Sensor
         CircleShape sensor = new CircleShape();
-        sensor.setRadius(100 / Settings.PPM);
+        sensor.setRadius(50 / Settings.PPM);
         fdef.filter.categoryBits = Tags.SENSOR_BIT;
         fdef.filter.maskBits = Tags.PLAYER_BIT | Tags.DEFAULT_BIT;
         fdef.shape = sensor;

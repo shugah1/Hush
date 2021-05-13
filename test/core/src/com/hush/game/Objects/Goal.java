@@ -45,5 +45,6 @@ public class Goal {
     public void contact(Player player) {
 
         System.out.println("GG");
+
     }
 }

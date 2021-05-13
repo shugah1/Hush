@@ -23,7 +23,7 @@ public class MovingWall extends GameObject {
     public Fixture fix;
     private Vector2 moveVector = new Vector2();
     private static final float  SPEEDX = 6.9f;
-    Texture image = new Texture("badlogic.jpg");
+    Texture image = new Texture("Rock.png");
 
     public MovingWall(int x, int y, float w, float h, Main screen) {
         super();
@@ -32,6 +32,7 @@ public class MovingWall extends GameObject {
         this.y = y;
         this.w = w;
         this.h = h;
+        setRegion(image);
 
         BodyDef bdef = new BodyDef();
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
@@ -40,7 +41,7 @@ public class MovingWall extends GameObject {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(this.w / Settings.PPM,this.h / Settings.PPM);
+        shape.setAsBox(getRegionWidth() / 20 / Settings.PPM,getRegionHeight() / 20 / Settings.PPM);
         fdef.density = 300f;
         fdef.friction = 0f;
         b2body.setFixedRotation(true);
@@ -49,7 +50,7 @@ public class MovingWall extends GameObject {
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
-        setRegion(image);
+
 
     }
 
@@ -59,7 +60,8 @@ public class MovingWall extends GameObject {
 
     public void update(float deltaTime){
         setRegion(image);
-        setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, w/Settings.PPM*2,h/Settings.PPM*2);
+        //setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, w/Settings.PPM*2,h/Settings.PPM*2);
+        setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }
 
 }
