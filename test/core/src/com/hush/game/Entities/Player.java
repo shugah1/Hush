@@ -91,7 +91,7 @@ public class Player extends GameObject {
         shape.setRadius(getRegionWidth() / Settings.PPM / 2);
 
         fdef.filter.categoryBits = Tags.PLAYER_BIT;
-        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT | Tags.SENSOR_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT | Tags.SENSOR_BIT | Tags.GOAL_BIT;
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
