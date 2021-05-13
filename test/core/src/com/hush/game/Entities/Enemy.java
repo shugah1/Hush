@@ -68,7 +68,7 @@ public abstract class Enemy extends GameObject {
             @Override
             public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
                 //System.out.println("To point" + toPoint);
-                System.out.println(point);
+                //System.out.println(point);
                 if (fixture.getFilterData().categoryBits == Tags.DEFAULT_BIT || fixture.getFilterData().categoryBits == Tags.WALL_BIT ) {
                     hit = false;
                     return fraction;
@@ -82,7 +82,7 @@ public abstract class Enemy extends GameObject {
         };
         //System.out.println(fromPoint + " " + toPoint);
         world.rayCast(callback, fromPoint, toPoint);
-        System.out.println(hit);
+        //System.out.println(hit);
         return hit;
 
     }

@@ -46,7 +46,7 @@ public class WorldContactListener implements ContactListener {
                     player = ((Player) fixB.getUserData());
                 }
                 if(enemy.calculateCollisionPoint(player)){
-                    //System.exit(1);
+                    System.out.println("dead");
                 }
                 break;
             case Tags.PLAYER_BIT | Tags.GOAL_BIT:

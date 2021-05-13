@@ -517,6 +517,6 @@
   <object id="123" x="1552.5" y="1521" width="30" height="30.5"/>
  </objectgroup>
  <objectgroup id="6" name="MWall">
-  <object id="94" x="52" y="1636" width="36" height="75"/>
+  <object id="94" x="384" y="1736" width="40" height="31"/>
  </objectgroup>
 </map>

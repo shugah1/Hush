@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.hush.game.Entities.Enemy;
 import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.MovingWall;
