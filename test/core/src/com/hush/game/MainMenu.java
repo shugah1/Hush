@@ -49,7 +49,7 @@ public class MainMenu extends ScreenAdapter {
                     if (cursorY > startY && cursorY < startY + 100) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
-                            game.setScreen(new GameScreen(game));
+                            game.setScreen(new LevelSelect(game));
                         }
                     }
                 }

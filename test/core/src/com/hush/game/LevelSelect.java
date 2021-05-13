@@ -8,27 +8,23 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class SplashScreen extends ScreenAdapter {
+public class LevelSelect extends ScreenAdapter {
     Hush game;
     ShapeRenderer shapeRenderer;
     SpriteBatch batch;
-    Texture titleText;
-    Texture splashText;
+    Texture selectText;
     Sound sound;
 
     int cursorX;
     int cursorY;
-    int titleX = 710;
-    int titleY = 750;
-    int splashX = 460;
-    int splashY = 210;
+    int selectX = 710;
+    int selectY = 750;
 
-    public SplashScreen(Hush game) {
+    public LevelSelect(Hush game) {
         this.game = game;
-        titleText = new Texture("titleText.png");
-        splashText = new Texture("splashText.png");
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
+        selectText = new Texture("selectText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
     }
 
@@ -41,7 +37,7 @@ public class SplashScreen extends ScreenAdapter {
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
                 if (Gdx.input.isTouched()) {
                     sound.play(0.25f);
-                    game.setScreen(new MainMenu(game));
+                    game.setScreen(new GameScreen(game));
                 }
                 return true;
             }
@@ -54,8 +50,7 @@ public class SplashScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(titleText, titleX, titleY, 500, 200);
-        batch.draw(splashText, splashX, splashY, 1000, 150);
+        batch.draw(selectText, selectX, selectY, 500, 200);
         batch.end();
 
     }
@@ -65,3 +60,4 @@ public class SplashScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(null);
     }
 }
+
