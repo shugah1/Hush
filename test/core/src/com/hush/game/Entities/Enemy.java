@@ -21,8 +21,7 @@ public abstract class Enemy extends GameObject {
     private Vector2 collisionPoint = new Vector2();
     float x;
     float y;
-
-
+    public boolean toReset = false;
 
     public Enemy(World world, Main screen, float x, float y){
         this.world = world;
@@ -84,9 +83,18 @@ public abstract class Enemy extends GameObject {
         world.rayCast(callback, fromPoint, toPoint);
         //System.out.println(hit);
         return hit;
-
     }
 
-    public abstract void update(float dt);
+    public void resetCol() {
+        world.destroyBody(b2body);
+        defineEnemy();
+    }
+
+    public void update(float dt) {
+        if (toReset) {
+            resetCol();
+            toReset = false;
+        }
+    }
 
 }

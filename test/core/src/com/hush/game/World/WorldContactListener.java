@@ -6,6 +6,7 @@ import com.hush.game.Entities.Player;
 import com.hush.game.Objects.DamageWall;
 import com.hush.game.Objects.Goal;
 import com.hush.game.Objects.MovingWall;
+import com.hush.game.UI.Settings;
 
 public class WorldContactListener implements ContactListener {
 
@@ -45,6 +46,8 @@ public class WorldContactListener implements ContactListener {
                     enemy = ((Enemy) fixA.getUserData());
                     player = ((Player) fixB.getUserData());
                 }
+
+                enemy.toReset = true;
 
                 if(enemy.calculateCollisionPoint(player)){
                     System.out.println("dead");

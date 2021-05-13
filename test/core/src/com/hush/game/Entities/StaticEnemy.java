@@ -17,6 +17,7 @@ public class StaticEnemy extends Enemy{
 
     @Override
     public void update(float dt) {
+        super.update(dt);
         //setBounds(b2body.getPosition().x - getWidth() / Settings.PPM / 2f, b2body.getPosition().y - getHeight() / Settings.PPM / 2f, getWidth() / Settings.PPM, getHeight() / Settings.PPM);
     }
 }
