@@ -45,6 +45,7 @@ public class WorldContactListener implements ContactListener {
                     enemy = ((Enemy) fixA.getUserData());
                     player = ((Player) fixB.getUserData());
                 }
+
                 if(enemy.calculateCollisionPoint(player)){
                     System.out.println("dead");
                 }
@@ -57,7 +58,7 @@ public class WorldContactListener implements ContactListener {
                     goal = ((Goal) fixA.getUserData());
                     player = ((Player) fixB.getUserData());
                 }
-                Goal.contact(player);
+                goal.contact(player);
         }
     }
 

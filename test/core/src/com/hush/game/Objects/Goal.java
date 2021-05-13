@@ -42,7 +42,7 @@ public class Goal {
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public static void contact(Player player) {
+    public void contact(Player player) {
 
         System.out.println("GG");
     }
