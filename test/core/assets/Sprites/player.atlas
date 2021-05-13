@@ -1,0 +1,160 @@
+
+player.png
+size: 512, 32
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+attack_down
+  rotate: false
+  xy: 139, 2
+  size: 15, 13
+  orig: 16, 16
+  offset: 1, 0
+  index: -1
+attack_left
+  rotate: false
+  xy: 37, 15
+  size: 15, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+attack_right
+  rotate: false
+  xy: 54, 15
+  size: 15, 15
+  orig: 16, 16
+  offset: 1, 0
+  index: -1
+attack_up
+  rotate: false
+  xy: 2, 14
+  size: 15, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+dead
+  rotate: false
+  xy: 139, 17
+  size: 16, 13
+  orig: 16, 16
+  offset: 0, 1
+  index: -1
+item
+  rotate: false
+  xy: 19, 15
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+walk_down
+  rotate: false
+  xy: 71, 15
+  size: 15, 15
+  orig: 16, 16
+  offset: 1, 0
+  index: 1
+walk_down
+  rotate: false
+  xy: 71, 15
+  size: 15, 15
+  orig: 16, 16
+  offset: 1, 0
+  index: 3
+walk_down
+  rotate: false
+  xy: 157, 16
+  size: 15, 14
+  orig: 16, 16
+  offset: 1, 0
+  index: 2
+walk_down
+  rotate: false
+  xy: 174, 16
+  size: 15, 14
+  orig: 16, 16
+  offset: 1, 0
+  index: 4
+walk_left
+  rotate: false
+  xy: 191, 15
+  size: 14, 15
+  orig: 16, 16
+  offset: 1, 0
+  index: 1
+walk_left
+  rotate: false
+  xy: 191, 15
+  size: 14, 15
+  orig: 16, 16
+  offset: 1, 0
+  index: 3
+walk_left
+  rotate: false
+  xy: 223, 16
+  size: 14, 14
+  orig: 16, 16
+  offset: 1, 0
+  index: 2
+walk_left
+  rotate: false
+  xy: 239, 16
+  size: 14, 14
+  orig: 16, 16
+  offset: 1, 0
+  index: 4
+walk_right
+  rotate: false
+  xy: 207, 15
+  size: 14, 15
+  orig: 16, 16
+  offset: 1, 0
+  index: 1
+walk_right
+  rotate: false
+  xy: 207, 15
+  size: 14, 15
+  orig: 16, 16
+  offset: 1, 0
+  index: 3
+walk_right
+  rotate: false
+  xy: 255, 16
+  size: 14, 14
+  orig: 16, 16
+  offset: 1, 0
+  index: 2
+walk_right
+  rotate: false
+  xy: 271, 16
+  size: 14, 14
+  orig: 16, 16
+  offset: 1, 0
+  index: 4
+walk_up
+  rotate: false
+  xy: 88, 15
+  size: 15, 15
+  orig: 16, 16
+  offset: 1, 0
+  index: 1
+walk_up
+  rotate: false
+  xy: 88, 15
+  size: 15, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+walk_up
+  rotate: false
+  xy: 105, 14
+  size: 15, 16
+  orig: 16, 16
+  offset: 1, 0
+  index: 2
+walk_up
+  rotate: false
+  xy: 122, 14
+  size: 15, 16
+  orig: 16, 16
+  offset: 1, 0
+  index: 4
