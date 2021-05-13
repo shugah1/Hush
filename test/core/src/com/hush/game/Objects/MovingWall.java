@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.UI.Settings;
-import com.hush.game.Screens.Main;
+import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
 public class MovingWall extends GameObject {
@@ -58,6 +58,7 @@ public class MovingWall extends GameObject {
     }
 
     public void update(float deltaTime){
+        setRegion(image);
         setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, w/Settings.PPM*2,h/Settings.PPM*2);
     }
 

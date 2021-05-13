@@ -3,7 +3,7 @@ package com.hush.game.Objects;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.Entities.Player;
 import com.hush.game.UI.Settings;
-import com.hush.game.Screens.Main;
+import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
 public class DamageWall {
@@ -24,6 +24,7 @@ public class DamageWall {
         this.w = w;
         this.h = h;
 
+
         BodyDef bdef = new BodyDef();
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
         bdef.type = BodyDef.BodyType.StaticBody;
@@ -42,6 +43,7 @@ public class DamageWall {
     }
 
     public void contact(Player player) {
+
         System.out.println("Insert Damage here");
     }
 }
