@@ -7,9 +7,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.hush.game.UI.Settings;
 
 public class SplashScreen extends ScreenAdapter {
-    Hush game;
+    Settings game;
     ShapeRenderer shapeRenderer;
     SpriteBatch batch;
     Texture titleText;
@@ -23,7 +24,7 @@ public class SplashScreen extends ScreenAdapter {
     int splashX = 460;
     int splashY = 210;
 
-    public SplashScreen(Hush game) {
+    public SplashScreen(Settings game) {
         this.game = game;
         titleText = new Texture("titleText.png");
         splashText = new Texture("splashText.png");

@@ -5,25 +5,38 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.hush.game.UI.Settings;
 
 public class SettingsScreen extends ScreenAdapter {
-    Hush game;
+    Settings game;
     SpriteBatch batch;
     Texture settingsText;
+    Texture audioText;
+    Texture videoText;
+    Texture slider;
     Texture quitText;
     Sound sound;
 
     int cursorX;
     int cursorY;
     int settingsX = 810;
-    int settingsY = 350;
+    int settingsY = 750;
+    int audioX = 490;
+    int audioY = 550;
+    int videoX = 490;
+    int videoY = 350;
+    int sliderX = 960;
+    int sliderY = 550;
     int quitX = 810;
     int quitY = 150;
 
-    public SettingsScreen(Hush game) {
+    public SettingsScreen(Settings game) {
         this.game = game;
         batch = new SpriteBatch();
         settingsText = new Texture("settingsText.png");
+        audioText = new Texture("audioText.png");
+        videoText = new Texture("videoText.png");
+        slider = new Texture("slider.png");
         quitText = new Texture("quitText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
     }
@@ -54,6 +67,10 @@ public class SettingsScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         batch.draw(settingsText, settingsX, settingsY, 300, 100);
+        batch.draw(audioText, audioX, audioY, 300, 100);
+        batch.draw(videoText, videoX, videoY, 300, 100);
+        batch.draw(slider, sliderX, sliderY, 450, 100);
+        batch.draw(slider, sliderX, sliderY - 200, 450, 100);
         batch.draw(quitText, quitX, quitY, 300, 100);
         batch.end();
     }

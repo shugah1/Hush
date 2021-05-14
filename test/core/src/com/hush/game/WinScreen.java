@@ -7,9 +7,10 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.hush.game.UI.Settings;
 
-public class EndScreen extends ScreenAdapter {
-    Hush game;
+public class WinScreen extends ScreenAdapter {
+    Settings game;
     SpriteBatch batch;
     Texture endText;
     Texture restartText;
@@ -18,17 +19,17 @@ public class EndScreen extends ScreenAdapter {
 
     int cursorX;
     int cursorY;
-    int endX = 460;
-    int endY = 750;
+    int winX = 660;
+    int winY = 750;
     int restartX = 810;
     int restartY = 550;
     int returnX = 810;
     int returnY = 350;
 
-    public EndScreen(Hush game) {
+    public WinScreen(Settings game) {
         this.game = game;
         batch = new SpriteBatch();
-        endText = new Texture("endText.png");
+        endText = new Texture("winText.png");
         restartText = new Texture("restartText.png");
         returnText = new Texture("returnText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
@@ -45,7 +46,7 @@ public class EndScreen extends ScreenAdapter {
                     if (cursorY > restartY && cursorY < restartY + 100) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
-                            game.setScreen(new GameScreen(game));
+                            game.setScreen(new Main(game));
                         }
                     }
                 }
@@ -68,7 +69,7 @@ public class EndScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(endText, endX, endY, 1000, 200);
+        batch.draw(endText, winX, winY, 600, 200);
         batch.draw(restartText, restartX, restartY, 300, 100);
         batch.draw(returnText, returnX, returnY, 300, 100);
         batch.end();

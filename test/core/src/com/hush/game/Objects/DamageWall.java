@@ -43,7 +43,6 @@ public class DamageWall {
     }
 
     public void contact(Player player) {
-
         System.out.println("Insert Damage here");
     }
 }

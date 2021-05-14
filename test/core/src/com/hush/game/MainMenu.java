@@ -7,9 +7,10 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.hush.game.UI.Settings;
 
 public class MainMenu extends ScreenAdapter {
-    Hush game;
+    Settings game;
     SpriteBatch batch;
     Texture titleText;
     Texture startText;
@@ -28,7 +29,7 @@ public class MainMenu extends ScreenAdapter {
     int quitX = 810;
     int quitY = 150;
 
-    public MainMenu(Hush game) {
+    public MainMenu(Settings game) {
         this.game = game;
         batch = new SpriteBatch();
         titleText = new Texture("titleText.png");

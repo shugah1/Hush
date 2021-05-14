@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.hush.game.Main;
+import com.hush.game.SplashScreen;
 import com.hush.game.constants.Globals;
 import org.ini4j.Wini;
 
@@ -38,7 +39,7 @@ public class Settings extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		System.out.println(musicVolume);
-		setScreen(new Main(this));
+		setScreen(new SplashScreen(this));
 	}
 
 	@Override
