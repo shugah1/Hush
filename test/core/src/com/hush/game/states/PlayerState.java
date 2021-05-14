@@ -40,14 +40,20 @@ public enum PlayerState implements State<Player> {
 
             if (player.running) {
                 player.state.changeState(RUN);
+                player.walkSound =false;
+                player.runSound = true;
             }
 
             if (player.moveVector.equals(new Vector2(0, 0))) {
                 player.state.changeState(IDLE);
+                player.walkSound = false;
+                player.runSound = false;
             }
 
             if (!player.moveVector.equals(new Vector2(0, 0))) {
                 player.walk();
+                player.walkSound = true;
+                player.runSound =false;
             }
         }
 
