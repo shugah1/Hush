@@ -1,0 +1,41 @@
+
+enemies.png
+size: 256, 64
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+kevin_idle
+  rotate: false
+  xy: 2, 3
+  size: 39, 32
+  orig: 50, 50
+  offset: 5, 9
+  index: 3
+kevin_idle
+  rotate: false
+  xy: 43, 2
+  size: 37, 33
+  orig: 50, 50
+  offset: 6, 9
+  index: 1
+kevin_idle
+  rotate: false
+  xy: 43, 2
+  size: 37, 33
+  orig: 50, 50
+  offset: 6, 9
+  index: 2
+kevin_idle
+  rotate: false
+  xy: 82, 2
+  size: 37, 33
+  orig: 50, 50
+  offset: 6, 9
+  index: 5
+kevin_idle
+  rotate: false
+  xy: 121, 3
+  size: 37, 32
+  orig: 50, 50
+  offset: 6, 9
+  index: 4
