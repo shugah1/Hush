@@ -12,6 +12,7 @@ import javax.swing.text.html.HTML;
 
 public abstract class Enemy extends GameObject {
     protected World world;
+    Player player;
     protected Main screen;
     private Vector2 fromPoint;
     private Vector2 point;
@@ -26,6 +27,7 @@ public abstract class Enemy extends GameObject {
     public Enemy(World world, Main screen, float x, float y){
         this.world = world;
         this.screen = screen;
+        this.player = screen.player;
         this.x = x;
         this.y = y;
         setPosition(x,y);
@@ -50,7 +52,7 @@ public abstract class Enemy extends GameObject {
 
         //Enemy Sensor
         CircleShape sensor = new CircleShape();
-        sensor.setRadius(50 / Settings.PPM);
+        sensor.setRadius((50 + player.sound) /Settings.PPM);
         fdef.filter.categoryBits = Tags.SENSOR_BIT;
         fdef.filter.maskBits = Tags.PLAYER_BIT | Tags.DEFAULT_BIT;
         fdef.shape = sensor;
@@ -91,10 +93,8 @@ public abstract class Enemy extends GameObject {
     }
 
     public void update(float dt) {
-        if (toReset) {
-            resetCol();
-            toReset = false;
-        }
+        resetCol();
+
     }
 
 }

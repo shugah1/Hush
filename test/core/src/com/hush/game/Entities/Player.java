@@ -44,6 +44,10 @@ public class Player extends GameObject {
     private float stateTimer;
     public float stamina;
     public float maxStamina;
+    public float sound;
+    public float maxSound;
+    public boolean walkSound;
+    public boolean runSound;
     public boolean running;
     public boolean recharing;
     public float runSpeed = 2f;
@@ -53,7 +57,7 @@ public class Player extends GameObject {
     TextureRegion sprite;
     Texture image = new Texture("KnightItem.png");
     Texture newImage = new Texture("Item.png");
-    Sound sound = Gdx.audio.newSound(Gdx.files.internal("PowerUp1.wav"));
+    //Sound sound = Gdx.audio.newSound(Gdx.files.internal("PowerUp1.wav"));
 
     public Player(World world, Main screen, float x, float y) {
         super();
@@ -79,7 +83,11 @@ public class Player extends GameObject {
         stateTimer = 0;
         maxStamina = 10;
         stamina = maxStamina;
+        maxSound = 100;
+        sound = 0;
         recharing = false;
+        walkSound = false;
+        runSound = false;
 
         definePlayer();
     }
@@ -104,6 +112,7 @@ public class Player extends GameObject {
         //control our player using immediate impulses
         moveVector.set(0,0);
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+
             moveVector.add(new Vector2(0,1));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
@@ -114,6 +123,7 @@ public class Player extends GameObject {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             moveVector.add(new Vector2(1,0));
+
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
             HUD.stunCounter();
@@ -136,7 +146,14 @@ public class Player extends GameObject {
             SPEED = walkSpeed;
             recharing = !(stamina == maxStamina);
         }
-
+        if(walkSound){
+            sound = Math.min(sound + 1f, maxSound);
+        }else if(runSound){
+            sound = Math.min(sound + 5f, maxSound);
+        }else{
+            sound = Math.max(sound - 0.5f, 0);
+        }
+        System.out.println(sound);
         setRegion(sprite);
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }
