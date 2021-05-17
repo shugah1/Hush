@@ -1,9 +1,10 @@
 package com.hush.game.Screens;
 
 import com.badlogic.gdx.Screen;
+import com.hush.game.UI.HUD;
+import com.hush.game.UI.Settings;
 
 public class MainMenu implements Screen {
-
 
     @Override
     public void show() {
@@ -12,6 +13,7 @@ public class MainMenu implements Screen {
 
     @Override
     public void render(float delta) {
+
 
     }
 
