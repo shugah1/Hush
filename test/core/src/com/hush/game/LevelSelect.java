@@ -15,6 +15,7 @@ public class LevelSelect extends ScreenAdapter {
     SpriteBatch batch;
     Texture selectText;
     Texture tutorialText;
+    Texture quitText;
     Sound sound;
 
     int cursorX;
@@ -23,6 +24,8 @@ public class LevelSelect extends ScreenAdapter {
     int selectY = 750;
     int tutorialX = 810;
     int tutorialY = 490;
+    int quitX = 810;
+    int quitY = 150;
 
     public LevelSelect(Settings game) {
         this.game = game;
@@ -30,6 +33,7 @@ public class LevelSelect extends ScreenAdapter {
         batch = new SpriteBatch();
         selectText = new Texture("Text/selectText.png");
         tutorialText = new Texture("Text/tutorialText.png");
+        quitText = new Texture("Text/quitText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
     }
 
@@ -48,6 +52,14 @@ public class LevelSelect extends ScreenAdapter {
                         }
                     }
                 }
+                if (cursorX > quitX && cursorX < quitX + 300) {
+                    if (cursorY > quitY && cursorY < quitY + 100) {
+                        if (Gdx.input.isTouched()) {
+                            sound.play(0.25f);
+                            game.setScreen(new MainMenu(game));
+                        }
+                    }
+                }
 
                 return true;
             }
@@ -62,6 +74,7 @@ public class LevelSelect extends ScreenAdapter {
         batch.begin();
         batch.draw(selectText, selectX, selectY, 500, 200);
         batch.draw(tutorialText, tutorialX, tutorialY, 300, 100);
+        batch.draw(quitText, quitX, quitY, 300, 100);
         batch.end();
 
     }

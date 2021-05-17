@@ -152,6 +152,7 @@ public class Main implements Screen {
         gameObject.removeAll(gameObjectBye);
         gameObjectAdd.clear();
         gameObjectBye.clear();
+        hud.update(dt);
     }
 
     @Override
@@ -165,9 +166,10 @@ public class Main implements Screen {
         for(GameObject gO : gameObject ){
             gO.draw(game.batch);
         }
-        hud.stage.draw();
+
         game.batch.setProjectionMatrix(cam.combined);
         b2dr.render(world, cam.combined);
+        hud.stage.draw();
         game.batch.end();
         hud.render();
     }

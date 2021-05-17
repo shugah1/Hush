@@ -108,7 +108,7 @@ public class HUD  {
         System.out.println(18 * (player.stamina / player.maxStamina));
         TextureRegion StaminaRedCrop = new TextureRegion(StaminaRed, 0, 0, (int)((18 * (player.stamina / player.maxStamina))), 4);
         batch.draw(Stamina, 10, 20, Stamina.getWidth() * 10, Stamina.getHeight() * 10);
-        batch.draw(StaminaRed, 10, 20, StaminaRedCrop.getRegionWidth() * 10, StaminaRedCrop.getRegionHeight() * 10);
+        batch.draw(StaminaRedCrop, 10, 20, StaminaRedCrop.getRegionWidth() * 10, StaminaRedCrop.getRegionHeight() * 10);
         batch.draw(stunImage, 1575, 888, 40, 40);
         batch.draw(invisImage, 1575, 964, 40, 40);
         batch.end();
