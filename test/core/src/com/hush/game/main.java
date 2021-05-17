@@ -40,7 +40,6 @@ public class Main implements Screen {
 
     public static World world;
     private OrthographicCamera cam;
-    //SpriteBatch batch;
     public Player player;
     private Viewport gamePort;
     private Settings game;
@@ -59,12 +58,9 @@ public class Main implements Screen {
         Settings.manager.load("sprites/player.atlas", TextureAtlas.class);
         Settings.manager.finishLoading();
         this.game = game;
-
-        //Gdx.graphics.setWindowedMode(1920, 1080);
-        //batch = new SpriteBatch();
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
-        gameMap = new TiledGameMap("test/core/assets/TiledMaps/Level1.tmx", this);
+        gameMap = new TiledGameMap("test/core/assets/TiledMaps/Tutorial(MidPoint).tmx", this);
         gamePort = new StretchViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         cam.update();
@@ -91,9 +87,6 @@ public class Main implements Screen {
         if (game.music.getPosition() >= game.songLoopEnd) {
             game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
         }
-
-        //player.update(dt);
-        //movingWall.update(dt);
 
         for(GameObject gO : gameObject ){
             if (gO.remove){
@@ -201,6 +194,5 @@ public class Main implements Screen {
         gameMap.dispose();
         world.dispose();
         b2dr.dispose();
-
     }
 }
