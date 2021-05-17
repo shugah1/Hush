@@ -33,11 +33,11 @@ public class SettingsScreen extends ScreenAdapter {
     public SettingsScreen(Settings game) {
         this.game = game;
         batch = new SpriteBatch();
-        settingsText = new Texture("settingsText.png");
-        audioText = new Texture("audioText.png");
-        videoText = new Texture("videoText.png");
-        slider = new Texture("slider.png");
-        quitText = new Texture("quitText.png");
+        settingsText = new Texture("Text/settingsText.png");
+        audioText = new Texture("Text/audioText.png");
+        videoText = new Texture("Text/videoText.png");
+        slider = new Texture("Text/slider.png");
+        quitText = new Texture("Text/quitText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
     }
 

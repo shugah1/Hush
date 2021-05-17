@@ -24,6 +24,9 @@ public class Settings extends Game {
 	public static final int V_HEIGHT = 270;
 	public static final float PPM = 100;
 
+	public static boolean dead = false;
+	public static boolean win = false;
+
 	public static String songName;
 	public static String internalSongName;
 	public static double songLoopStart;

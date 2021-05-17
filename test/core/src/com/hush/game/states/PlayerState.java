@@ -105,6 +105,18 @@ public enum PlayerState implements State<Player> {
         public void update(Player player) {}
 
         public void exit(Player player) {}
+    },
+
+    DEAD() {
+        public void enter(Player player) {
+            player.elapsedTime = 0;
+        }
+
+        public void update(Player player) {
+            player.deadAction();
+        }
+
+        public void exit(Player player) {}
     };
 
     @Override

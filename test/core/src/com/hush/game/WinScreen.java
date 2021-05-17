@@ -29,14 +29,15 @@ public class WinScreen extends ScreenAdapter {
     public WinScreen(Settings game) {
         this.game = game;
         batch = new SpriteBatch();
-        endText = new Texture("winText.png");
-        restartText = new Texture("restartText.png");
-        returnText = new Texture("returnText.png");
+        endText = new Texture("Text/winText.png");
+        restartText = new Texture("Text/restartText.png");
+        returnText = new Texture("Text/returnText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
     }
 
     @Override
     public void show() {
+        Main.gameObject.clear();
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {

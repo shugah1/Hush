@@ -1,5 +1,4 @@
 package com.hush.game;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
@@ -32,10 +31,10 @@ public class MainMenu extends ScreenAdapter {
     public MainMenu(Settings game) {
         this.game = game;
         batch = new SpriteBatch();
-        titleText = new Texture("titleText.png");
-        startText = new Texture("startText.png");
-        settingsText = new Texture("settingsText.png");
-        quitText = new Texture("quitText.png");
+        titleText = new Texture("Text/titleText.png");
+        startText = new Texture("Text/startText.png");
+        settingsText = new Texture("Text/settingsText.png");
+        quitText = new Texture("Text/quitText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
     }
 

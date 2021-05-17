@@ -2,11 +2,13 @@ package com.hush.game.Objects;
 
 import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.Entities.Player;
+import com.hush.game.MainMenu;
 import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
 public class DamageWall {
+    Settings game;
 
     //declaring and initializing variables
     public World world;
@@ -43,6 +45,8 @@ public class DamageWall {
     }
 
     public void contact(Player player) {
+        Settings.dead = true;
+        player.die();
         System.out.println("Insert Damage here");
     }
 }

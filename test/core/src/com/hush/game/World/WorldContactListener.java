@@ -50,6 +50,8 @@ public class WorldContactListener implements ContactListener {
                 enemy.toReset = true;
 
                 if(enemy.calculateCollisionPoint(player)){
+                    Settings.dead = true;
+                    player.die();
                     System.out.println("dead");
                 }
                 break;

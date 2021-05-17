@@ -43,7 +43,7 @@ public class Goal {
     }
 
     public void contact(Player player) {
-
+        Settings.win = true;
         System.out.println("GG");
     }
 }

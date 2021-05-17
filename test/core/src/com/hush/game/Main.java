@@ -1,8 +1,9 @@
 package com.hush.game;
-
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -50,6 +51,7 @@ public class Main implements Screen {
     public TiledGameMap gameMap;
 
     public Main(Settings game){
+        Settings.dead = false;
         Settings.manager.load("sprites/player.atlas", TextureAtlas.class);
         Settings.manager.finishLoading();
         this.game = game;
@@ -80,6 +82,19 @@ public class Main implements Screen {
     }
 
     public void update(float dt) {
+        if (Settings.win == true) {
+            game.setScreen(new WinScreen(game));
+            Settings.music.stop();
+            Settings.win = false;
+            gameObject.clear();
+        }
+        if (Settings.dead == true) {
+            game.setScreen(new LoseScreen(game));
+            Settings.music.stop();
+            Settings.dead = false;
+            gameObject.clear();
+        }
+
         //        Loops song
         if (game.music.getPosition() >= game.songLoopEnd) {
             game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
@@ -133,8 +148,8 @@ public class Main implements Screen {
 
         world.step(1/60f,6,2);
 
-        cam.position.x = player.b2body.getPosition().x;
-        cam.position.y = player.b2body.getPosition().y;
+        cam.position.x = player.x;
+        cam.position.y = player.y;
         cam.update();
 
         gameObject.addAll(gameObjectAdd);
@@ -186,6 +201,5 @@ public class Main implements Screen {
         gameMap.dispose();
         world.dispose();
         b2dr.dispose();
-
     }
 }

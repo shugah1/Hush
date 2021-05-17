@@ -15,6 +15,7 @@ public class SplashScreen extends ScreenAdapter {
     SpriteBatch batch;
     Texture titleText;
     Texture splashText;
+    Texture namesText;
     Sound sound;
 
     int cursorX;
@@ -23,11 +24,14 @@ public class SplashScreen extends ScreenAdapter {
     int titleY = 750;
     int splashX = 460;
     int splashY = 210;
+    int namesX = 1570;
+    int namesY = 700;
 
     public SplashScreen(Settings game) {
         this.game = game;
-        titleText = new Texture("titleText.png");
-        splashText = new Texture("splashText.png");
+        titleText = new Texture("Text/titleText.png");
+        splashText = new Texture("Text/splashText.png");
+        namesText = new Texture("Text/namesText.png");
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
@@ -57,6 +61,7 @@ public class SplashScreen extends ScreenAdapter {
         batch.begin();
         batch.draw(titleText, titleX, titleY, 500, 200);
         batch.draw(splashText, splashX, splashY, 1000, 150);
+        batch.draw(namesText, namesX, namesY, 350, 350);
         batch.end();
 
     }

@@ -1,5 +1,4 @@
 package com.hush.game;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
@@ -29,14 +28,15 @@ public class LoseScreen extends ScreenAdapter {
     public LoseScreen(Settings game) {
         this.game = game;
         batch = new SpriteBatch();
-        endText = new Texture("loseText.png");
-        restartText = new Texture("restartText.png");
-        returnText = new Texture("returnText.png");
+        endText = new Texture("Text/loseText.png");
+        restartText = new Texture("Text/restartText.png");
+        returnText = new Texture("Text/returnText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
     }
 
     @Override
     public void show() {
+        Settings.dead = false;
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
