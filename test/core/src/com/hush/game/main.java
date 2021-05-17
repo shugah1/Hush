@@ -11,6 +11,7 @@ import com.hush.game.Entities.Enemy;
 import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.MovingWall;
+import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 import com.hush.game.World.WorldContactListener;
 import com.hush.game.World.TiledGameMap;
@@ -48,6 +49,7 @@ public class Main implements Screen {
     public static ArrayList<GameObject> gameObjectAdd = new ArrayList<>();
     public static ArrayList<GameObject> gameObjectBye = new ArrayList<>();
     public TiledGameMap gameMap;
+    private HUD hud;
 
     public Main(Settings game){
         Settings.dead = false;
@@ -56,7 +58,7 @@ public class Main implements Screen {
         this.game = game;
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
-        gameMap = new TiledGameMap("test/core/assets/TiledMaps/Level1.tmx", this);
+        gameMap = new TiledGameMap("test/core/assets/TiledMaps/Tutorial(Midpoint).tmx", this);
         gamePort = new StretchViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         cam.update();
@@ -66,6 +68,7 @@ public class Main implements Screen {
         Settings.music = game.newSong("hub");
         Settings.music.play();
         game.music.setVolume(Settings.musicVolume / 10f);
+        hud = new HUD(this);
     }
 
     public TextureAtlas getAtlas(){
@@ -162,9 +165,11 @@ public class Main implements Screen {
         for(GameObject gO : gameObject ){
             gO.draw(game.batch);
         }
+        hud.stage.draw();
         game.batch.setProjectionMatrix(cam.combined);
         b2dr.render(world, cam.combined);
         game.batch.end();
+        hud.render();
     }
 
     @Override
