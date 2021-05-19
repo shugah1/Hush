@@ -28,7 +28,7 @@ public class TiledGameMap {
     }
 
 
-    public static void render(OrthographicCamera camera) {
+    public void render(OrthographicCamera camera) {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
     }
