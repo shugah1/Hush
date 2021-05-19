@@ -14,10 +14,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 import com.hush.game.states.PlayerState;
+
+import static com.hush.game.UI.HUD.invis;
+import static com.hush.game.UI.HUD.stun;
 
 public class Player extends GameObject {
     public float SPEED;
@@ -120,6 +124,12 @@ public class Player extends GameObject {
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             moveVector.add(new Vector2(1,0));
 
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+            HUD.stunCounter();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            HUD.invisCounter();
         }
         if (!recharing) {
             running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);

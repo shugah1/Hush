@@ -2,6 +2,7 @@ package com.hush.game.UI;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -34,6 +35,9 @@ public class Settings extends Game {
 	public static AssetManager audioManager = new AssetManager();
 	public static AssetManager manager = new AssetManager();
 
+
+
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -42,9 +46,7 @@ public class Settings extends Game {
 	}
 
 	@Override
-	public void render () {
-		super.render();
-	}
+	public void render () { super.render(); }
 
 
 	
