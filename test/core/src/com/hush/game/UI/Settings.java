@@ -1,22 +1,16 @@
 package com.hush.game.UI;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Array;
 import com.hush.game.Main;
-import com.hush.game.constants.Globals;
-import org.ini4j.Wini;
+import com.hush.game.Screens.SplashScreen;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Random;
 
 public class Settings extends Game {
 	public SpriteBatch batch;
@@ -42,14 +36,14 @@ public class Settings extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		System.out.println(musicVolume);
-		setScreen(new Main(this));
+		setScreen(new SplashScreen(this));
 	}
 
 	@Override
 	public void render () { super.render(); }
 
 
-	
+
 	@Override
 	public void dispose () {
 		//

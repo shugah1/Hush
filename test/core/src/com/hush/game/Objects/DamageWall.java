@@ -7,6 +7,7 @@ import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
 public class DamageWall {
+    Settings game;
 
     //declaring and initializing variables
     public World world;
@@ -43,7 +44,8 @@ public class DamageWall {
     }
 
     public void contact(Player player) {
-
+        player.pDead = true;
+        player.die();
         System.out.println("Insert Damage here");
     }
 }

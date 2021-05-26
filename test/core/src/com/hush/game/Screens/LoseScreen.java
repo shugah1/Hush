@@ -9,72 +9,82 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.hush.game.Entities.Player;
+import com.hush.game.Main;
+import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 
-public class MainMenu extends ScreenAdapter {
+public class LoseScreen extends ScreenAdapter {
     Settings game;
     SpriteBatch batch;
-    Texture titleText;
-    Texture startText;
-    Texture settingsText;
-    Texture quitText;
-    Sound sound;
+    Texture endText;
+    Texture scoreText;
+    Texture restartText;
+    Texture returnText;
     BitmapFont font;
+    Sound sound;
+    HUD hud;
+    Player player;
 
+
+    int minutes = hud.worldTimer / 60;
+    int seconds = hud.worldTimer % 60;
+    String score = minutes + " : " + seconds  + " s";
     int cursorX;
     int cursorY;
     float buttonWidth = Gdx.graphics.getWidth() / 5;
     float buttonHeight = Gdx.graphics.getHeight() / 9;
     float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
-    float titleY = buttonHeight * 7;
-    float startY = buttonHeight * 5;
-    float settingsY = buttonHeight * 3;
-    float quitY = buttonHeight;
 
-    public MainMenu(Settings game) {
+    float endX = buttonX;
+    float endY = buttonHeight * 7;
+    float scoreX = buttonX;
+    float scoreY = buttonHeight * 5;
+    float restartX = buttonX;
+    float restartY = buttonHeight * 3;
+    float returnX = buttonX;
+    float returnY = buttonHeight;
+
+    public LoseScreen(Settings game) {
         this.game = game;
         batch = new SpriteBatch();
-        titleText = new Texture("Text/titleText.png");
-        startText = new Texture("Text/startText.png");
-        settingsText = new Texture("Text/settingsText.png");
-        quitText = new Texture("Text/quitText.png");
+        font = new BitmapFont();
+        endText = new Texture("Text/loseText.png");
+        scoreText = new Texture(("Text/scoreText.png"));
+        restartText = new Texture("Text/restartText.png");
+        returnText = new Texture("Text/returnText.png");
+
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Cyberverse Condensed Bold Italic.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = (int) buttonHeight;
+        parameter.size = (int)buttonHeight; // font size
         font = generator.generateFont(parameter);
         font.setColor(0f, 104f, 255f, 1f);
+        generator.dispose(); // avoid memory leaks, important
     }
 
     @Override
-    public void show(){
+    public void show() {
+        player.pDead = false;
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
-                if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
-                    if (cursorY > startY && cursorY < startY + buttonHeight) {
+                if (cursorX > restartX && cursorX < restartX + buttonWidth) {
+                    if (cursorY > restartY && cursorY < restartY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
-                            game.setScreen(new LevelSelect(game));
+                            game.setScreen(new Main(game));
                         }
                     }
                 }
-                if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
-                    if (cursorY > settingsY && cursorY < settingsY + buttonHeight) {
+                if (cursorX > returnX && cursorX < returnX + buttonWidth) {
+                    if (cursorY > returnY && cursorY < returnY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
-                            game.setScreen(new SettingsScreen(game));
-                        }
-                    }
-                }
-                if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
-                    if (cursorY > quitY && cursorY < quitY + buttonHeight) {
-                        if (Gdx.input.isTouched()) {
-                            sound.play(0.25f);
-                            System.exit(0);
+                            game.setScreen(new MainMenu(game));
                         }
                     }
                 }
@@ -89,15 +99,18 @@ public class MainMenu extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(titleText, buttonX, titleY, buttonWidth, buttonHeight);
-        batch.draw(startText, buttonX, startY, buttonWidth, buttonHeight);
-        batch.draw(settingsText, buttonX, settingsY, buttonWidth, buttonHeight);
-        batch.draw(quitText, buttonX, quitY, buttonWidth, buttonHeight);
+        batch.draw(endText, endX, endY, buttonWidth, buttonHeight);
+        batch.draw(scoreText, scoreX - buttonWidth, scoreY, buttonWidth, buttonHeight);
+        batch.draw(restartText, restartX, restartY, buttonWidth, buttonHeight);
+        batch.draw(returnText, returnX, returnY, buttonWidth, buttonHeight);
+
+        font.draw(batch, score, buttonX + buttonWidth * 0.75f, scoreY + buttonHeight * 0.8f);
         batch.end();
+
     }
 
     @Override
-    public void hide(){
+    public void hide() {
         Gdx.input.setInputProcessor(null);
     }
 }

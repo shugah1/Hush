@@ -73,17 +73,13 @@ public class Main implements Screen {
         hud = new HUD(this);
     }
 
-    public TextureAtlas getAtlas(){
-        return atlas;
-    }
-
     @Override
     public void show() {
         //
     }
 
     public void update(float dt) {
-        //        Loops song
+        //Loops song
         if (game.music.getPosition() >= game.songLoopEnd) {
             game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
         }
@@ -93,15 +89,11 @@ public class Main implements Screen {
                 try{
                     world.destroyBody(gO.b2body);
                 }catch (Exception e){
-
                 }
             }else{
                 gO.update(dt);
-
             }
-
         }
-
         // Set game.music volume
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             Settings.musicVolume = Settings.musicVolume < 10 ? Settings.musicVolume + 1 : 10;
@@ -135,8 +127,8 @@ public class Main implements Screen {
 
         world.step(1/60f,6,2);
 
-        cam.position.x = player.b2body.getPosition().x;
-        cam.position.y = player.b2body.getPosition().y;
+        cam.position.x = player.x;
+        cam.position.y = player.y;
         cam.update();
 
         gameObject.addAll(gameObjectAdd);

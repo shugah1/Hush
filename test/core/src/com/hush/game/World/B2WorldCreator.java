@@ -57,7 +57,6 @@ public class B2WorldCreator {
 
             new DynamicEnemy(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM);
         }
-
         for (MapObject object : map.getLayers().get("Goal").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
