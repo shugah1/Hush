@@ -64,8 +64,6 @@ public class Player extends GameObject {
     public float x;
     public float y;
     TextureRegion sprite;
-    Texture image = new Texture("KnightItem.png");
-    Texture newImage = new Texture("Item.png");
     //Sound sound = Gdx.audio.newSound(Gdx.files.internal("PowerUp1.wav"));
 
     public Player(World world, Main screen, float x, float y) {

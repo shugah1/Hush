@@ -39,7 +39,7 @@ public class LevelSelect extends ScreenAdapter {
         selectText = new Texture("Text/selectText.png");
         tutorialText = new Texture("Text/tutorialText.png");
         quitText = new Texture("Text/quitText.png");
-        sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
     }
 
     @Override

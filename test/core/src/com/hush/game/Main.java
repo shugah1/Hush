@@ -53,7 +53,6 @@ public class Main implements Screen {
     public static ArrayList<GameObject> gameObjectAdd = new ArrayList<>();
     public static ArrayList<GameObject> gameObjectBye = new ArrayList<>();
     public TiledGameMap gameMap;
-    Texture stunImage = new Texture("ScrollThunder.png");
 
 
     public Main(Settings game){
