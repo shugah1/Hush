@@ -56,7 +56,7 @@ public class WinScreen extends ScreenAdapter {
         scoreText = new Texture(("Text/scoreText.png"));
         restartText = new Texture("Text/restartText.png");
         returnText = new Texture("Text/returnText.png");
-        sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Cyberverse Condensed Bold Italic.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();

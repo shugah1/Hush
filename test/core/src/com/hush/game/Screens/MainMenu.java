@@ -38,7 +38,7 @@ public class MainMenu extends ScreenAdapter {
         startText = new Texture("Text/startText.png");
         settingsText = new Texture("Text/settingsText.png");
         quitText = new Texture("Text/quitText.png");
-        sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Cyberverse Condensed Bold Italic.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
