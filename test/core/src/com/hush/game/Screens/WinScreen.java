@@ -29,7 +29,6 @@ public class WinScreen extends ScreenAdapter {
     Texture returnText;
     BitmapFont font;
     Sound sound;
-    HUD hud;
 
     int minutes = HUD.worldTimer / 60;
     int seconds = HUD.worldTimer % 60;
