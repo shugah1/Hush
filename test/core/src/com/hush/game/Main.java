@@ -1,8 +1,10 @@
 package com.hush.game;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -10,6 +12,7 @@ import com.hush.game.Entities.Enemy;
 import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.MovingWall;
+import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 import com.hush.game.World.WorldContactListener;
 import com.hush.game.World.TiledGameMap;
@@ -42,11 +45,14 @@ public class Main implements Screen {
     private Settings game;
     private Box2DDebugRenderer b2dr;
     private TextureAtlas atlas;
+    private HUD hud;
     public MovingWall movingWall;
     public static ArrayList<GameObject> gameObject = new ArrayList<>();
     public static ArrayList<GameObject> gameObjectAdd = new ArrayList<>();
     public static ArrayList<GameObject> gameObjectBye = new ArrayList<>();
     public TiledGameMap gameMap;
+    Texture stunImage = new Texture("ScrollThunder.png");
+
 
     public Main(Settings game){
         Settings.manager.load("sprites/player.atlas", TextureAtlas.class);
@@ -54,7 +60,7 @@ public class Main implements Screen {
         this.game = game;
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
-        gameMap = new TiledGameMap("test/core/assets/TiledMaps/Level1.tmx", this);
+        gameMap = new TiledGameMap("test/core/assets/TiledMaps/Tutorial(MidPoint).tmx", this);
         gamePort = new StretchViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         cam.update();
@@ -64,6 +70,7 @@ public class Main implements Screen {
         Settings.music = game.newSong("hub");
         Settings.music.play();
         game.music.setVolume(Settings.musicVolume / 10f);
+        hud = new HUD(this);
     }
 
     public TextureAtlas getAtlas(){
@@ -90,7 +97,9 @@ public class Main implements Screen {
                 }
             }else{
                 gO.update(dt);
+
             }
+
         }
 
         // Set game.music volume
@@ -134,6 +143,8 @@ public class Main implements Screen {
         gameObject.removeAll(gameObjectBye);
         gameObjectAdd.clear();
         gameObjectBye.clear();
+
+        hud.update(dt);
     }
 
     @Override
@@ -141,7 +152,9 @@ public class Main implements Screen {
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         gameMap.render(cam);
+
 
         game.batch.begin();
         for(GameObject gO : gameObject ){
@@ -149,7 +162,9 @@ public class Main implements Screen {
         }
         game.batch.setProjectionMatrix(cam.combined);
         b2dr.render(world, cam.combined);
+        hud.stage.draw();
         game.batch.end();
+        hud.render();
     }
 
     @Override
