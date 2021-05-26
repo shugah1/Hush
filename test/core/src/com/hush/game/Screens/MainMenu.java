@@ -45,6 +45,8 @@ public class MainMenu extends ScreenAdapter {
         parameter.size = (int) buttonHeight;
         font = generator.generateFont(parameter);
         font.setColor(0f, 104f, 255f, 1f);
+        Settings.music = game.newSong("TitleTheme");
+        Settings.music.play();
     }
 
     @Override
