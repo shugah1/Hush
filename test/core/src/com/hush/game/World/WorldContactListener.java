@@ -1,6 +1,7 @@
 package com.hush.game.World;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.hush.game.Entities.DynamicEnemy;
 import com.hush.game.Entities.Enemy;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.DamageWall;
@@ -48,9 +49,10 @@ public class WorldContactListener implements ContactListener {
                 }
 
                 enemy.toReset = true;
-
-                if(enemy.calculateCollisionPoint(player)){
-                    System.out.println("dead");
+                if(!player.invis) {
+                    if (enemy.calculateCollisionPoint(player)) {
+                        System.out.println("dead");
+                    }
                 }
                 break;
             case Tags.PLAYER_BIT | Tags.GOAL_BIT:
@@ -62,6 +64,7 @@ public class WorldContactListener implements ContactListener {
                     player = ((Player) fixB.getUserData());
                 }
                 goal.contact(player);
+
         }
     }
 

@@ -26,7 +26,6 @@ public class HUD  {
     private Viewport viewport;
     private Integer worldTimer;
     private float timeCount;
-    private Integer score;
     public static Integer stun;
     public static Integer invis;
     private Player player;
@@ -34,6 +33,7 @@ public class HUD  {
     Texture invisImage = new Texture("invisibility-hush.png");
     Texture Stamina = new Texture("LifeBarMiniUnder.png");
     Texture StaminaRed = new Texture("LifeBarMiniProgress.png");
+    Texture Sound = new Texture("SoundBarMiniProgressCut.png");
 
     SpriteBatch batch = new SpriteBatch();
 
@@ -49,7 +49,6 @@ public class HUD  {
     public HUD (Main game){
         worldTimer = 0;
         timeCount = 0;
-        score= 0;
         stun = 3;
         invis = 3;
         player = game.player;
@@ -105,13 +104,15 @@ public class HUD  {
     }
     public void render(){
         batch.begin();
-        System.out.println(18 * (player.stamina / player.maxStamina));
         TextureRegion StaminaRedCrop = new TextureRegion(StaminaRed, 0, 0, (int)((18 * (player.stamina / player.maxStamina))), 4);
         batch.draw(Stamina, 10, 20, Stamina.getWidth() * 10, Stamina.getHeight() * 10);
-        batch.draw(StaminaRed, 10, 20, StaminaRedCrop.getRegionWidth() * 10, StaminaRedCrop.getRegionHeight() * 10);
+        batch.draw(StaminaRedCrop, 10, 20, StaminaRedCrop.getRegionWidth() * 10, StaminaRedCrop.getRegionHeight() * 10);
+
+        TextureRegion SoundCrop = new TextureRegion(Sound, 0, 0, (int)((18 * (player.sound / player.maxSound))), 4);
+        batch.draw(Stamina, 10, 70, Stamina.getWidth() * 10, Stamina.getHeight() * 10);
+        batch.draw(SoundCrop, 10, 70, SoundCrop.getRegionWidth() * 10, SoundCrop.getRegionHeight() * 10);
         batch.draw(stunImage, 1575, 888, 40, 40);
         batch.draw(invisImage, 1575, 964, 40, 40);
         batch.end();
-
     }
 }
