@@ -81,13 +81,13 @@ public class Main implements Screen {
     }
 
     public void update(float dt) {
-        if (Settings.win == true) {
+        if (Settings.win) {
             game.setScreen(new WinScreen(game));
             Settings.music.stop();
             Settings.win = false;
             gameObject.clear();
         }
-        if (Settings.dead == true) {
+        if (Settings.dead ) {
             game.setScreen(new LoseScreen(game));
             Settings.music.stop();
             Settings.dead = false;

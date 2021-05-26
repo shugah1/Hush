@@ -20,15 +20,23 @@ public class SplashScreen extends ScreenAdapter {
 
     int cursorX;
     int cursorY;
-    int titleX = 710;
-    int titleY = 750;
-    int splashX = 460;
-    int splashY = 210;
-    int namesX = 1570;
-    int namesY = 700;
+    float buttonWidth = Gdx.graphics.getWidth() / 5;
+    float buttonHeight = Gdx.graphics.getHeight() / 9;
+    float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
+    float splashWidth = (Gdx.graphics.getWidth() / 5) * 2;
+    float splashX = Gdx.graphics.getWidth() / 2 - splashWidth / 2;
+
+    float titleX = buttonX;
+    float titleY = buttonHeight * 7;
+    float splashY = buttonHeight;
+    float namesWidth = Gdx.graphics.getWidth() / 6;
+    float namesHeight = Gdx.graphics.getHeight() / 4;
+    float namesX = Gdx.graphics.getWidth() - namesWidth;
+    float namesY = Gdx.graphics.getHeight() - namesHeight;
 
     public SplashScreen(Settings game) {
         this.game = game;
+
         titleText = new Texture("Text/titleText.png");
         splashText = new Texture("Text/splashText.png");
         namesText = new Texture("Text/namesText.png");
@@ -59,9 +67,9 @@ public class SplashScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(titleText, titleX, titleY, 500, 200);
-        batch.draw(splashText, splashX, splashY, 1000, 150);
-        batch.draw(namesText, namesX, namesY, 350, 350);
+        batch.draw(titleText, titleX, titleY, buttonWidth, buttonHeight);
+        batch.draw(splashText, splashX, splashY, splashWidth, buttonHeight);
+        batch.draw(namesText, namesX, namesY, namesWidth, namesHeight);
         batch.end();
 
     }

@@ -1,11 +1,14 @@
 package com.hush.game;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.hush.game.UI.Settings;
 
 public class MainMenu extends ScreenAdapter {
@@ -16,17 +19,17 @@ public class MainMenu extends ScreenAdapter {
     Texture settingsText;
     Texture quitText;
     Sound sound;
+    BitmapFont font;
 
     int cursorX;
     int cursorY;
-    int titleX = 710;
-    int titleY = 750;
-    int startX = 810;
-    int startY = 550;
-    int settingsX = 810;
-    int settingsY = 350;
-    int quitX = 810;
-    int quitY = 150;
+    float buttonWidth = Gdx.graphics.getWidth() / 5;
+    float buttonHeight = Gdx.graphics.getHeight() / 9;
+    float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
+    float titleY = buttonHeight * 7;
+    float startY = buttonHeight * 5;
+    float settingsY = buttonHeight * 3;
+    float quitY = buttonHeight;
 
     public MainMenu(Settings game) {
         this.game = game;
@@ -36,6 +39,12 @@ public class MainMenu extends ScreenAdapter {
         settingsText = new Texture("Text/settingsText.png");
         quitText = new Texture("Text/quitText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Cyberverse Condensed Bold Italic.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = (int) buttonHeight;
+        font = generator.generateFont(parameter);
+        font.setColor(0f, 104f, 255f, 1f);
     }
 
     @Override
@@ -45,24 +54,24 @@ public class MainMenu extends ScreenAdapter {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
-                if (cursorX > startX && cursorX < startX + 300) {
-                    if (cursorY > startY && cursorY < startY + 100) {
+                if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
+                    if (cursorY > startY && cursorY < startY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
                             game.setScreen(new LevelSelect(game));
                         }
                     }
                 }
-                if (cursorX > settingsX && cursorX < settingsX + 300) {
-                    if (cursorY > settingsY && cursorY < settingsY + 100) {
+                if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
+                    if (cursorY > settingsY && cursorY < settingsY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
                             game.setScreen(new SettingsScreen(game));
                         }
                     }
                 }
-                if (cursorX > quitX && cursorX < quitX + 300) {
-                    if (cursorY > quitY && cursorY < quitY + 100) {
+                if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
+                    if (cursorY > quitY && cursorY < quitY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
                             System.exit(0);
@@ -80,10 +89,10 @@ public class MainMenu extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(titleText, titleX, titleY, 500, 200);
-        batch.draw(startText, startX, startY, 300, 100);
-        batch.draw(settingsText, settingsX, settingsY, 300, 100);
-        batch.draw(quitText, quitX, quitY, 300, 100);
+        batch.draw(titleText, buttonX, titleY, buttonWidth, buttonHeight);
+        batch.draw(startText, buttonX, startY, buttonWidth, buttonHeight);
+        batch.draw(settingsText, buttonX, settingsY, buttonWidth, buttonHeight);
+        batch.draw(quitText, buttonX, quitY, buttonWidth, buttonHeight);
         batch.end();
     }
 
@@ -92,4 +101,3 @@ public class MainMenu extends ScreenAdapter {
         Gdx.input.setInputProcessor(null);
     }
 }
-

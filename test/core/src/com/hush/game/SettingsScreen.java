@@ -5,11 +5,13 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.hush.game.UI.Settings;
 
 public class SettingsScreen extends ScreenAdapter {
     Settings game;
     SpriteBatch batch;
+    ShapeRenderer shapeRenderer;
     Texture settingsText;
     Texture audioText;
     Texture videoText;
@@ -19,20 +21,29 @@ public class SettingsScreen extends ScreenAdapter {
 
     int cursorX;
     int cursorY;
-    int settingsX = 810;
-    int settingsY = 750;
-    int audioX = 490;
-    int audioY = 550;
-    int videoX = 490;
-    int videoY = 350;
-    int sliderX = 960;
-    int sliderY = 550;
-    int quitX = 810;
-    int quitY = 150;
+    float buttonWidth = Gdx.graphics.getWidth() / 5;
+    float buttonHeight = Gdx.graphics.getHeight() / 9;
+    float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
+
+    float settingsX = buttonX;
+    float settingsY = buttonHeight * 7;
+    float audioX = buttonX;
+    float audioY = buttonHeight * 5;
+    float videoX = buttonX;
+    float videoY = buttonHeight * 3;
+    float sliderX = buttonX;
+    float sliderY = buttonHeight * 5;
+    float audioSetX = 1180;
+    float audioSetY = 600;
+    float videoSetX;
+    float videoSetY;
+    float quitX = buttonX;
+    float quitY = buttonHeight;
 
     public SettingsScreen(Settings game) {
         this.game = game;
         batch = new SpriteBatch();
+        shapeRenderer = new ShapeRenderer();
         settingsText = new Texture("Text/settingsText.png");
         audioText = new Texture("Text/audioText.png");
         videoText = new Texture("Text/videoText.png");
@@ -48,8 +59,8 @@ public class SettingsScreen extends ScreenAdapter {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
-                if (cursorX > quitX && cursorX < quitX + 300) {
-                    if (cursorY > quitY && cursorY < quitY + 100) {
+                if (cursorX > quitX && cursorX < quitX + buttonWidth) {
+                    if (cursorY > quitY && cursorY < quitY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
                             game.setScreen(new MainMenu(game));
@@ -66,12 +77,13 @@ public class SettingsScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(settingsText, settingsX, settingsY, 300, 100);
-        batch.draw(audioText, audioX, audioY, 300, 100);
-        batch.draw(videoText, videoX, videoY, 300, 100);
-        batch.draw(slider, sliderX, sliderY, 450, 100);
-        batch.draw(slider, sliderX, sliderY - 200, 450, 100);
-        batch.draw(quitText, quitX, quitY, 300, 100);
+        batch.draw(settingsText, settingsX, settingsY, buttonWidth, buttonHeight);
+        batch.draw(audioText, audioX - buttonWidth, audioY, buttonWidth, buttonHeight);
+        batch.draw(videoText, videoX - buttonWidth, videoY, buttonWidth, buttonHeight);
+
+        batch.draw(slider, sliderX + buttonWidth * 0.75f, sliderY, buttonWidth * 1.25f, buttonHeight);
+        batch.draw(slider, sliderX + buttonWidth * 0.75f, sliderY - buttonHeight * 2, buttonWidth * 1.25f, buttonHeight);
+        batch.draw(quitText, quitX, quitY, buttonWidth, buttonHeight);
         batch.end();
     }
 

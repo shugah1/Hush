@@ -24,9 +24,8 @@ import com.hush.game.Main;
 public class HUD  {
     public Stage stage;
     private Viewport viewport;
-    private Integer worldTimer;
-    private float timeCount;
-    private Integer score;
+    public static Integer worldTimer;
+    public static float timeCount;
     public static Integer stun;
     public static Integer invis;
     private Player player;
@@ -49,7 +48,6 @@ public class HUD  {
     public HUD (Main game){
         worldTimer = 0;
         timeCount = 0;
-        score= 0;
         stun = 3;
         invis = 3;
         player = game.player;
@@ -103,14 +101,15 @@ public class HUD  {
             invisLabel.setText(String.format("%01d", invis));
         }
     }
+
     public void render(){
         batch.begin();
         System.out.println(18 * (player.stamina / player.maxStamina));
         TextureRegion StaminaRedCrop = new TextureRegion(StaminaRed, 0, 0, (int)((18 * (player.stamina / player.maxStamina))), 4);
-        batch.draw(Stamina, 10, 20, Stamina.getWidth() * 10, Stamina.getHeight() * 10);
-        batch.draw(StaminaRedCrop, 10, 20, StaminaRedCrop.getRegionWidth() * 10, StaminaRedCrop.getRegionHeight() * 10);
-        batch.draw(stunImage, 1575, 888, 40, 40);
-        batch.draw(invisImage, 1575, 964, 40, 40);
+        batch.draw(Stamina, Gdx.graphics.getWidth() / 192, Gdx.graphics.getHeight() / 54, Stamina.getWidth() * 10, Stamina.getHeight() * 10);
+        batch.draw(StaminaRedCrop, Gdx.graphics.getWidth() / 192, Gdx.graphics.getHeight() / 54, StaminaRedCrop.getRegionWidth() * 10, StaminaRedCrop.getRegionHeight() * 10);
+        batch.draw(stunImage, Gdx.graphics.getWidth() / 1.25f, Gdx.graphics.getHeight() / 1.2f, 40, 40);
+        batch.draw(invisImage, Gdx.graphics.getWidth() / 1.25f, Gdx.graphics.getHeight() / 1.1f, 40, 40);
         batch.end();
 
     }
