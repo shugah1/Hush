@@ -12,6 +12,8 @@ import com.hush.game.Entities.Enemy;
 import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.MovingWall;
+import com.hush.game.Screens.LoseScreen;
+import com.hush.game.Screens.WinScreen;
 import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 import com.hush.game.World.WorldContactListener;
@@ -79,6 +81,18 @@ public class Main implements Screen {
     }
 
     public void update(float dt) {
+        if (player.win) {
+            game.setScreen(new WinScreen(game));
+            Settings.music.stop();
+            player.win = false;
+            gameObject.clear();
+        }
+        if (player.pDead) {
+            game.setScreen(new LoseScreen(game));
+            Settings.music.stop();
+            player.pDead = false;
+            gameObject.clear();
+        }
         //Loops song
         if (game.music.getPosition() >= game.songLoopEnd) {
             game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));

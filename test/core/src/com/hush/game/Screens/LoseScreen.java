@@ -66,7 +66,7 @@ public class LoseScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        player.pDead = false;
+        Player.pDead = false;
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {

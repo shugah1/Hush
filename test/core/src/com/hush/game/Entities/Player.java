@@ -45,7 +45,7 @@ public class Player extends GameObject {
     public StateMachine state;
     public float elapsedTime = 0;
     public Vector2 facing = new Vector2(0,-1);
-    public boolean pDead ;
+    public static boolean pDead ;
     public boolean win;
     public boolean deadState;
 

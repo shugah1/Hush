@@ -31,8 +31,8 @@ public class WinScreen extends ScreenAdapter {
     Sound sound;
     HUD hud;
 
-    int minutes = hud.worldTimer / 60;
-    int seconds = hud.worldTimer % 60;
+    int minutes = HUD.worldTimer / 60;
+    int seconds = HUD.worldTimer % 60;
     String score = minutes + " : " + seconds + " s";
     int highScore;
     int cursorX;
@@ -66,7 +66,7 @@ public class WinScreen extends ScreenAdapter {
         font.setColor(0f, 104f, 255f, 1f);
 
         try {
-            File myObj = new File("C:\\Hush-main\\Hush-main\\Hush\\test\\core\\assets\\highScore");
+            File myObj = new File("test/core/assets/highScore");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -79,10 +79,10 @@ public class WinScreen extends ScreenAdapter {
             e.printStackTrace();
         }
 
-        if (highScore > hud.worldTimer) {
+        if (highScore > HUD.worldTimer) {
             try {
-                FileWriter myWriter = new FileWriter("C:\\Hush-main\\Hush-main\\Hush\\test\\core\\assets\\highScore");
-                myWriter.write(hud.worldTimer.toString());
+                FileWriter myWriter = new FileWriter("test/core/assets/highScore");
+                myWriter.write(HUD.worldTimer.toString());
                 myWriter.close();
                 System.out.println("New High Score");
             } catch (IOException e) {

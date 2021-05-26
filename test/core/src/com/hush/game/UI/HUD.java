@@ -24,7 +24,7 @@ import com.hush.game.Main;
 public class HUD  {
     public Stage stage;
     private Viewport viewport;
-    public Integer worldTimer;
+    public static Integer worldTimer;
     private float timeCount;
     public static Integer stun;
     public static Integer invis;
