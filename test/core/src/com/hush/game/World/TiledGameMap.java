@@ -27,7 +27,6 @@ public class TiledGameMap {
         creator = new B2WorldCreator(main, tiledMap);
     }
 
-
     public void render(OrthographicCamera camera) {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
