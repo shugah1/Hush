@@ -133,7 +133,6 @@ public class WinScreen extends ScreenAdapter {
 
         font.draw(batch, score, buttonX + buttonWidth * 0.75f, scoreY + buttonHeight * 0.8f);
         batch.end();
-
     }
 
     @Override
