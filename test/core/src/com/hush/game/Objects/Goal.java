@@ -16,6 +16,7 @@ public class Goal {
     public float h;
     public Fixture fix;
     public Body b2body;
+    Settings settings;
 
     public Goal(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
@@ -43,7 +44,7 @@ public class Goal {
     }
 
     public void contact(Player player) {
-
+        player.win = true;
         System.out.println("GG");
 
     }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.hush.game.Entities.DynamicEnemy;
 import com.hush.game.Entities.Player;
 import com.hush.game.Entities.StaticEnemy;
 import com.hush.game.Main;
@@ -50,6 +51,11 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new StaticEnemy(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM);
+        }
+        for (MapObject object : map.getLayers().get("DEnemy").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            new DynamicEnemy(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM);
         }
         for (MapObject object : map.getLayers().get("Goal").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();

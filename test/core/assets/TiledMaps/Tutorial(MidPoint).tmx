@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="80" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="61">
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="80" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="62">
  <tileset firstgid="1" source="../Tilesets/TilesetFloor.tsx"/>
  <tileset firstgid="573" source="TilesetHole.tsx"/>
  <tileset firstgid="628" source="TilesetHouse.tsx"/>
@@ -268,6 +268,9 @@
 585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,2684355151,2684355151,2684355151,2684355151,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585
 </data>
  </layer>
+ <objectgroup id="10" name="DEnemy">
+  <object id="61" x="424" y="1416" width="40" height="36"/>
+ </objectgroup>
  <objectgroup id="5" name="DWall">
   <object id="14" x="768" y="1344" width="96" height="48"/>
   <object id="15" x="864" y="1248" width="96" height="48"/>

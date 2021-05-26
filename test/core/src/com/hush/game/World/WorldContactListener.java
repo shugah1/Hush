@@ -26,6 +26,7 @@ public class WorldContactListener implements ContactListener {
         Goal goal;
         Enemy enemy;
         Player player;
+        Settings settings;
 
         switch (cDef){
             case Tags.PLAYER_BIT | Tags.DAMAGE_BIT:
@@ -48,9 +49,12 @@ public class WorldContactListener implements ContactListener {
                 }
 
                 enemy.toReset = true;
-
-                if(enemy.calculateCollisionPoint(player)){
-                    System.out.println("dead");
+                if(!player.invis) {
+                    if (enemy.calculateCollisionPoint(player)) {
+                        player.pDead = true;
+                        player.die();
+                        System.out.println("dead");
+                    }
                 }
                 break;
             case Tags.PLAYER_BIT | Tags.GOAL_BIT:

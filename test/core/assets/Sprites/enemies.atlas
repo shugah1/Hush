@@ -4,37 +4,177 @@ size: 256, 64
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
+detec_circle
+  rotate: false
+  xy: 2, 2
+  size: 26, 26
+  orig: 32, 32
+  offset: 3, 3
+  index: 3
+detec_circle
+  rotate: false
+  xy: 160, 34
+  size: 28, 28
+  orig: 32, 32
+  offset: 2, 2
+  index: 4
+detec_circle
+  rotate: false
+  xy: 190, 38
+  size: 24, 24
+  orig: 32, 32
+  offset: 4, 4
+  index: 2
+detec_circle
+  rotate: false
+  xy: 30, 18
+  size: 10, 10
+  orig: 32, 32
+  offset: 11, 11
+  index: 1
+enemy_down
+  rotate: false
+  xy: 216, 47
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+enemy_down
+  rotate: false
+  xy: 216, 47
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+enemy_down
+  rotate: false
+  xy: 234, 47
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+enemy_down
+  rotate: false
+  xy: 216, 31
+  size: 16, 14
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+enemy_left
+  rotate: false
+  xy: 234, 30
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+enemy_left
+  rotate: false
+  xy: 234, 30
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+enemy_left
+  rotate: false
+  xy: 30, 2
+  size: 16, 14
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+enemy_left
+  rotate: false
+  xy: 102, 13
+  size: 16, 14
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+enemy_right
+  rotate: false
+  xy: 48, 12
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+enemy_right
+  rotate: false
+  xy: 48, 12
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+enemy_right
+  rotate: false
+  xy: 160, 18
+  size: 16, 14
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+enemy_right
+  rotate: false
+  xy: 178, 18
+  size: 16, 14
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+enemy_up
+  rotate: false
+  xy: 66, 12
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+enemy_up
+  rotate: false
+  xy: 66, 12
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+enemy_up
+  rotate: false
+  xy: 84, 12
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+enemy_up
+  rotate: false
+  xy: 196, 22
+  size: 16, 14
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
 kevin_idle
   rotate: false
-  xy: 2, 3
+  xy: 2, 30
   size: 39, 32
   orig: 50, 50
   offset: 5, 9
   index: 3
 kevin_idle
   rotate: false
-  xy: 43, 2
+  xy: 43, 29
   size: 37, 33
   orig: 50, 50
   offset: 6, 9
   index: 1
 kevin_idle
   rotate: false
-  xy: 43, 2
+  xy: 43, 29
   size: 37, 33
   orig: 50, 50
   offset: 6, 9
   index: 2
 kevin_idle
   rotate: false
-  xy: 82, 2
+  xy: 82, 29
   size: 37, 33
   orig: 50, 50
   offset: 6, 9
   index: 5
 kevin_idle
   rotate: false
-  xy: 121, 3
+  xy: 121, 30
   size: 37, 32
   orig: 50, 50
   offset: 6, 9

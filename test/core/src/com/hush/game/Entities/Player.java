@@ -24,11 +24,16 @@ import static com.hush.game.UI.HUD.invis;
 import static com.hush.game.UI.HUD.stun;
 
 public class Player extends GameObject {
+    Enemy enemy;
     public float SPEED;
     public float deltaTime;
     public World world;
     public Body b2body;
     public Vector2 moveVector = new Vector2();
+    public boolean invis = false;
+    private float invisDuration = 3;
+    private float invisTimer = invisDuration;
+
 
     private Animation<TextureRegion> walkUp;
     private Animation<TextureRegion> walkDown;
@@ -40,6 +45,10 @@ public class Player extends GameObject {
     public StateMachine state;
     public float elapsedTime = 0;
     public Vector2 facing = new Vector2(0,-1);
+    public boolean pDead ;
+    public boolean win;
+    public boolean deadState;
+
 
     private float stateTimer;
     public float stamina;
@@ -52,8 +61,8 @@ public class Player extends GameObject {
     public boolean recharing;
     public float runSpeed = 2f;
     public float walkSpeed = 1f;
-    float x;
-    float y;
+    public float x;
+    public float y;
     TextureRegion sprite;
     Texture image = new Texture("KnightItem.png");
     Texture newImage = new Texture("Item.png");
@@ -88,6 +97,10 @@ public class Player extends GameObject {
         recharing = false;
         walkSound = false;
         runSound = false;
+        pDead = false;
+        win = false;
+        deadState = false;
+
 
         definePlayer();
     }
@@ -125,11 +138,13 @@ public class Player extends GameObject {
             moveVector.add(new Vector2(1,0));
 
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
-            HUD.stunCounter();
-        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            HUD.stunCounter();
+
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
             HUD.invisCounter();
+            invis = true;
         }
         if (!recharing) {
             running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
@@ -140,6 +155,15 @@ public class Player extends GameObject {
         this.deltaTime = deltaTime;
         handleInput(deltaTime);
         state.update();
+        if (deadState && b2body != null) {
+            remove = true;
+        }
+        if(invis && invisTimer > 0){
+            invisTimer = Math.max(0, invisTimer - deltaTime);
+        } else {
+            invis = false;
+            invisTimer = invisDuration;
+        }
 
         if (state.getCurrentState() != PlayerState.RUN) {
             stamina = Math.min(stamina + (deltaTime * 3), maxStamina);
@@ -153,9 +177,15 @@ public class Player extends GameObject {
         }else{
             sound = Math.max(sound - 0.5f, 0);
         }
-        System.out.println(sound);
+
+        if(b2body!= null){
+            x = b2body.getPosition().x;
+            y = b2body.getPosition().y;
+        }
         setRegion(sprite);
-        setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
+        setBounds(x - getRegionWidth() / Settings.PPM / 2f, y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
+
+
     }
 
     public void idle() {
@@ -186,7 +216,16 @@ public class Player extends GameObject {
         } else if (moveVector.x > 0) {
             sprite = walkRight.getKeyFrame(elapsedTime, true);
         }
-
         facing = moveVector.cpy();
     }
+
+    public void die() {
+        deadState = true;
+        state.changeState(PlayerState.DEAD);
+    }
+
+    public void deadAction() {
+        sprite = dead.getKeyFrame(0, false);
+    }
 }
+
