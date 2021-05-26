@@ -14,17 +14,26 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 import com.hush.game.states.PlayerState;
 
+import static com.hush.game.UI.HUD.invis;
+import static com.hush.game.UI.HUD.stun;
+
 public class Player extends GameObject {
+    Enemy enemy;
     public float SPEED;
     public float deltaTime;
     public World world;
     public Body b2body;
     public Vector2 moveVector = new Vector2();
+    public boolean invis = false;
+    private float invisDuration = 3;
+    private float invisTimer = invisDuration;
+
 
     private Animation<TextureRegion> walkUp;
     private Animation<TextureRegion> walkDown;
@@ -36,20 +45,28 @@ public class Player extends GameObject {
     public StateMachine state;
     public float elapsedTime = 0;
     public Vector2 facing = new Vector2(0,-1);
+    public boolean pDead ;
+    public boolean win;
+    public boolean deadState;
+
 
     private float stateTimer;
     public float stamina;
     public float maxStamina;
+    public float sound;
+    public float maxSound;
+    public boolean walkSound;
+    public boolean runSound;
     public boolean running;
     public boolean recharing;
     public float runSpeed = 2f;
     public float walkSpeed = 1f;
-    float x;
-    float y;
+    public float x;
+    public float y;
     TextureRegion sprite;
     Texture image = new Texture("KnightItem.png");
     Texture newImage = new Texture("Item.png");
-    Sound sound = Gdx.audio.newSound(Gdx.files.internal("PowerUp1.wav"));
+    //Sound sound = Gdx.audio.newSound(Gdx.files.internal("PowerUp1.wav"));
 
     public Player(World world, Main screen, float x, float y) {
         super();
@@ -75,7 +92,15 @@ public class Player extends GameObject {
         stateTimer = 0;
         maxStamina = 10;
         stamina = maxStamina;
+        maxSound = 100;
+        sound = 0;
         recharing = false;
+        walkSound = false;
+        runSound = false;
+        pDead = false;
+        win = false;
+        deadState = false;
+
 
         definePlayer();
     }
@@ -100,6 +125,7 @@ public class Player extends GameObject {
         //control our player using immediate impulses
         moveVector.set(0,0);
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+
             moveVector.add(new Vector2(0,1));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
@@ -110,6 +136,15 @@ public class Player extends GameObject {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             moveVector.add(new Vector2(1,0));
+
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            HUD.stunCounter();
+
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+            HUD.invisCounter();
+            invis = true;
         }
         if (!recharing) {
             running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
@@ -120,15 +155,37 @@ public class Player extends GameObject {
         this.deltaTime = deltaTime;
         handleInput(deltaTime);
         state.update();
+        if (deadState && b2body != null) {
+            remove = true;
+        }
+        if(invis && invisTimer > 0){
+            invisTimer = Math.max(0, invisTimer - deltaTime);
+        } else {
+            invis = false;
+            invisTimer = invisDuration;
+        }
 
         if (state.getCurrentState() != PlayerState.RUN) {
             stamina = Math.min(stamina + (deltaTime * 3), maxStamina);
             SPEED = walkSpeed;
             recharing = !(stamina == maxStamina);
         }
+        if(walkSound){
+            sound = Math.min(sound + 1f, maxSound);
+        }else if(runSound){
+            sound = Math.min(sound + 5f, maxSound);
+        }else{
+            sound = Math.max(sound - 0.5f, 0);
+        }
 
+        if(b2body!= null){
+            x = b2body.getPosition().x;
+            y = b2body.getPosition().y;
+        }
         setRegion(sprite);
-        setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
+        setBounds(x - getRegionWidth() / Settings.PPM / 2f, y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
+
+
     }
 
     public void idle() {
@@ -159,7 +216,16 @@ public class Player extends GameObject {
         } else if (moveVector.x > 0) {
             sprite = walkRight.getKeyFrame(elapsedTime, true);
         }
-
         facing = moveVector.cpy();
     }
+
+    public void die() {
+        deadState = true;
+        state.changeState(PlayerState.DEAD);
+    }
+
+    public void deadAction() {
+        sprite = dead.getKeyFrame(0, false);
+    }
 }
+

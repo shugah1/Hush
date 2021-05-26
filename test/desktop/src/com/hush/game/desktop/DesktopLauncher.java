@@ -39,11 +39,9 @@ public class DesktopLauncher {
 
 		config.title = "Hush";
 		config.resizable = false;
-		config.width = 1920;
-		config.height = 1080;
+		config.width = 1280;
+		config.height = 720;
 		new LwjglApplication(new Settings(), config);
-
-
 
 	}
 }

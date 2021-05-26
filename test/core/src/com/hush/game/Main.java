@@ -1,8 +1,10 @@
 package com.hush.game;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -10,6 +12,7 @@ import com.hush.game.Entities.Enemy;
 import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.MovingWall;
+import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 import com.hush.game.World.WorldContactListener;
 import com.hush.game.World.TiledGameMap;
@@ -37,28 +40,27 @@ public class Main implements Screen {
 
     public static World world;
     private OrthographicCamera cam;
-    //SpriteBatch batch;
     public Player player;
     private Viewport gamePort;
     private Settings game;
     private Box2DDebugRenderer b2dr;
     private TextureAtlas atlas;
+    private HUD hud;
     public MovingWall movingWall;
     public static ArrayList<GameObject> gameObject = new ArrayList<>();
     public static ArrayList<GameObject> gameObjectAdd = new ArrayList<>();
     public static ArrayList<GameObject> gameObjectBye = new ArrayList<>();
     public TiledGameMap gameMap;
+    Texture stunImage = new Texture("ScrollThunder.png");
+
 
     public Main(Settings game){
         Settings.manager.load("sprites/player.atlas", TextureAtlas.class);
         Settings.manager.finishLoading();
         this.game = game;
-
-        //Gdx.graphics.setWindowedMode(1920, 1080);
-        //batch = new SpriteBatch();
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
-        gameMap = new TiledGameMap("test/core/assets/TiledMaps/Level1.tmx", this);
+        gameMap = new TiledGameMap("test/core/assets/TiledMaps/Tutorial(MidPoint).tmx", this);
         gamePort = new StretchViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         cam.update();
@@ -68,10 +70,7 @@ public class Main implements Screen {
         Settings.music = game.newSong("hub");
         Settings.music.play();
         game.music.setVolume(Settings.musicVolume / 10f);
-    }
-
-    public TextureAtlas getAtlas(){
-        return atlas;
+        hud = new HUD(this);
     }
 
     @Override
@@ -80,26 +79,21 @@ public class Main implements Screen {
     }
 
     public void update(float dt) {
-        //        Loops song
+        //Loops song
         if (game.music.getPosition() >= game.songLoopEnd) {
             game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
         }
-
-        //player.update(dt);
-        //movingWall.update(dt);
 
         for(GameObject gO : gameObject ){
             if (gO.remove){
                 try{
                     world.destroyBody(gO.b2body);
                 }catch (Exception e){
-
                 }
             }else{
                 gO.update(dt);
             }
         }
-
         // Set game.music volume
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             Settings.musicVolume = Settings.musicVolume < 10 ? Settings.musicVolume + 1 : 10;
@@ -133,14 +127,16 @@ public class Main implements Screen {
 
         world.step(1/60f,6,2);
 
-        cam.position.x = player.b2body.getPosition().x;
-        cam.position.y = player.b2body.getPosition().y;
+        cam.position.x = player.x;
+        cam.position.y = player.y;
         cam.update();
 
         gameObject.addAll(gameObjectAdd);
         gameObject.removeAll(gameObjectBye);
         gameObjectAdd.clear();
         gameObjectBye.clear();
+
+        hud.update(dt);
     }
 
     @Override
@@ -148,7 +144,9 @@ public class Main implements Screen {
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         gameMap.render(cam);
+
 
         game.batch.begin();
         for(GameObject gO : gameObject ){
@@ -156,7 +154,9 @@ public class Main implements Screen {
         }
         game.batch.setProjectionMatrix(cam.combined);
         b2dr.render(world, cam.combined);
+        hud.stage.draw();
         game.batch.end();
+        hud.render();
     }
 
     @Override
@@ -186,6 +186,5 @@ public class Main implements Screen {
         gameMap.dispose();
         world.dispose();
         b2dr.dispose();
-
     }
 }
