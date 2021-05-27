@@ -5,6 +5,7 @@ import com.hush.game.Entities.Enemy;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.DamageWall;
 import com.hush.game.Objects.Goal;
+import com.hush.game.Objects.Key;
 import com.hush.game.Objects.MovingWall;
 import com.hush.game.UI.Settings;
 
@@ -27,6 +28,7 @@ public class WorldContactListener implements ContactListener {
         Enemy enemy;
         Player player;
         Settings settings;
+        Key key;
 
         switch (cDef){
             case Tags.PLAYER_BIT | Tags.DAMAGE_BIT:
@@ -57,6 +59,16 @@ public class WorldContactListener implements ContactListener {
                     }
                 }
                 break;
+            case Tags.PLAYER_BIT | Tags.KEY_BIT:
+                if(fixA.getFilterData().categoryBits == Tags.PLAYER_BIT ){
+                    key = ((Key) fixB.getUserData());
+                    player = ((Player) fixA.getUserData());
+                }else{
+                    key = ((Key) fixA.getUserData());
+                    player = ((Player) fixB.getUserData());
+                }
+                key.contact(player);
+                break;
             case Tags.PLAYER_BIT | Tags.GOAL_BIT:
                 if(fixA.getFilterData().categoryBits == Tags.PLAYER_BIT ){
                     goal = ((Goal) fixB.getUserData());
@@ -65,7 +77,10 @@ public class WorldContactListener implements ContactListener {
                     goal = ((Goal) fixA.getUserData());
                     player = ((Player) fixB.getUserData());
                 }
-                goal.contact(player);
+                if(player.hasKey) {
+                    goal.contact(player);
+                }
+                break;
         }
     }
 

@@ -48,6 +48,7 @@ public class Player extends GameObject {
     public static boolean pDead ;
     public boolean win;
     public boolean deadState;
+    public boolean hasKey;
 
 
     private float stateTimer;
@@ -98,6 +99,7 @@ public class Player extends GameObject {
         pDead = false;
         win = false;
         deadState = false;
+        hasKey = false;
 
 
         definePlayer();
@@ -114,7 +116,8 @@ public class Player extends GameObject {
         shape.setRadius(getRegionWidth() / Settings.PPM / 2);
 
         fdef.filter.categoryBits = Tags.PLAYER_BIT;
-        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT | Tags.SENSOR_BIT | Tags.GOAL_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT
+                | Tags.WALL_BIT | Tags.SENSOR_BIT | Tags.GOAL_BIT | Tags.KEY_BIT;
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }

@@ -103,6 +103,7 @@ public class Main implements Screen {
                     world.destroyBody(gO.b2body);
                 }catch (Exception e){
                 }
+                gameObjectBye.add(gO);
             }else{
                 gO.update(dt);
             }
