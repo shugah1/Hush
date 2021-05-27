@@ -53,6 +53,7 @@ public class LevelSelect extends ScreenAdapter {
                     if (cursorY >= tutorialY && cursorY <= tutorialY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
+                            Settings.music.stop();
                             game.setScreen(new Main(game));
                         }
                     }

@@ -44,6 +44,8 @@ public class SplashScreen extends ScreenAdapter {
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+        Settings.music = game.newSong("TitleTheme");
+        Settings.music.play();
     }
 
     @Override
