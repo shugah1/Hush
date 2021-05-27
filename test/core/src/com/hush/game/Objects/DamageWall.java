@@ -46,6 +46,6 @@ public class DamageWall {
     public void contact(Player player) {
         player.pDead = true;
         player.die();
-        System.out.println("Insert Damage here");
+        //System.out.println("Insert Damage here");
     }
 }

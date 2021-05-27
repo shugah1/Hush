@@ -24,16 +24,16 @@ import com.hush.game.Main;
 public class HUD  {
     public Stage stage;
     private Viewport viewport;
-    public Integer worldTimer;
+    public static Integer worldTimer;
     private float timeCount;
     public static Integer stun;
     public static Integer invis;
     private Player player;
-    Texture stunImage = new Texture("ScrollThunder.png");
-    Texture invisImage = new Texture("invisibility-hush.png");
-    Texture Stamina = new Texture("LifeBarMiniUnder.png");
-    Texture StaminaRed = new Texture("LifeBarMiniProgress.png");
-    Texture Sound = new Texture("SoundBarMiniProgressCut.png");
+    Texture stunImage = new Texture("test/core/assets/HUD/ScrollThunder.png");
+    Texture invisImage = new Texture("test/core/assets/HUD/invisibility-hush.png");
+    Texture Stamina = new Texture("test/core/assets/HUD/LifeBarMiniUnder.png");
+    Texture StaminaRed = new Texture("test/core/assets/HUD/LifeBarMiniProgress.png");
+    Texture Sound = new Texture("test/core/assets/HUD/SoundBarMiniProgressCut.png");
 
     SpriteBatch batch = new SpriteBatch();
 

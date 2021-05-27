@@ -50,7 +50,7 @@ public class SettingsScreen extends ScreenAdapter {
         videoText = new Texture("Text/videoText.png");
         slider = new Texture("Text/slider.png");
         quitText = new Texture("Text/quitText.png");
-        sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
     }
 
     @Override

@@ -45,7 +45,7 @@ public class Player extends GameObject {
     public StateMachine state;
     public float elapsedTime = 0;
     public Vector2 facing = new Vector2(0,-1);
-    public boolean pDead ;
+    public static boolean pDead ;
     public boolean win;
     public boolean deadState;
 
@@ -64,8 +64,6 @@ public class Player extends GameObject {
     public float x;
     public float y;
     TextureRegion sprite;
-    Texture image = new Texture("KnightItem.png");
-    Texture newImage = new Texture("Item.png");
     //Sound sound = Gdx.audio.newSound(Gdx.files.internal("PowerUp1.wav"));
 
     public Player(World world, Main screen, float x, float y) {
