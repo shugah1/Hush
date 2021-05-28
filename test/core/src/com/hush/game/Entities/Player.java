@@ -143,6 +143,8 @@ public class Player extends GameObject {
         if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
             HUD.invisCounter();
             invis = true;
+
+
         }
         if (!recharing) {
             running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
