@@ -33,10 +33,6 @@ public class SettingsScreen extends ScreenAdapter {
     float videoY = buttonHeight * 3;
     float sliderX = buttonX;
     float sliderY = buttonHeight * 5;
-    float audioSetX = 1180;
-    float audioSetY = 600;
-    float videoSetX;
-    float videoSetY;
     float quitX = buttonX;
     float quitY = buttonHeight;
 
@@ -55,10 +51,12 @@ public class SettingsScreen extends ScreenAdapter {
     @Override
     public void show(){
         Gdx.input.setInputProcessor(new InputAdapter() {
+            // Settings Input
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
+                // Quit Button
                 if (cursorX > quitX && cursorX < quitX + buttonWidth) {
                     if (cursorY > quitY && cursorY < quitY + buttonHeight) {
                         if (Gdx.input.isTouched()) {

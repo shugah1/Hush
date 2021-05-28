@@ -6,9 +6,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.hush.game.UI.Settings;
 
 public class MainMenu extends ScreenAdapter {
@@ -19,7 +17,6 @@ public class MainMenu extends ScreenAdapter {
     Texture settingsText;
     Texture quitText;
     Sound sound;
-    BitmapFont font;
 
     int cursorX;
     int cursorY;
@@ -39,21 +36,17 @@ public class MainMenu extends ScreenAdapter {
         settingsText = new Texture("Text/settingsText.png");
         quitText = new Texture("Text/quitText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("Menu1.wav"));
-
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Cyberverse Condensed Bold Italic.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = (int) buttonHeight;
-        font = generator.generateFont(parameter);
-        font.setColor(0f, 104f, 255f, 1f);
     }
 
     @Override
     public void show(){
         Gdx.input.setInputProcessor(new InputAdapter() {
+            // Main Menu Input
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
+                // Start Button
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > startY && cursorY < startY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -62,6 +55,7 @@ public class MainMenu extends ScreenAdapter {
                         }
                     }
                 }
+                // Settings Button
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > settingsY && cursorY < settingsY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -70,6 +64,7 @@ public class MainMenu extends ScreenAdapter {
                         }
                     }
                 }
+                // Quit Button
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > quitY && cursorY < quitY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -88,6 +83,7 @@ public class MainMenu extends ScreenAdapter {
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // Renders Menu Buttons
         batch.begin();
         batch.draw(titleText, buttonX, titleY, buttonWidth, buttonHeight);
         batch.draw(startText, buttonX, startY, buttonWidth, buttonHeight);
