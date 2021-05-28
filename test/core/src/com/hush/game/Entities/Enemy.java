@@ -40,7 +40,9 @@ public abstract class Enemy extends GameObject {
 
 
     }
+    public void resetFixture() {
 
+    }
     public void defineEnemy(){
         //Enemy body
         BodyDef bdef = new BodyDef();

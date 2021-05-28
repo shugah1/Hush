@@ -59,6 +59,16 @@ public class B2WorldCreator {
 
             new Goal((int) (rect.getX() + rect.getWidth() / 2), (int) (rect.getY() + rect.getHeight() / 2), rect.getWidth() / 2f, rect.getHeight() / 2f, world);
         }
+        for (MapObject object : map.getLayers().get("HEnemy").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            new HorizontalEnemy(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM);
+        }
+        for (MapObject object : map.getLayers().get("VEnemy").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            new VerticalEnemy(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM);
+        }
         for (MapObject object : map.getLayers().get("Key").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
