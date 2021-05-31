@@ -34,7 +34,7 @@ public class HorizontalEnemy extends Enemy{
     @Override
     public void update(float dt) {
 
-        //super.update(dt);
+        super.update(dt);
         walk();
 
         if(moveTimer == 0){
@@ -44,7 +44,6 @@ public class HorizontalEnemy extends Enemy{
             moveTimer = Math.max(0, moveTimer-dt);
         }
         HorizontalVector.set(speed, 0);
-        System.out.println(speed);
         b2body.setLinearVelocity(HorizontalVector);
 
 

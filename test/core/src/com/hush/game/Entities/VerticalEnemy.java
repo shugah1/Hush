@@ -30,7 +30,7 @@ public class VerticalEnemy extends Enemy{
     @Override
     public void update(float dt) {
 
-        //super.update(dt);
+        super.update(dt);
         walk();
 
         if(moveTimer == 0){
@@ -40,7 +40,6 @@ public class VerticalEnemy extends Enemy{
             moveTimer = Math.max(0, moveTimer-dt);
         }
         VerticalVector.set(0, speed);
-        System.out.println(speed);
         b2body.setLinearVelocity(VerticalVector);
 
 

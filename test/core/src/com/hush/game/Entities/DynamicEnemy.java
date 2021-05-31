@@ -15,9 +15,9 @@ import java.util.Random;
 
 public class DynamicEnemy extends Enemy{
     private boolean closeEnough = true;
-    private float countMax = 5;
+    private float countMax = 4;
     private float count = countMax;
-    final private float range = 10;
+    final private float range = 8;
     final private Random r;
     final private Animation<TextureRegion> EnemyUp;
     final private Animation<TextureRegion> EnemyDown;
