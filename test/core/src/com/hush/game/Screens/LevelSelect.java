@@ -120,6 +120,7 @@ public class LevelSelect extends ScreenAdapter {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
                             mapSelect = "";
+                            Settings.music.stop();
                             game.setScreen(new Main(game));
                         }
                     }

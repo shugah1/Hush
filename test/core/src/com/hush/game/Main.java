@@ -28,6 +28,7 @@ import com.hush.game.constants.Globals;
 import org.ini4j.Wini;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class Main implements Screen {
