@@ -29,6 +29,8 @@ public class Settings extends Game {
 	public static AssetManager audioManager = new AssetManager();
 	public static AssetManager manager = new AssetManager();
 
+	public static int highScore;
+
 
 
 
@@ -40,7 +42,9 @@ public class Settings extends Game {
 	}
 
 	@Override
-	public void render () { super.render(); }
+	public void render () {
+		super.render();
+	}
 
 
 

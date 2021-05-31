@@ -16,6 +16,11 @@ public class LevelSelect extends ScreenAdapter {
     SpriteBatch batch;
     Texture selectText;
     Texture tutorialText;
+    Texture level1Text;
+    Texture level2Text;
+    Texture level3Text;
+    Texture level4Text;
+    Texture level5Text;
     Texture quitText;
     Sound sound;
 
@@ -28,9 +33,12 @@ public class LevelSelect extends ScreenAdapter {
     float selectX = buttonX;
     float selectY = buttonHeight * 7;
     float tutorialX = buttonX;
-    float tutorialY = buttonHeight * 5;
+    float row1Y = buttonHeight * 5;
+    float row2Y = buttonHeight * 3;
     float quitX = buttonX;
     float quitY = buttonHeight;
+
+    public static String mapSelect;
 
     public LevelSelect(Settings game) {
         this.game = game;
@@ -38,6 +46,13 @@ public class LevelSelect extends ScreenAdapter {
         batch = new SpriteBatch();
         selectText = new Texture("Text/selectText.png");
         tutorialText = new Texture("Text/tutorialText.png");
+
+        level1Text = new Texture("Text/level1Text.png");
+        level2Text = new Texture("Text/level2Text.png");
+        level3Text = new Texture("Text/level3Text.png");
+        level4Text = new Texture("Text/level4Text.png");
+        level5Text = new Texture("Text/level5Text.png");
+
         quitText = new Texture("Text/quitText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
     }
@@ -49,14 +64,67 @@ public class LevelSelect extends ScreenAdapter {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
-                if (cursorX >= tutorialX && cursorX <= tutorialX + buttonWidth) {
-                    if (cursorY >= tutorialY && cursorY <= tutorialY + buttonHeight) {
+                // Tutorial Button
+                if (cursorX >=  tutorialX - buttonWidth * 1.5f && cursorX <=  tutorialX - buttonWidth * 1.5f + buttonWidth) {
+                    if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
+                            mapSelect = "Tutorial(MidPoint)";
                             game.setScreen(new Main(game));
                         }
                     }
                 }
+                // Level 1 Button
+                if (cursorX >=  tutorialX && cursorX <= tutorialX + buttonWidth) {
+                    if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
+                        if (Gdx.input.isTouched()) {
+                            sound.play(0.25f);
+                            mapSelect = "";
+                            game.setScreen(new Main(game));
+                        }
+                    }
+                }
+                // Level 2 Button
+                if (cursorX >=  tutorialX + buttonWidth * 1.5f && cursorX <=  tutorialX + buttonWidth * 1.5f + buttonWidth) {
+                    if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
+                        if (Gdx.input.isTouched()) {
+                            sound.play(0.25f);
+                            mapSelect = "";
+                            game.setScreen(new Main(game));
+                        }
+                    }
+                }
+                // Level 3 Button
+                if (cursorX >=  tutorialX - buttonWidth * 1.5f && cursorX <=  tutorialX - buttonWidth * 1.5f + buttonWidth) {
+                    if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
+                        if (Gdx.input.isTouched()) {
+                            sound.play(0.25f);
+                            mapSelect = "";
+                            game.setScreen(new Main(game));
+                        }
+                    }
+                }
+                // Level 4 Button
+                if (cursorX >=  tutorialX && cursorX <= tutorialX + buttonWidth) {
+                    if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
+                        if (Gdx.input.isTouched()) {
+                            sound.play(0.25f);
+                            mapSelect = "";
+                            game.setScreen(new Main(game));
+                        }
+                    }
+                }
+                // Level 5 Button
+                if (cursorX >=  tutorialX + buttonWidth * 1.5f && cursorX <=  tutorialX + buttonWidth * 1.5f + buttonWidth) {
+                    if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
+                        if (Gdx.input.isTouched()) {
+                            sound.play(0.25f);
+                            mapSelect = "";
+                            game.setScreen(new Main(game));
+                        }
+                    }
+                }
+                // Quit Button
                 if (cursorX > quitX && cursorX < quitX + buttonWidth) {
                     if (cursorY > quitY && cursorY < quitY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -78,7 +146,15 @@ public class LevelSelect extends ScreenAdapter {
 
         batch.begin();
         batch.draw(selectText, selectX, selectY, buttonWidth, buttonHeight);
-        batch.draw(tutorialText, tutorialX, tutorialY, buttonWidth, buttonHeight);
+
+        batch.draw(tutorialText, tutorialX - buttonWidth * 1.5f, row1Y, buttonWidth, buttonHeight);
+        batch.draw(level1Text, tutorialX, row1Y, buttonWidth, buttonHeight);
+        batch.draw(level2Text, tutorialX + buttonWidth * 1.5f, row1Y, buttonWidth, buttonHeight);
+
+        batch.draw(level3Text, tutorialX - buttonWidth * 1.5f, row2Y, buttonWidth, buttonHeight);
+        batch.draw(level4Text, tutorialX, row2Y, buttonWidth, buttonHeight);
+        batch.draw(level5Text, tutorialX + buttonWidth * 1.5f, row2Y, buttonWidth, buttonHeight);
+
         batch.draw(quitText, quitX, quitY, buttonWidth, buttonHeight);
         batch.end();
 

@@ -32,6 +32,7 @@ public class DesktopLauncher {
 			// loads save data and assigns variables
 			try {
 				Settings.musicVolume = Integer.parseInt(ini.get("Settings", "music volume"));
+				Settings.highScore = Integer.parseInt(ini.get("Settings", "High Score"));
 			} catch (Exception ignored) {
 
 			}
