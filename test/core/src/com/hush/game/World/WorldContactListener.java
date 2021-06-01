@@ -39,7 +39,9 @@ public class WorldContactListener implements ContactListener {
                     damageWall = ((DamageWall) fixA.getUserData());
                     player = ((Player) fixB.getUserData());
                 }
-                damageWall.contact(player);
+                if(!player.armored){
+                    damageWall.contact(player);
+                }
                 break;
             case Tags.PLAYER_BIT | Tags.SENSOR_BIT:
                 if(fixA.getFilterData().categoryBits == Tags.PLAYER_BIT ){

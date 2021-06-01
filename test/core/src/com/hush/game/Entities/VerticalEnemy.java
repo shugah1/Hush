@@ -21,8 +21,8 @@ public class VerticalEnemy extends Enemy{
     public VerticalEnemy(World world, Main screen, float x, float y) {
 
         super(world, screen, x, y);
-        SpriteUp = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_up"), Animation.PlayMode.LOOP);
-        SpriteDown = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_down"), Animation.PlayMode.LOOP);
+        SpriteUp = new Animation<TextureRegion>(1f/5f, ta.findRegions("VEnemyUp"), Animation.PlayMode.LOOP);
+        SpriteDown = new Animation<TextureRegion>(1f/5f, ta.findRegions("VEnemyDown"), Animation.PlayMode.LOOP);
 
         Verticalsprite = SpriteDown.getKeyFrame(0, true);
         setRegion(Verticalsprite);
@@ -30,7 +30,7 @@ public class VerticalEnemy extends Enemy{
     @Override
     public void update(float dt) {
 
-        //super.update(dt);
+        super.update(dt);
         walk();
 
         if(moveTimer == 0){
@@ -40,7 +40,6 @@ public class VerticalEnemy extends Enemy{
             moveTimer = Math.max(0, moveTimer-dt);
         }
         VerticalVector.set(0, speed);
-        System.out.println(speed);
         b2body.setLinearVelocity(VerticalVector);
 
 

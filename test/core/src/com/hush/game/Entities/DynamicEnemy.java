@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class DynamicEnemy extends Enemy{
     private boolean closeEnough = true;
-    private float countMax = 5;
+    private float countMax = 4;
     private float count = countMax;
     final private float range = 10;
     final private Random r;
@@ -52,6 +52,8 @@ public class DynamicEnemy extends Enemy{
     @Override
     public void update(float dt) {
         super.update(dt);
+        System.out.println("go to Position" + goToPos);
+        System.out.println("Position" + pos);
         closeEnough = pos.dst(goToPos) <= (speed * dt);
         walk();
         if(count == 0 && closeEnough){

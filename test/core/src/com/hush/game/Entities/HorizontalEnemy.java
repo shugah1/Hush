@@ -22,8 +22,8 @@ public class HorizontalEnemy extends Enemy{
         super(world, screen, x, y);
 
 
-        SpriteLeft = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_left"), Animation.PlayMode.LOOP);
-        SpriteRight = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_right"), Animation.PlayMode.LOOP);
+        SpriteLeft = new Animation<TextureRegion>(1f/5f, ta.findRegions("HEnemyLeft"), Animation.PlayMode.LOOP);
+        SpriteRight = new Animation<TextureRegion>(1f/5f, ta.findRegions("HEnemyRight"), Animation.PlayMode.LOOP);
 
         Horizontalsprite = SpriteRight.getKeyFrame(0, true);
         setRegion(Horizontalsprite);
@@ -34,7 +34,7 @@ public class HorizontalEnemy extends Enemy{
     @Override
     public void update(float dt) {
 
-        //super.update(dt);
+        super.update(dt);
         walk();
 
         if(moveTimer == 0){
@@ -44,7 +44,6 @@ public class HorizontalEnemy extends Enemy{
             moveTimer = Math.max(0, moveTimer-dt);
         }
         HorizontalVector.set(speed, 0);
-        System.out.println(speed);
         b2body.setLinearVelocity(HorizontalVector);
 
 

@@ -20,8 +20,8 @@ import com.hush.game.Main;
 import com.hush.game.World.Tags;
 import com.hush.game.states.PlayerState;
 
-import static com.hush.game.UI.HUD.invis;
-import static com.hush.game.UI.HUD.stun;
+import static com.hush.game.UI.HUD.invisInv;
+import static com.hush.game.UI.HUD.stunInv;
 
 public class Player extends GameObject {
     Enemy enemy;
@@ -33,7 +33,9 @@ public class Player extends GameObject {
     public boolean invis = false;
     private float invisDuration = 3;
     private float invisTimer = invisDuration;
-
+    public boolean armored = false;
+    private float armoredDuration = 4;
+    private float armoredTimer = armoredDuration;
 
     private Animation<TextureRegion> walkUp;
     private Animation<TextureRegion> walkDown;
@@ -91,7 +93,7 @@ public class Player extends GameObject {
         stateTimer = 0;
         maxStamina = 10;
         stamina = maxStamina;
-        maxSound = 100;
+        maxSound = 75;
         sound = 0;
         recharing = false;
         walkSound = false;
@@ -140,16 +142,19 @@ public class Player extends GameObject {
 
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            HUD.stunCounter();
-
+            if (!armored && stunInv != 0){
+                HUD.stunCounter();
+                armored = true;
+            }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
-            HUD.invisCounter();
-            invis = true;
-
+            if(!invis && invisInv != 0){
+                HUD.invisCounter();
+                invis = true;
+            }
 
         }
-        if (!recharing) {
+        if (!recharing && !moveVector.isZero()) {
             running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
         }
     }
@@ -158,6 +163,7 @@ public class Player extends GameObject {
         this.deltaTime = deltaTime;
         handleInput(deltaTime);
         state.update();
+        //System.out.println(state.getCurrentState());
         if (deadState && b2body != null) {
             remove = true;
         }
@@ -167,6 +173,13 @@ public class Player extends GameObject {
             invis = false;
             invisTimer = invisDuration;
         }
+        if(armored && armoredTimer > 0){
+            armoredTimer = Math.max(0, armoredTimer - deltaTime);
+        } else {
+            armored = false;
+            armoredTimer = armoredDuration;
+        }
+
 
         if (state.getCurrentState() != PlayerState.RUN) {
             stamina = Math.min(stamina + (deltaTime * 3), maxStamina);
@@ -174,7 +187,7 @@ public class Player extends GameObject {
             recharing = !(stamina == maxStamina);
         }
         if(walkSound){
-            sound = Math.min(sound + 1f, maxSound);
+            sound = Math.min(sound + 0.5f, maxSound);
         }else if(runSound){
             sound = Math.min(sound + 5f, maxSound);
         }else{

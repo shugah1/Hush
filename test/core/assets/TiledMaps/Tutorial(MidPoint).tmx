@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="../Tilesets/TilesetFloor.tsx"/>
  <tileset firstgid="573" source="TilesetHole.tsx"/>
  <tileset firstgid="628" source="TilesetHouse.tsx"/>
- <tileset firstgid="1295" source="../Tilesets/TilesetNature.tsx"/>
+ <tileset firstgid="1295" source="TilesetNature.tsx"/>
  <layer id="1" name="Ground" width="80" height="128">
   <data encoding="csv">
 434,432,432,433,433,432,433,434,431,432,433,434,432,433,433,432,434,431,433,434,431,431,434,431,433,432,434,431,433,430,434,432,433,432,430,434,432,431,430,433,430,432,433,430,434,431,433,430,432,434,431,434,432,434,432,431,434,433,431,433,434,432,433,432,433,433,432,434,430,431,433,433,430,433,431,430,433,432,431,434,
