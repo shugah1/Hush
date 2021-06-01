@@ -13,5 +13,4 @@ public class Tags {
     public static final int SENSOR_BIT = 128;
     public static final int GOAL_BIT = 256;
     public static final int KEY_BIT = 512;
-    public static final int DYNAMIC_BIT = 512;
 }

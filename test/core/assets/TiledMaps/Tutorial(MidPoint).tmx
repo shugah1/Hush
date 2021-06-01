@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="80" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="67">
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="80" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="63">
  <tileset firstgid="1" source="../Tilesets/TilesetFloor.tsx"/>
  <tileset firstgid="573" source="TilesetHole.tsx"/>
  <tileset firstgid="628" source="TilesetHouse.tsx"/>
- <tileset firstgid="1295" source="TilesetNature.tsx"/>
+ <tileset firstgid="1295" source="../Tilesets/TilesetNature.tsx"/>
  <layer id="1" name="Ground" width="80" height="128">
   <data encoding="csv">
 434,432,432,433,433,432,433,434,431,432,433,434,432,433,433,432,434,431,433,434,431,431,434,431,433,432,434,431,433,430,434,432,433,432,430,434,432,431,430,433,430,432,433,430,434,431,433,430,432,434,431,434,432,434,432,431,434,433,431,433,434,432,433,432,433,433,432,434,430,431,433,433,430,433,431,430,433,432,431,434,
@@ -271,6 +271,10 @@
  <objectgroup id="10" name="DEnemy">
   <object id="61" x="424" y="1416" width="40" height="36"/>
  </objectgroup>
+ <objectgroup id="12" name="Key">
+  <object id="62" x="616" y="1552" width="36" height="32"/>
+ </objectgroup>
+ <objectgroup id="11" name="Key"/>
  <objectgroup id="5" name="DWall">
   <object id="14" x="768" y="1344" width="96" height="48"/>
   <object id="15" x="864" y="1248" width="96" height="48"/>
@@ -279,9 +283,6 @@
   <object id="18" x="896" y="816" width="64" height="128"/>
   <object id="20" x="816" y="688" width="96" height="64"/>
   <object id="47" x="336" y="1472" width="16" height="16"/>
- </objectgroup>
- <objectgroup id="13" name="Key">
-  <object id="66" x="652" y="1588" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="6" name="MWall">
   <object id="48" x="544" y="688" width="32" height="32"/>
@@ -297,12 +298,6 @@
  <objectgroup id="9" name="SEnemy">
   <object id="53" x="512" y="976" width="48" height="48"/>
   <object id="56" x="816" y="480" width="48" height="48"/>
- </objectgroup>
- <objectgroup id="11" name="HEnemy">
-  <object id="63" x="576" y="1552" width="32" height="32"/>
- </objectgroup>
- <objectgroup id="12" name="VEnemy">
-  <object id="65" x="896" y="1328" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="4" name="Wall">
   <object id="1" x="480" y="1104" width="288" height="320"/>
