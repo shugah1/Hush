@@ -26,7 +26,7 @@ public class HUD  {
     private Viewport viewport;
     public static Integer worldTimer;
     private float timeCount;
-    public static Integer stun;
+    public static Integer stunInv;
     public static Integer invisInv;
     private Player player;
     Texture stunImage = new Texture("test/core/assets/HUD/ScrollThunder.png");
@@ -49,7 +49,7 @@ public class HUD  {
     public HUD (Main game){
         worldTimer = 0;
         timeCount = 0;
-        stun = 3;
+        stunInv = 3;
         invisInv = 3;
         player = game.player;
         viewport = new FitViewport(Settings.V_WIDTH, Settings.V_HEIGHT, new OrthographicCamera());
@@ -64,7 +64,7 @@ public class HUD  {
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        stunLabel = new Label(String.format("%01d", stun), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        stunLabel = new Label(String.format("%01d", stunInv), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         invisLabel = new Label(String.format("%01d", invisInv), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //hushLabel = new Label("HUSH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -91,9 +91,9 @@ public class HUD  {
         }
     }
     public static void stunCounter() {
-        if (stun > 0){
-            stun -= 1;
-            stunLabel.setText(String.format("%01d", stun));
+        if (stunInv > 0){
+            stunInv -= 1;
+            stunLabel.setText(String.format("%01d", stunInv));
             System.out.println(stunLabel.getX());
         }
     }

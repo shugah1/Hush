@@ -21,7 +21,7 @@ import com.hush.game.World.Tags;
 import com.hush.game.states.PlayerState;
 
 import static com.hush.game.UI.HUD.invisInv;
-import static com.hush.game.UI.HUD.stun;
+import static com.hush.game.UI.HUD.stunInv;
 
 public class Player extends GameObject {
     Enemy enemy;
@@ -33,7 +33,9 @@ public class Player extends GameObject {
     public boolean invis = false;
     private float invisDuration = 3;
     private float invisTimer = invisDuration;
-
+    public boolean armored = false;
+    private float armoredDuration = 4;
+    private float armoredTimer = armoredDuration;
 
     private Animation<TextureRegion> walkUp;
     private Animation<TextureRegion> walkDown;
@@ -137,8 +139,10 @@ public class Player extends GameObject {
 
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            HUD.stunCounter();
-
+            if (!armored && stunInv != 0){
+                HUD.stunCounter();
+                armored = true;
+            }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
             if(!invis && invisInv != 0){
@@ -162,11 +166,17 @@ public class Player extends GameObject {
         }
         if(invis && invisTimer > 0){
             invisTimer = Math.max(0, invisTimer - deltaTime);
-
         } else {
             invis = false;
             invisTimer = invisDuration;
         }
+        if(armored && armoredTimer > 0){
+            armoredTimer = Math.max(0, armoredTimer - deltaTime);
+        } else {
+            armored = false;
+            armoredTimer = armoredDuration;
+        }
+
 
         if (state.getCurrentState() != PlayerState.RUN) {
             stamina = Math.min(stamina + (deltaTime * 3), maxStamina);

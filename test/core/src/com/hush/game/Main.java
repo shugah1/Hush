@@ -61,7 +61,7 @@ public class Main implements Screen {
         this.game = game;
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
-        gameMap = new TiledGameMap("test/core/assets/TiledMaps/Level1.tmx", this);
+        gameMap = new TiledGameMap("test/core/assets/TiledMaps/Tutorial(MidPoint).tmx", this);
         gamePort = new StretchViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         cam.update();

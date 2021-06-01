@@ -22,8 +22,8 @@ public class HorizontalEnemy extends Enemy{
         super(world, screen, x, y);
 
 
-        SpriteLeft = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_left"), Animation.PlayMode.LOOP);
-        SpriteRight = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_right"), Animation.PlayMode.LOOP);
+        SpriteLeft = new Animation<TextureRegion>(1f/5f, ta.findRegions("HEnemyLeft"), Animation.PlayMode.LOOP);
+        SpriteRight = new Animation<TextureRegion>(1f/5f, ta.findRegions("HEnemyRight"), Animation.PlayMode.LOOP);
 
         Horizontalsprite = SpriteRight.getKeyFrame(0, true);
         setRegion(Horizontalsprite);

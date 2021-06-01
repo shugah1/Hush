@@ -53,6 +53,7 @@ public abstract class Enemy extends GameObject {
         CircleShape shape = new CircleShape();
         shape.setRadius(10 / Settings.PPM );
 
+        fdef.density = 10000f;
         fdef.filter.categoryBits = Tags.ENEMY_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT | Tags.PLAYER_BIT;
         fdef.shape = shape;
@@ -76,6 +77,7 @@ public abstract class Enemy extends GameObject {
         CircleShape shape = new CircleShape();
         shape.setRadius(10 / Settings.PPM );
 
+        fdef.density = 10000f;
         fdef.filter.categoryBits = Tags.ENEMY_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT | Tags.PLAYER_BIT;
         fdef.shape = shape;
