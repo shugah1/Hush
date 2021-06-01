@@ -70,8 +70,19 @@ public class Main implements Screen {
         this.game = game;
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
+
         gameMap = new TiledGameMap("test/core/assets/TiledMaps/" + LevelSelect.mapSelect + ".tmx", this);
-        gamePort = new StretchViewport(Settings.V_WIDTH /Settings.PPM,Settings.V_HEIGHT /Settings.PPM,cam);
+        // loads save data and assigns variables
+        File settings = new File(Globals.workingDirectory + "settings.ini");
+        try {
+            Wini ini = new Wini(settings);
+            Settings.highScore.put(LevelSelect.mapSelect, Integer.parseInt(ini.get("High Score", LevelSelect.mapSelect)));
+
+        } catch (Exception ignored) {
+            Settings.highScore.put(LevelSelect.mapSelect, Integer.MAX_VALUE);
+        }
+
+        gamePort = new StretchViewport(Settings.V_WIDTH / Settings.PPM,Settings.V_HEIGHT / Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         cam.update();
 

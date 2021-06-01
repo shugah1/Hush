@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 public class WinScreen extends ScreenAdapter {
     Settings game;
@@ -36,7 +37,6 @@ public class WinScreen extends ScreenAdapter {
     int minutes = HUD.worldTimer / 60;
     int seconds = HUD.worldTimer % 60;
     String score = minutes + " : " + seconds + " s";
-    int highScore;
     int cursorX;
     int cursorY;
     float buttonWidth = Gdx.graphics.getWidth() / 5;
@@ -65,16 +65,30 @@ public class WinScreen extends ScreenAdapter {
         font = generator.generateFont(parameter);
         font.setColor(0f, 104f, 255f, 1f);
 
+        // Checks and assigns New High Score
         System.out.println(HUD.worldTimer);
-        if (HUD.worldTimer < Settings.highScore) {
-            Settings.highScore = HUD.worldTimer;
+        if (HUD.worldTimer < Settings.highScore.get(LevelSelect.mapSelect)) {
+            Settings.highScore.put(LevelSelect.mapSelect, HUD.worldTimer);
             newHighScore = true;
-            // Writes data to the settings file
-            File settings = new File(Globals.workingDirectory + "settings.ini");
 
+            // Writes High Score to the settings file
+            File settings = new File(Globals.workingDirectory + "settings.ini");
             try {
                 Wini ini = new Wini(settings);
-                ini.add("Settings", "High Score", Settings.highScore);
+                ini.add("High Score", LevelSelect.mapSelect, Settings.highScore.get(LevelSelect.mapSelect));
+                ini.store();
+                System.out.println("ooga booga");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (Settings.highScore.get(LevelSelect.mapSelect) > 0) {
+            // Writes Completion to the settings file
+            File settings = new File(Globals.workingDirectory + "settings.ini");
+            try {
+                Wini ini = new Wini(settings);
+                ini.add("Completion", "Completed", Settings.completion += 1);
                 ini.store();
                 System.out.println("ooga booga");
             } catch (IOException e) {

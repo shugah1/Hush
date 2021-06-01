@@ -9,6 +9,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.hush.game.Main;
 import com.hush.game.UI.Settings;
+import com.hush.game.constants.Globals;
+import org.ini4j.Wini;
+
+import java.io.File;
 
 public class LevelSelect extends ScreenAdapter {
     Settings game;
@@ -32,13 +36,12 @@ public class LevelSelect extends ScreenAdapter {
 
     float selectX = buttonX;
     float selectY = buttonHeight * 7;
-    float tutorialX = buttonX;
     float row1Y = buttonHeight * 5;
     float row2Y = buttonHeight * 3;
     float quitX = buttonX;
     float quitY = buttonHeight;
 
-    public static String mapSelect;
+    public static String mapSelect = "Tutorial(Midpoint)";
 
     public LevelSelect(Settings game) {
         this.game = game;
@@ -55,6 +58,15 @@ public class LevelSelect extends ScreenAdapter {
 
         quitText = new Texture("Text/quitText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+
+        // loads save data and assigns variables
+        File settings = new File(Globals.workingDirectory + "settings.ini");
+        try {
+            Wini ini = new Wini(settings);
+            Settings.completion = Integer.parseInt(ini.get("Completion", "Completed"));
+
+        } catch (Exception ignored) {
+        }
     }
 
     @Override
@@ -65,63 +77,78 @@ public class LevelSelect extends ScreenAdapter {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
                 // Tutorial Button
-                if (cursorX >=  tutorialX - buttonWidth * 1.5f && cursorX <=  tutorialX - buttonWidth * 1.5f + buttonWidth) {
+                if (cursorX >=  buttonX - buttonWidth * 1.5f && cursorX <=  buttonX - buttonWidth * 1.5f + buttonWidth) {
                     if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
                             mapSelect = "Tutorial(MidPoint)";
+                            Settings.music.stop();
                             game.setScreen(new Main(game));
                         }
                     }
                 }
                 // Level 1 Button
-                if (cursorX >=  tutorialX && cursorX <= tutorialX + buttonWidth) {
-                    if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
-                        if (Gdx.input.isTouched()) {
-                            sound.play(0.25f);
-                            mapSelect = "";
-                            game.setScreen(new Main(game));
+                if (Settings.completion >= 1) {
+                    if (cursorX >= buttonX && cursorX <= buttonX + buttonWidth) {
+                        if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
+                            if (Gdx.input.isTouched()) {
+                                sound.play(0.25f);
+                                mapSelect = "Level1";
+                                Settings.music.stop();
+                                game.setScreen(new Main(game));
+                            }
                         }
                     }
                 }
                 // Level 2 Button
-                if (cursorX >=  tutorialX + buttonWidth * 1.5f && cursorX <=  tutorialX + buttonWidth * 1.5f + buttonWidth) {
-                    if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
-                        if (Gdx.input.isTouched()) {
-                            sound.play(0.25f);
-                            mapSelect = "";
-                            game.setScreen(new Main(game));
+                if (Settings.completion >= 2) {
+                    if (cursorX >= buttonX + buttonWidth * 1.5f && cursorX <= buttonX + buttonWidth * 1.5f + buttonWidth) {
+                        if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
+                            if (Gdx.input.isTouched()) {
+                                sound.play(0.25f);
+                                mapSelect = "Rocky copy";
+                                Settings.music.stop();
+                                game.setScreen(new Main(game));
+                            }
                         }
                     }
                 }
                 // Level 3 Button
-                if (cursorX >=  tutorialX - buttonWidth * 1.5f && cursorX <=  tutorialX - buttonWidth * 1.5f + buttonWidth) {
-                    if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
-                        if (Gdx.input.isTouched()) {
-                            sound.play(0.25f);
-                            mapSelect = "";
-                            game.setScreen(new Main(game));
+                if (Settings.completion >= 3) {
+                    if (cursorX >= buttonX - buttonWidth * 1.5f && cursorX <= buttonX - buttonWidth * 1.5f + buttonWidth) {
+                        if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
+                            if (Gdx.input.isTouched()) {
+                                sound.play(0.25f);
+                                mapSelect = "Winter copy";
+                                Settings.music.stop();
+                                game.setScreen(new Main(game));
+                            }
                         }
                     }
                 }
                 // Level 4 Button
-                if (cursorX >=  tutorialX && cursorX <= tutorialX + buttonWidth) {
-                    if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
-                        if (Gdx.input.isTouched()) {
-                            sound.play(0.25f);
-                            mapSelect = "";
-                            game.setScreen(new Main(game));
+                if (Settings.completion >= 4) {
+                    if (cursorX >= buttonX && cursorX <= buttonX + buttonWidth) {
+                        if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
+                            if (Gdx.input.isTouched()) {
+                                sound.play(0.25f);
+                                mapSelect = "";
+                                Settings.music.stop();
+                                game.setScreen(new Main(game));
+                            }
                         }
                     }
                 }
                 // Level 5 Button
-                if (cursorX >=  tutorialX + buttonWidth * 1.5f && cursorX <=  tutorialX + buttonWidth * 1.5f + buttonWidth) {
-                    if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
-                        if (Gdx.input.isTouched()) {
-                            sound.play(0.25f);
-                            mapSelect = "";
-                            Settings.music.stop();
-                            game.setScreen(new Main(game));
+                if (Settings.completion >= 5) {
+                    if (cursorX >= buttonX + buttonWidth * 1.5f && cursorX <= buttonX + buttonWidth * 1.5f + buttonWidth) {
+                        if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
+                            if (Gdx.input.isTouched()) {
+                                sound.play(0.25f);
+                                mapSelect = "";
+                                Settings.music.stop();
+                                game.setScreen(new Main(game));
+                            }
                         }
                     }
                 }
@@ -134,7 +161,6 @@ public class LevelSelect extends ScreenAdapter {
                         }
                     }
                 }
-
                 return true;
             }
         });
@@ -142,19 +168,29 @@ public class LevelSelect extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        // Renders Level Select Menu
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
         batch.draw(selectText, selectX, selectY, buttonWidth, buttonHeight);
+        batch.draw(tutorialText, buttonX - buttonWidth * 1.5f, row1Y, buttonWidth, buttonHeight);
 
-        batch.draw(tutorialText, tutorialX - buttonWidth * 1.5f, row1Y, buttonWidth, buttonHeight);
-        batch.draw(level1Text, tutorialX, row1Y, buttonWidth, buttonHeight);
-        batch.draw(level2Text, tutorialX + buttonWidth * 1.5f, row1Y, buttonWidth, buttonHeight);
-
-        batch.draw(level3Text, tutorialX - buttonWidth * 1.5f, row2Y, buttonWidth, buttonHeight);
-        batch.draw(level4Text, tutorialX, row2Y, buttonWidth, buttonHeight);
-        batch.draw(level5Text, tutorialX + buttonWidth * 1.5f, row2Y, buttonWidth, buttonHeight);
+        if (Settings.completion >= 1) {
+            batch.draw(level1Text, buttonX, row1Y, buttonWidth, buttonHeight);
+        }
+        if (Settings.completion >= 2) {
+            batch.draw(level2Text, buttonX + buttonWidth * 1.5f, row1Y, buttonWidth, buttonHeight);
+        }
+        if (Settings.completion >= 3) {
+            batch.draw(level3Text, buttonX - buttonWidth * 1.5f, row2Y, buttonWidth, buttonHeight);
+        }
+        if (Settings.completion >= 4) {
+            batch.draw(level4Text, buttonX, row2Y, buttonWidth, buttonHeight);
+        }
+        if (Settings.completion >= 5) {
+            batch.draw(level5Text, buttonX + buttonWidth * 1.5f, row2Y, buttonWidth, buttonHeight);
+        }
 
         batch.draw(quitText, quitX, quitY, buttonWidth, buttonHeight);
         batch.end();
