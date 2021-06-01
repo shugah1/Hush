@@ -52,6 +52,7 @@ public class DynamicEnemy extends Enemy{
     @Override
     public void update(float dt) {
         super.update(dt);
+        detecRadius = 20 + player.sound;
         System.out.println("go to Position" + goToPos);
         System.out.println("Position" + pos);
         closeEnough = pos.dst(goToPos) <= (speed * dt);

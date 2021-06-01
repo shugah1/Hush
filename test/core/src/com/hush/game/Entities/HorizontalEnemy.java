@@ -29,12 +29,12 @@ public class HorizontalEnemy extends Enemy{
         setRegion(Horizontalsprite);
 
 
-
     }
     @Override
     public void update(float dt) {
 
         super.update(dt);
+        detecRadius = 20 + player.sound;
         walk();
 
         if(moveTimer == 0){

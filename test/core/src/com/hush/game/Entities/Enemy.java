@@ -121,7 +121,7 @@ public abstract class Enemy extends GameObject {
 
     public void update(float dt) {
         elapsedTime += dt;
-        detecRadius = 20 + player.sound;
+
         resetCol();
 
     }
