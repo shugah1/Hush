@@ -1,11 +1,16 @@
 package com.hush.game.Entities;
 
+import ca.error404.bytefyte.constants.Globals;
+import ca.error404.bytefyte.constants.ScreenSizes;
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -19,6 +24,11 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 import com.hush.game.states.PlayerState;
+import org.ini4j.Wini;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import static com.hush.game.UI.HUD.invisInv;
 import static com.hush.game.UI.HUD.stunInv;
@@ -67,10 +77,13 @@ public class Player extends GameObject {
     public float x;
     public float y;
     TextureRegion sprite;
+    Settings game;
+    public boolean ByteFyte;
     //Sound sound = Gdx.audio.newSound(Gdx.files.internal("PowerUp1.wav"));
 
-    public Player(World world, Main screen, float x, float y) {
+    public Player(World world, Main screen, float x, float y, Settings game) {
         super();
+        this.game = game;
         this.x = x;
         this.y = y;
         setPosition(x,y);
@@ -126,6 +139,7 @@ public class Player extends GameObject {
 
     public void handleInput(float dt){
         //control our player using immediate impulses
+
         moveVector.set(0,0);
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 
@@ -154,8 +168,72 @@ public class Player extends GameObject {
             }
 
         }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F5)) {
+            launchByteFyte();
+        }
+
         if (!recharing && !moveVector.isZero()) {
             running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
+        }
+    }
+
+    public void launchByteFyte() {
+        try {
+            // Window settings
+            File settings = new File(Globals.workingDirectory + "settings.ini");
+
+            // Checks for active save data
+            if (!settings.exists()) {
+                // Creates save file and writes default save data
+                File file = new File(Globals.workingDirectory);
+                file.mkdirs();
+
+                settings.createNewFile();
+
+                Wini ini = new Wini(settings);
+                ini.add("Settings", "screen size", ScreenSizes.screenSize);
+                ini.add("Settings", "music volume", ca.error404.bytefyte.Main.musicVolume);
+                ini.add("Settings", "sfx volume", ca.error404.bytefyte.Main.sfxVolume);
+                ini.add("Settings", "cutscene volume", ca.error404.bytefyte.Main.cutsceneVolume);
+                ini.add("Settings", "fullscreen", ScreenSizes.fullScreen);
+                ini.add("Settings", "debug", ca.error404.bytefyte.Main.debug);
+                ini.add("Menu", "bill", ca.error404.bytefyte.Main.bill);
+                ini.add("Menu", "stamina", ca.error404.bytefyte.Main.stamina);
+                ini.store();
+            } else {
+                Wini ini = new Wini(settings);
+                // loads save data and assigns variables
+                try {
+                    ScreenSizes.screenSize = Integer.parseInt(ini.get("Settings", "screen size"));
+                    ca.error404.bytefyte.Main.musicVolume = Integer.parseInt(ini.get("Settings", "music volume"));
+                    ca.error404.bytefyte.Main.cutsceneVolume = Integer.parseInt(ini.get("Settings", "cutscene volume"));
+                    ca.error404.bytefyte.Main.sfxVolume = Integer.parseInt(ini.get("Settings", "sfx volume"));
+                    ScreenSizes.fullScreen = Boolean.parseBoolean(ini.get("Settings", "fullscreen"));
+                    ca.error404.bytefyte.Main.debug = Boolean.parseBoolean(ini.get("Settings", "debug"));
+                    ca.error404.bytefyte.Main.bill = Boolean.parseBoolean(ini.get("Menu", "bill"));
+                    ca.error404.bytefyte.Main.stamina = Boolean.parseBoolean(ini.get("Menu", "stamina"));
+                } catch (Exception ignored) {
+
+                }
+            }
+
+            // Sets screen size
+            if (ScreenSizes.fullScreen) {
+                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+            } else {
+                Gdx.graphics.setWindowedMode(ScreenSizes.screenSizes.get(ScreenSizes.screenSize).get(0), ScreenSizes.screenSizes.get(ScreenSizes.screenSize).get(1));
+            }
+
+            // window title and window icon
+            Gdx.graphics.setTitle("Byte Fyte");
+            Gdx.graphics.setResizable(false);
+
+            // Starts app
+            new ca.error404.bytefyte.Main(game);
+            Settings.music.stop();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -169,6 +247,7 @@ public class Player extends GameObject {
         }
         if(invis && invisTimer > 0){
             invisTimer = Math.max(0, invisTimer - deltaTime);
+
         } else {
             invis = false;
             invisTimer = invisDuration;
@@ -244,4 +323,3 @@ public class Player extends GameObject {
         sprite = dead.getKeyFrame(0, false);
     }
 }
-

@@ -21,8 +21,8 @@ public class VerticalEnemy extends Enemy{
     public VerticalEnemy(World world, Main screen, float x, float y) {
 
         super(world, screen, x, y);
-        SpriteUp = new Animation<TextureRegion>(1f/5f, ta.findRegions("VEnemyUp"), Animation.PlayMode.LOOP);
-        SpriteDown = new Animation<TextureRegion>(1f/5f, ta.findRegions("VEnemyDown"), Animation.PlayMode.LOOP);
+        SpriteUp = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_up"), Animation.PlayMode.LOOP);
+        SpriteDown = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_down"), Animation.PlayMode.LOOP);
 
         Verticalsprite = SpriteDown.getKeyFrame(0, true);
         setRegion(Verticalsprite);
@@ -31,7 +31,6 @@ public class VerticalEnemy extends Enemy{
     public void update(float dt) {
 
         super.update(dt);
-        detecRadius = 20 + player.sound;
         walk();
 
         if(moveTimer == 0){
