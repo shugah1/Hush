@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="80" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="62">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="80" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="66">
  <tileset firstgid="1" source="../Tilesets/TilesetFloor.tsx"/>
  <tileset firstgid="573" source="TilesetHole.tsx"/>
  <tileset firstgid="628" source="TilesetHouse.tsx"/>
- <tileset firstgid="1295" source="../Tilesets/TilesetNature.tsx"/>
+ <tileset firstgid="1295" source="TilesetNature.tsx"/>
  <layer id="1" name="Ground" width="80" height="128">
   <data encoding="csv">
 434,432,432,433,433,432,433,434,431,432,433,434,432,433,433,432,434,431,433,434,431,431,434,431,433,432,434,431,433,430,434,432,433,432,430,434,432,431,430,433,430,432,433,430,434,431,433,430,432,434,431,434,432,434,432,431,434,433,431,433,434,432,433,432,433,433,432,434,430,431,433,433,430,433,431,430,433,432,431,434,
@@ -294,6 +294,12 @@
  <objectgroup id="9" name="SEnemy">
   <object id="53" x="512" y="976" width="48" height="48"/>
   <object id="56" x="816" y="480" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup id="11" name="HEnemy">
+  <object id="63" x="576" y="1552" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="12" name="VEnemy">
+  <object id="65" x="896" y="1328" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="4" name="Wall">
   <object id="1" x="480" y="1104" width="288" height="320"/>
