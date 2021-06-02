@@ -23,9 +23,9 @@ public class MainMenu extends ScreenAdapter {
 
     int cursorX;
     int cursorY;
-    float buttonWidth = Gdx.graphics.getWidth() / 5;
-    float buttonHeight = Gdx.graphics.getHeight() / 9;
-    float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
+    float buttonWidth = Gdx.graphics.getWidth() / 5f;
+    float buttonHeight = Gdx.graphics.getHeight() / 9f;
+    float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
     float titleY = buttonHeight * 7;
     float startY = buttonHeight * 5;
     float settingsY = buttonHeight * 3;
@@ -49,6 +49,12 @@ public class MainMenu extends ScreenAdapter {
 
     @Override
     public void show(){
+        if (!Settings.songName.equalsIgnoreCase("TitleTheme")) {
+            Settings.music.stop();
+            Settings.music = game.newSong("TitleTheme");
+            Settings.music.play();
+        }
+
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
