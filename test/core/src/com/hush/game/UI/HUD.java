@@ -1,22 +1,17 @@
 package com.hush.game.UI;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.Main;
 
@@ -27,7 +22,7 @@ public class HUD  {
     public static Integer worldTimer;
     private float timeCount;
     public static Integer stun;
-    public static Integer invis;
+    public static Integer invisInv;
     private Player player;
     Texture stunImage = new Texture("test/core/assets/HUD/ScrollThunder.png");
     Texture invisImage = new Texture("test/core/assets/HUD/invisibility-hush.png");
@@ -38,11 +33,9 @@ public class HUD  {
     SpriteBatch batch = new SpriteBatch();
 
     Label countdownLabel;
-    Label scoreLabel;
     Label timeLabel;
     Label levelLabel;
     Label worldLabel;
-    Label hushLabel;
     private static Label stunLabel;
     private static Label invisLabel;
 
@@ -50,7 +43,7 @@ public class HUD  {
         worldTimer = 0;
         timeCount = 0;
         stun = 3;
-        invis = 3;
+        invisInv = 3;
         player = game.player;
         viewport = new FitViewport(Settings.V_WIDTH, Settings.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport);
@@ -60,21 +53,16 @@ public class HUD  {
         table.setFillParent(true);
 
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        //scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         stunLabel = new Label(String.format("%01d", stun), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        invisLabel = new Label(String.format("%01d", invis), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        invisLabel = new Label(String.format("%01d", invisInv), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        //hushLabel = new Label("HUSH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
-        //table.add(hushLabel).expandX().padTop(10);
         table.add(worldLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
         table.add(invisLabel).expandX().padTop(10);
         table.row();
-        //table.add(scoreLabel).expandX();
         table.add(levelLabel).expandX();
         table.add(countdownLabel).expandX();
 
@@ -94,12 +82,13 @@ public class HUD  {
         if (stun > 0){
             stun -= 1;
             stunLabel.setText(String.format("%01d", stun));
+            System.out.println(stunLabel.getX());
         }
     }
     public static void invisCounter() {
-        if (invis > 0){
-            invis -= 1;
-            invisLabel.setText(String.format("%01d", invis));
+        if (invisInv > 0){
+            invisInv -= 1;
+            invisLabel.setText(String.format("%01d", invisInv));
         }
     }
     public void render(){
@@ -111,8 +100,8 @@ public class HUD  {
         TextureRegion SoundCrop = new TextureRegion(Sound, 0, 0, (int)((18 * (player.sound / player.maxSound))), 4);
         batch.draw(Stamina, 10, 70, Stamina.getWidth() * 10, Stamina.getHeight() * 10);
         batch.draw(SoundCrop, 10, 70, SoundCrop.getRegionWidth() * 10, SoundCrop.getRegionHeight() * 10);
-        batch.draw(stunImage, 1575, 888, 40, 40);
-        batch.draw(invisImage, 1575, 964, 40, 40);
+        batch.draw(stunImage, stunLabel.getX() * 2.5f, stunLabel.getY() * 2.66f, 40, 40);
+        batch.draw(invisImage, invisLabel.getX() * 2.5f, invisLabel.getY() * 2.66f, 40, 40);
         batch.end();
     }
 }

@@ -43,11 +43,35 @@ public abstract class Enemy extends GameObject {
 
     public void defineEnemy(){
         //Enemy body
+
         BodyDef bdef = new BodyDef();
-        bdef.position.set(x,y);
+        bdef.position.set(x, y);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
+        FixtureDef fdef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(10 / Settings.PPM );
+
+        fdef.filter.categoryBits = Tags.ENEMY_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT | Tags.PLAYER_BIT;
+        fdef.shape = shape;
+        b2body.createFixture(fdef).setUserData(this);
+
+        //Enemy Sensor
+        CircleShape sensor = new CircleShape();
+        sensor.setRadius(detecRadius /Settings.PPM);
+        fdef.filter.categoryBits = Tags.SENSOR_BIT;
+        fdef.filter.maskBits = Tags.PLAYER_BIT | Tags.DEFAULT_BIT;
+        fdef.shape = sensor;
+        fdef.isSensor = true;
+        b2body.createFixture(fdef).setUserData(this);
+
+    }
+    public void resetFixture() {
+        for (Fixture fixture : b2body.getFixtureList()) {
+            b2body.destroyFixture(fixture);
+        }
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(10 / Settings.PPM );
@@ -88,13 +112,14 @@ public abstract class Enemy extends GameObject {
     }
 
     public void resetCol() {
-        world.destroyBody(b2body);
-        defineEnemy();
+        //world.destroyBody(b2body);
+        resetFixture();
+
     }
 
     public void update(float dt) {
         elapsedTime += dt;
-        detecRadius = 40 + player.sound;
+        detecRadius = 20 + player.sound;
         resetCol();
 
     }

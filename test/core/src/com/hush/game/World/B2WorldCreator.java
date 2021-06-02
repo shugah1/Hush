@@ -5,9 +5,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import com.hush.game.Entities.DynamicEnemy;
-import com.hush.game.Entities.Player;
-import com.hush.game.Entities.StaticEnemy;
+import com.hush.game.Entities.*;
 import com.hush.game.Main;
 import com.hush.game.Objects.DamageWall;
 import com.hush.game.Objects.Goal;
@@ -19,7 +17,7 @@ public class B2WorldCreator {
 
     private Main main;
 
-    public B2WorldCreator(Main world, TiledMap map) {
+    public B2WorldCreator(Main world, TiledMap map, Settings game) {
         this.main = world;
 
         //Creates Walls
@@ -44,7 +42,7 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get("Player").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            main.player = new Player(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM);
+            main.player = new Player(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM, game);
         }
 
         for (MapObject object : map.getLayers().get("SEnemy").getObjects().getByType(RectangleMapObject.class)) {
@@ -61,6 +59,16 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new Goal((int) (rect.getX() + rect.getWidth() / 2), (int) (rect.getY() + rect.getHeight() / 2), rect.getWidth() / 2f, rect.getHeight() / 2f, world);
+        }
+        for (MapObject object : map.getLayers().get("HEnemy").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            new HorizontalEnemy(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM);
+        }
+        for (MapObject object : map.getLayers().get("VEnemy").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            new VerticalEnemy(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM);
         }
     }
 }
