@@ -3,7 +3,10 @@ package com.hush.game.Objects;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.Entities.GameObject;
@@ -12,7 +15,7 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
-public class MovingWall extends GameObject {
+public class Rock extends GameObject {
 
     //declaring and initializing variables
     public World world;
@@ -20,20 +23,34 @@ public class MovingWall extends GameObject {
     public int y;
     public float w;
     public float h;
-    public Fixture fix;
-    private Vector2 moveVector = new Vector2();
-    private static final float  SPEEDX = 6.9f;
-    Texture image = new Texture("Rock.png");
+    private TextureAtlas ta;
+    private Animation<TextureRegion> key;
+    private TextureRegion sprite;
 
-    public MovingWall(int x, int y, float w, float h, Main screen) {
+    /**
+     * constructor for the Rock
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param screen
+     * determines the sprite, position, and creates the b2body.
+     */
+    public Rock(int x, int y, float w, float h, Main screen) {
         super();
         this.world = Main.world;
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        setRegion(image);
 
+        //textures
+        ta = new TextureAtlas("Sprites/Objects.atlas");
+        key = new Animation<TextureRegion>(1/5f, ta.findRegions("Rock"), Animation.PlayMode.LOOP);
+        sprite = key.getKeyFrame(0, true);
+        setRegion(sprite);
+
+        //creates b2body and collision masks
         BodyDef bdef = new BodyDef();
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -41,7 +58,7 @@ public class MovingWall extends GameObject {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(getRegionWidth() / 20 / Settings.PPM,getRegionHeight() / 20 / Settings.PPM);
+        shape.setAsBox(getRegionWidth() / Settings.PPM /2.15f,getRegionHeight()  / Settings.PPM /2f);
         fdef.density = 300f;
         fdef.friction = 0f;
         b2body.setFixedRotation(true);
@@ -53,15 +70,22 @@ public class MovingWall extends GameObject {
 
 
     }
-
+    /**
+     * When the player comes into contact with the rock
+     * @param player
+     * Stops the rock once the player stops touching it
+     */
     public void contact(Player player){
         b2body.setLinearVelocity(0f,0f);
     }
 
+    /**
+     * Every frame the rocks region is being updated, and is getting a new position
+     * @param deltaTime
+     */
     public void update(float deltaTime){
-        setRegion(image);
+        setRegion(sprite);
         //setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, w/Settings.PPM*2,h/Settings.PPM*2);
-        setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
-    }
+        setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);}
 
 }

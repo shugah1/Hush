@@ -25,7 +25,7 @@ public class Goal {
         this.w = w;
         this.h = h;
 
-
+        //creates b2body and collision masks
         BodyDef bdef = new BodyDef();
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
         bdef.type = BodyDef.BodyType.StaticBody;
@@ -45,7 +45,6 @@ public class Goal {
 
     public void contact(Player player) {
         player.win = true;
-        System.out.println("GG");
 
     }
 }

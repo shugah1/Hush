@@ -6,7 +6,7 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
-public class StaticWall {
+public class Wall {
 
     //declaring and initializing variables
     public World world;
@@ -18,19 +18,29 @@ public class StaticWall {
     public Body b2body;
     private Vector2 moveVector = new Vector2();
 
-
-    public StaticWall(int x, int y, float w, float h, Main screen) {
+    /**
+     * constructor for the Rock
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param screen
+     * determines the sprite, position, and creates the b2body.
+     */
+    public Wall(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
 
+        //creates b2body
         BodyDef bdef = new BodyDef();
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
         bdef.type = BodyDef.BodyType.StaticBody;
         b2body = world.createBody(bdef);
 
+        //fixture and collision masks
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(this.w / Settings.PPM,this.h / Settings.PPM);
@@ -41,7 +51,4 @@ public class StaticWall {
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public void contact() {
-        //
-    }
 }

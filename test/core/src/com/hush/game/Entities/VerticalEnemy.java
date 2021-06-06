@@ -31,6 +31,7 @@ public class VerticalEnemy extends Enemy{
     public void update(float dt) {
 
         super.update(dt);
+        detecRadius = 20 + player.sound;
         walk();
 
         if(moveTimer == 0){
@@ -41,7 +42,6 @@ public class VerticalEnemy extends Enemy{
         }
         VerticalVector.set(0, speed);
         b2body.setLinearVelocity(VerticalVector);
-
 
         setRegion(Verticalsprite);
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
