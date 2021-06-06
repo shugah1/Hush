@@ -139,6 +139,7 @@ public class Main implements Screen {
                 gO.update(dt);
             }
         }
+
         // Set game.music volume
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             Settings.musicVolume = Settings.musicVolume < 10 ? Settings.musicVolume + 1 : 10;
