@@ -17,7 +17,7 @@ public class B2WorldCreator {
     public B2WorldCreator(Main world, TiledMap map) {
         this.main = world;
 
-        //Creates Walls
+        //Generates all structures, enemies and the player
         for (MapObject object : map.getLayers().get("Wall").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 

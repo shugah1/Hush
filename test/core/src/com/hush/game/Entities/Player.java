@@ -21,9 +21,10 @@ import com.hush.game.World.Tags;
 import com.hush.game.states.PlayerState;
 
 import static com.hush.game.UI.HUD.invisInv;
-import static com.hush.game.UI.HUD.stunInv;
+import static com.hush.game.UI.HUD.armourInv;
 
 public class Player extends GameObject {
+    //Initializing and defining Variables
     Enemy enemy;
     public float SPEED;
     public float deltaTime;
@@ -51,7 +52,6 @@ public class Player extends GameObject {
     public boolean win;
     public boolean deadState;
     public boolean hasKey;
-
 
     private float stateTimer;
     public float stamina;
@@ -142,7 +142,7 @@ public class Player extends GameObject {
 
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            if (!armored && stunInv != 0){
+            if (!armored && armourInv != 0){
                 HUD.stunCounter();
                 armored = true;
             }
@@ -169,12 +169,14 @@ public class Player extends GameObject {
         }
         if(invis && invisTimer > 0){
             invisTimer = Math.max(0, invisTimer - deltaTime);
+
         } else {
             invis = false;
             invisTimer = invisDuration;
         }
         if(armored && armoredTimer > 0){
             armoredTimer = Math.max(0, armoredTimer - deltaTime);
+
         } else {
             armored = false;
             armoredTimer = armoredDuration;
@@ -193,6 +195,10 @@ public class Player extends GameObject {
         }else{
             sound = Math.max(sound - 0.5f, 0);
         }
+
+        System.out.println("Run sound: " + runSound);
+        System.out.println("Walk sound: " + walkSound);
+
 
         if(b2body!= null){
             x = b2body.getPosition().x;

@@ -25,7 +25,7 @@ public class Goal {
         this.w = w;
         this.h = h;
 
-
+        //Defining the goal body
         BodyDef bdef = new BodyDef();
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
         bdef.type = BodyDef.BodyType.StaticBody;
@@ -44,6 +44,7 @@ public class Goal {
     }
 
     public void contact(Player player) {
+        //Once a player come in contact with the goal they win
         player.win = true;
         System.out.println("GG");
 

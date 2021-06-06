@@ -25,7 +25,7 @@ public class DamageWall {
         this.w = w;
         this.h = h;
 
-
+        //Defining the damage wall body
         BodyDef bdef = new BodyDef();
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
         bdef.type = BodyDef.BodyType.StaticBody;
@@ -44,8 +44,8 @@ public class DamageWall {
     }
 
     public void contact(Player player) {
+        //Once a player come in contact with a damage wall they die
         player.pDead = true;
         player.die();
-        //System.out.println("Insert Damage here");
     }
 }

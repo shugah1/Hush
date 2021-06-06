@@ -2,6 +2,7 @@ package com.hush.game.World;
 
 public class Tags {
 
+    //Defines which object is which using bits
     public static final int DEFAULT_BIT = 1;
     public static final int PLAYER_BIT = 2;
     public static final int DAMAGE_BIT = 4;

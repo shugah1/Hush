@@ -60,7 +60,7 @@ public class MovingWall extends GameObject {
 
     public void update(float deltaTime){
         setRegion(image);
-        //setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, w/Settings.PPM*2,h/Settings.PPM*2);
+
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }
 

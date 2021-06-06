@@ -8,7 +8,7 @@ import com.hush.game.Main;
 import com.hush.game.UI.Settings;
 
 public class VerticalEnemy extends Enemy{
-
+    //Initializing and defining Variables
     private float speed = 1f;
     private float moveInterval = 2;
     private float moveTimer = moveInterval;
@@ -19,11 +19,11 @@ public class VerticalEnemy extends Enemy{
     TextureRegion Verticalsprite;
 
     public VerticalEnemy(World world, Main screen, float x, float y) {
-
         super(world, screen, x, y);
+
+        //Defines different sprites according to direction
         SpriteUp = new Animation<TextureRegion>(1f/5f, ta.findRegions("VEnemyUp"), Animation.PlayMode.LOOP);
         SpriteDown = new Animation<TextureRegion>(1f/5f, ta.findRegions("VEnemyDown"), Animation.PlayMode.LOOP);
-
         Verticalsprite = SpriteDown.getKeyFrame(0, true);
         setRegion(Verticalsprite);
     }
@@ -33,6 +33,7 @@ public class VerticalEnemy extends Enemy{
         super.update(dt);
         walk();
 
+        //Creates a timer than changes the direction of the enemy
         if(moveTimer == 0){
             moveTimer = moveInterval;
             changeDir();
@@ -42,7 +43,7 @@ public class VerticalEnemy extends Enemy{
         VerticalVector.set(0, speed);
         b2body.setLinearVelocity(VerticalVector);
 
-
+        //Sets the sprite and bounds of the enemy
         setRegion(Verticalsprite);
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
 
@@ -54,6 +55,7 @@ public class VerticalEnemy extends Enemy{
 
     }
     public void walk() {
+        //Checks the directional vector of the enemy sets the sprite to the corresponding direction
         if (VerticalVector.y < 0) {
             Verticalsprite = SpriteDown.getKeyFrame(elapsedTime, true);
         } else if (VerticalVector.y > 0) {
