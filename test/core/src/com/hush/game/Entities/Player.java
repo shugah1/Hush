@@ -22,7 +22,7 @@ import java.io.File;
 import java.io.IOException;
 
 import static com.hush.game.UI.HUD.invisInv;
-import static com.hush.game.UI.HUD.stunInv;
+import static com.hush.game.UI.HUD.armourInv;
 
 public class Player extends GameObject {
     //Initializing and defining Variables
@@ -147,7 +147,7 @@ public class Player extends GameObject {
 
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            if (!armored && stunInv != 0){
+            if (!armored && armourInv != 0){
                 HUD.stunCounter();
                 armored = true;
             }

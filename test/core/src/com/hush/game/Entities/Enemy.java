@@ -103,7 +103,9 @@ public abstract class Enemy extends GameObject {
         RayCastCallback callback = new RayCastCallback() {
             @Override
             public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
-                if (fixture.getFilterData().categoryBits == Tags.DEFAULT_BIT || fixture.getFilterData().categoryBits == Tags.WALL_BIT ) {
+                if (fixture.getFilterData().categoryBits == Tags.DEFAULT_BIT || fixture.getFilterData().categoryBits == Tags.WALL_BIT
+                        || fixture.getFilterData().categoryBits == Tags.SWALL_BIT || fixture.getFilterData().categoryBits == Tags.DAMAGE_BIT
+                        || fixture.getFilterData().categoryBits == Tags.ENEMY_BIT ) {
                     hit = false;
                     return fraction;
                 }else{
