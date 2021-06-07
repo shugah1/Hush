@@ -14,6 +14,7 @@ import com.hush.game.World.Tags;
 import java.util.Random;
 
 public class DynamicEnemy extends Enemy{
+    //Initializing and defining Variables
     private boolean closeEnough = true;
     private float countMax = 4;
     private float count = countMax;
@@ -30,22 +31,20 @@ public class DynamicEnemy extends Enemy{
     TextureRegion Enemysprite;
 
     public DynamicEnemy(World world, Main screen, float x, float y) {
+        //Defining some Variables
         super(world, screen, x, y);
         r = new Random();
         ta = new TextureAtlas("Sprites/enemies.atlas");
         pos = new Vector2(x, y);
         goToPos = pos;
 
+        //Defines different sprites according to direction
         EnemyDown = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_down"), Animation.PlayMode.LOOP);
         EnemyUp = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_up"), Animation.PlayMode.LOOP);
         EnemyLeft = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_left"), Animation.PlayMode.LOOP);
         EnemyRight = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_right"), Animation.PlayMode.LOOP);
-
         Enemysprite = EnemyDown.getKeyFrame(0, true);
         setRegion(Enemysprite);
-
-
-
 
     }
 
@@ -98,6 +97,8 @@ public class DynamicEnemy extends Enemy{
         return canMove;
     }
     public void walk() {
+
+        //Checks the enemy's current and next position to find the direction it is going, then sets the sprite to the corresponding direction
         if (goToPos.y > pos.y) {
             Enemysprite = EnemyUp.getKeyFrame(elapsedTime, true);
         } else if (goToPos.y < pos.y) {

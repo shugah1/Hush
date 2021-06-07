@@ -59,8 +59,8 @@ public class DamageWall {
      * @param player
      */
     public void contact(Player player) {
+        //Once a player come in contact with a damage wall they die
         player.pDead = true;
         player.die();
-        //System.out.println("Insert Damage here");
     }
 }

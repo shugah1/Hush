@@ -10,6 +10,7 @@ import com.hush.game.World.Tags;
 import javax.swing.text.html.HTML;
 
 public abstract class Enemy extends GameObject {
+    //Initializing and defining Variables
     protected World world;
     Player player;
     protected Main screen;
@@ -25,6 +26,7 @@ public abstract class Enemy extends GameObject {
     public float detecRadius;
 
     public Enemy(World world, Main screen, float x, float y){
+        //Defining some Variables
         this.world = world;
         this.screen = screen;
         this.player = screen.player;
