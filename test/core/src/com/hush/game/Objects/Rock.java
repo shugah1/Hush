@@ -32,7 +32,6 @@ public class Rock extends GameObject {
      * determines the sprite, position, and creates the b2body.
      */
     public Rock(int x, int y, float w, float h, Main screen) {
-        super();
         this.world = Main.world;
         this.x = x;
         this.y = y;
@@ -58,7 +57,7 @@ public class Rock extends GameObject {
         fdef.friction = 0f;
         b2body.setFixedRotation(true);
         fdef.filter.categoryBits = Tags.WALL_BIT;
-        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT | Tags.SWALL_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

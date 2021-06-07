@@ -2,23 +2,15 @@ package com.hush.game.Entities;
 
 import ca.error404.bytefyte.constants.Globals;
 import ca.error404.bytefyte.constants.ScreenSizes;
-import com.badlogic.gdx.Files;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
 import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 import com.hush.game.Main;
@@ -28,7 +20,6 @@ import org.ini4j.Wini;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static com.hush.game.UI.HUD.invisInv;
 import static com.hush.game.UI.HUD.armourInv;
@@ -132,7 +123,7 @@ public class Player extends GameObject {
 
         fdef.filter.categoryBits = Tags.PLAYER_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT
-                | Tags.WALL_BIT | Tags.SENSOR_BIT | Tags.GOAL_BIT | Tags.KEY_BIT;
+                | Tags.WALL_BIT | Tags.SENSOR_BIT | Tags.GOAL_BIT | Tags.KEY_BIT | Tags.SWALL_BIT;
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
