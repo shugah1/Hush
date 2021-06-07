@@ -32,8 +32,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.hush.game.UI.HUD.invisInv;
-import static com.hush.game.UI.HUD.stun;
 
 public class Player extends GameObject {
     //Initializing and defining Variables

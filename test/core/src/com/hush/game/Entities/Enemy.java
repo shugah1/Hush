@@ -95,29 +95,7 @@ public abstract class Enemy extends GameObject {
         b2body.createFixture(fdef).setUserData(this);
 
     }
-    public void resetFixture() {
-        for (Fixture fixture : b2body.getFixtureList()) {
-            b2body.destroyFixture(fixture);
-        }
-        FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(10 / Settings.PPM );
 
-        fdef.filter.categoryBits = Tags.ENEMY_BIT;
-        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT | Tags.PLAYER_BIT;
-        fdef.shape = shape;
-        b2body.createFixture(fdef).setUserData(this);
-
-        //Enemy Sensor
-        CircleShape sensor = new CircleShape();
-        sensor.setRadius(detecRadius /Settings.PPM);
-        fdef.filter.categoryBits = Tags.SENSOR_BIT;
-        fdef.filter.maskBits = Tags.PLAYER_BIT | Tags.DEFAULT_BIT;
-        fdef.shape = sensor;
-        fdef.isSensor = true;
-        b2body.createFixture(fdef).setUserData(this);
-
-    }
 
     public boolean calculateCollisionPoint(Player player){
         fromPoint = b2body.getPosition();
