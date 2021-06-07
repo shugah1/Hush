@@ -209,6 +209,7 @@ public class Player extends GameObject {
                 }
             }
 
+            Main.gameObject.clear();
             // Sets screen size
             if (ScreenSizes.fullScreen) {
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());

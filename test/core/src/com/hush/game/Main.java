@@ -39,7 +39,6 @@ public class Main implements Screen {
     private Viewport gamePort;
     private Settings game;
     private Box2DDebugRenderer b2dr;
-    private TextureAtlas atlas;
     private HUD hud;
     public Rock rock;
     public static ArrayList<GameObject> gameObject = new ArrayList<>();
@@ -92,7 +91,7 @@ public class Main implements Screen {
         if (!Settings.songName.equalsIgnoreCase(LevelSelect.mapSelect) ) {
             Settings.music = game.newSong(LevelSelect.mapSelect);
 
-          if (Settings.music == null) { Settings.music = game.newSong("menu weird"); }
+            if (Settings.music == null) { Settings.music = game.newSong("menu weird"); }
         }
         Settings.music.play();
         game.music.setVolume(Settings.musicVolume / 10f);
@@ -129,15 +128,15 @@ public class Main implements Screen {
             game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
         }
 
-        for(GameObject gO : gameObject ){
-            if (gO.remove){
+        for( int i = 0; i < gameObject.size(); i++){
+            if (gameObject.get(i).remove){
                 try{
-                    world.destroyBody(gO.b2body);
+                    world.destroyBody(gameObject.get(i).b2body);
                 }catch (Exception e){
                 }
-                gameObjectBye.add(gO);
+                gameObjectBye.add(gameObject.get(i));
             }else{
-                gO.update(dt);
+                gameObject.get(i).update(dt);
             }
         }
 
