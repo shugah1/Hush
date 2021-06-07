@@ -16,6 +16,12 @@ public class B2WorldCreator {
     public B2WorldCreator(Main world, TiledMap map, Settings game) {
         this.main = world;
 
+
+        for (MapObject object : map.getLayers().get("Player").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            main.player = new Player(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM, game);
+        }
         //Creates Walls
         for (MapObject object : map.getLayers().get("Wall").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -28,6 +34,11 @@ public class B2WorldCreator {
 
             new Rock((int) (rect.getX() + rect.getWidth() / 2), (int) (rect.getY() + rect.getHeight() / 2), rect.getWidth() / 2f, rect.getHeight() / 2f, world);
         }
+        for (MapObject object : map.getLayers().get("Lock").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            new KeyHole((int) (rect.getX() + rect.getWidth() / 2), (int) (rect.getY() + rect.getHeight() / 2), rect.getWidth() / 2f, rect.getHeight() / 2f, world);
+        }
         for (MapObject object : map.getLayers().get("Snow").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
@@ -38,12 +49,6 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new DamageWall((int) (rect.getX() + rect.getWidth() / 2), (int) (rect.getY() + rect.getHeight() / 2), rect.getWidth() / 2f, rect.getHeight() / 2f, world);
-        }
-
-        for (MapObject object : map.getLayers().get("Player").getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            main.player = new Player(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM, game);
         }
 
         for (MapObject object : map.getLayers().get("SEnemy").getObjects().getByType(RectangleMapObject.class)) {
