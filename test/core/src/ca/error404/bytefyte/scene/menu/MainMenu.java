@@ -137,7 +137,6 @@ public class MainMenu extends MenuScene {
             Random rand = new Random();
             int i = rand.nextInt(100);
 
-
             //handles menu music
             if (Main.bill) {
                 game.music = game.newSong("menu weird");
