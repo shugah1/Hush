@@ -96,6 +96,7 @@ public abstract class Enemy extends GameObject {
 
     }
 
+
     public boolean calculateCollisionPoint(Player player){
         fromPoint = b2body.getPosition();
         toPoint = player.b2body.getPosition().cpy();

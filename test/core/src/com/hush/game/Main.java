@@ -11,7 +11,7 @@ import com.hush.game.Entities.Player;
 import com.hush.game.Objects.Rock;
 import com.hush.game.Screens.LevelSelect;
 import com.hush.game.Screens.LoseScreen;
-import com.hush.game.Screens.MainMenu;
+import com.hush.game.Screens.*;
 import com.hush.game.Screens.WinScreen;
 import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;

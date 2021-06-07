@@ -18,7 +18,7 @@ public class DynamicEnemy extends Enemy{
     private boolean closeEnough = true;
     private float countMax = 4;
     private float count = countMax;
-    final private float range = 8;
+    final private float range = 10;
     final private Random r;
     final private Animation<TextureRegion> EnemyUp;
     final private Animation<TextureRegion> EnemyDown;
@@ -26,7 +26,7 @@ public class DynamicEnemy extends Enemy{
     final private Animation<TextureRegion> EnemyRight;
     public Vector2 pos;
     public Vector2 goToPos;
-    public float speed = 0.0075f;
+    public float speed = 0.01f;
     private boolean canMove = true;
     TextureRegion Enemysprite;
 
@@ -45,6 +45,9 @@ public class DynamicEnemy extends Enemy{
         EnemyRight = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_right"), Animation.PlayMode.LOOP);
         Enemysprite = EnemyDown.getKeyFrame(0, true);
         setRegion(Enemysprite);
+
+
+
 
     }
 
