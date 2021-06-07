@@ -270,10 +270,10 @@ public class Player extends GameObject {
             SPEED = walkSpeed;
             recharing = !(stamina == maxStamina);
         }
-        if(walkSound){
+        if(running){
+            sound = Math.min(sound + 1f, maxSound);
+        }else if(walkSound){
             sound = Math.min(sound + 0.5f, maxSound);
-        }else if(runSound){
-            sound = Math.min(sound + 5f, maxSound);
         }else{
             sound = Math.max(sound - 0.5f, 0);
         }
