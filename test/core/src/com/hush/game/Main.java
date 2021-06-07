@@ -1,6 +1,5 @@
 package com.hush.game;
 
-import ca.error404.bytefyte.shaders.GrayscaleShader;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,7 +26,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import ca.error404.bytefyte.constants.Globals;
 import org.ini4j.Wini;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -55,9 +53,9 @@ public class Main implements Screen {
     Texture returnText;
     Sound sound;
     boolean paused = false;
-    float buttonWidth = Gdx.graphics.getWidth() / 5;
-    float buttonHeight = Gdx.graphics.getHeight() / 9;
-    float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
+    float buttonWidth = Gdx.graphics.getWidth() / 5f;
+    float buttonHeight = Gdx.graphics.getHeight() / 9f;
+    float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
     float pauseY = buttonHeight * 7;
     float resumeY = buttonHeight * 5;
     float restartY = buttonHeight * 3;
