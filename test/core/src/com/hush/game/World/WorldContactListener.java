@@ -1,12 +1,8 @@
 package com.hush.game.World;
 
 import com.badlogic.gdx.physics.box2d.*;
-import com.hush.game.Entities.Enemy;
-import com.hush.game.Entities.Player;
-import com.hush.game.Objects.DamageWall;
-import com.hush.game.Objects.Goal;
-import com.hush.game.Objects.Key;
-import com.hush.game.Objects.Rock;
+import com.hush.game.Entities.*;
+import com.hush.game.Objects.*;
 import com.hush.game.UI.Settings;
 
 public class WorldContactListener implements ContactListener {
@@ -96,19 +92,30 @@ public class WorldContactListener implements ContactListener {
         Fixture fixB = contact.getFixtureB();
 
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
-        DamageWall damageWall;
         Rock rock;
+        SnowRock snowRock;
         Player player;
+
         switch (cDef) {
             case Tags.PLAYER_BIT | Tags.WALL_BIT:
                 if (fixA.getFilterData().categoryBits == Tags.PLAYER_BIT) {
-                    rock = ((Rock) fixB.getUserData());
+                    rock= ((Rock) fixB.getUserData());
                     player = ((Player) fixA.getUserData());
                 } else {
                     rock = ((Rock) fixA.getUserData());
                     player = ((Player) fixB.getUserData());
                 }
                 rock.contact(player);
+                break;
+            case Tags.PLAYER_BIT | Tags.SWALL_BIT:
+                if (fixA.getFilterData().categoryBits == Tags.PLAYER_BIT) {
+                    snowRock= ((SnowRock) fixB.getUserData());
+                    player = ((Player) fixA.getUserData());
+                } else {
+                    snowRock = ((SnowRock) fixA.getUserData());
+                    player = ((Player) fixB.getUserData());
+                }
+                snowRock.contact(player);
                 break;
         }
     }

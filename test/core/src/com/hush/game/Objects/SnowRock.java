@@ -62,7 +62,7 @@ public class SnowRock extends GameObject {
         fdef.density = 300f;
         fdef.friction = 0f;
         b2body.setFixedRotation(true);
-        fdef.filter.categoryBits = Tags.WALL_BIT;
+        fdef.filter.categoryBits = Tags.SWALL_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT;
 
         fdef.shape = shape;

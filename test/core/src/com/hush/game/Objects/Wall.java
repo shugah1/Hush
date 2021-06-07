@@ -46,7 +46,7 @@ public class Wall {
         shape.setAsBox(this.w / Settings.PPM,this.h / Settings.PPM);
         fdef.friction = 0;
         fdef.filter.categoryBits = Tags.DEFAULT_BIT;
-        fdef.filter.maskBits = Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT;
+        fdef.filter.maskBits = Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT | Tags.SWALL_BIT;
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }

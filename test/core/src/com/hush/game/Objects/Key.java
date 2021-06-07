@@ -56,7 +56,7 @@ public class Key extends GameObject {
         shape.setAsBox(getRegionWidth() / Settings.PPM,getRegionHeight() / Settings.PPM);
         fdef.friction = 0;
         fdef.filter.categoryBits = Tags.KEY_BIT;
-        fdef.filter.maskBits = Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT;
+        fdef.filter.maskBits = Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT | Tags.SWALL_BIT;
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
 

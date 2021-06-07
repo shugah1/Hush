@@ -1,13 +1,8 @@
 package com.hush.game.Objects;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
@@ -37,7 +32,6 @@ public class Rock extends GameObject {
      * determines the sprite, position, and creates the b2body.
      */
     public Rock(int x, int y, float w, float h, Main screen) {
-        super();
         this.world = Main.world;
         this.x = x;
         this.y = y;
@@ -63,7 +57,7 @@ public class Rock extends GameObject {
         fdef.friction = 0f;
         b2body.setFixedRotation(true);
         fdef.filter.categoryBits = Tags.WALL_BIT;
-        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT | Tags.SWALL_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
