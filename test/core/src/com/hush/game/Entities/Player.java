@@ -2,15 +2,20 @@ package com.hush.game.Entities;
 
 import ca.error404.bytefyte.constants.Globals;
 import ca.error404.bytefyte.constants.ScreenSizes;
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 import com.hush.game.Main;
@@ -18,11 +23,12 @@ import com.hush.game.World.Tags;
 import com.hush.game.states.PlayerState;
 import org.ini4j.Wini;
 
-import java.io.File;
-import java.io.IOException;
-
 import static com.hush.game.UI.HUD.invisInv;
 import static com.hush.game.UI.HUD.armourInv;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 
 public class Player extends GameObject {
     //Initializing and defining Variables
@@ -36,7 +42,7 @@ public class Player extends GameObject {
     private float invisDuration = 3;
     private float invisTimer = invisDuration;
     public boolean armored = false;
-    private float armoredDuration = 4;
+    private float armoredDuration = 3;
     private float armoredTimer = armoredDuration;
 
     private Animation<TextureRegion> walkUp;
@@ -45,6 +51,8 @@ public class Player extends GameObject {
     private Animation<TextureRegion> walkRight;
     private Animation<TextureRegion> item;
     private Animation<TextureRegion> dead;
+    private Animation<TextureRegion> Shield;
+    private TextureRegion FX;
 
     public StateMachine state;
     public float elapsedTime = 0;
@@ -90,6 +98,7 @@ public class Player extends GameObject {
 
         dead = new Animation<TextureRegion>(1f/5f, textureAtlas.findRegions("dead"), Animation.PlayMode.LOOP);
         item = new Animation<TextureRegion>(1f/5f, textureAtlas.findRegions("item"), Animation.PlayMode.LOOP);
+        Shield = new Animation<TextureRegion>(1f/5f, textureAtlas.findRegions("Shield"), Animation.PlayMode.LOOP);
 
         sprite = walkDown.getKeyFrame(0, true);
         setRegion(sprite);
@@ -248,6 +257,7 @@ public class Player extends GameObject {
         }
         if(armored && armoredTimer > 0){
             armoredTimer = Math.max(0, armoredTimer - deltaTime);
+            FX = Shield.getKeyFrame(elapsedTime);
 
         } else {
             armored = false;
@@ -285,15 +295,15 @@ public class Player extends GameObject {
     public void idle() {
         if (facing.x == 0) {
             if (facing.y <= 0) {
-                sprite = walkDown.getKeyFrame(elapsedTime, true);
+                sprite = walkDown.getKeyFrame(0, false);
             } else {
-                sprite = walkUp.getKeyFrame(elapsedTime, true);
+                sprite = walkUp.getKeyFrame(0, false);
             }
         } else {
             if (facing.x > 0) {
-                sprite = walkRight.getKeyFrame(elapsedTime, true);
+                sprite = walkRight.getKeyFrame(0, false);
             } else {
-                sprite = walkLeft.getKeyFrame(elapsedTime, true);
+                sprite = walkLeft.getKeyFrame(0, false);
             }
         }
         walkSound = false;
@@ -324,5 +334,13 @@ public class Player extends GameObject {
 
     public void deadAction() {
         sprite = dead.getKeyFrame(0, false);
+    }
+
+    @Override
+    public void draw(Batch batch){
+        super.draw(batch);
+        if(armored && armoredTimer > 0){
+            batch.draw(FX, b2body.getPosition().x - FX.getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - FX.getRegionHeight() / Settings.PPM / 2f, FX.getRegionWidth() / Settings.PPM, FX.getRegionHeight() / Settings.PPM);
+        }
     }
 }

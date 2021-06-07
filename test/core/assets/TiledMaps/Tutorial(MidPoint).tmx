@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="80" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="68">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="80" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="66">
  <tileset firstgid="1" source="../Tilesets/TilesetFloor.tsx"/>
  <tileset firstgid="573" source="TilesetHole.tsx"/>
  <tileset firstgid="628" source="TilesetHouse.tsx"/>
@@ -136,6 +136,9 @@
 432,434,432,432,433,432,434,430,431,434,432,432,431,432,432,430,433,431,433,434,434,432,430,434,430,434,434,432,432,432,430,434,433,430,431,433,433,433,432,432,430,431,431,432,431,433,433,430,433,431,431,431,432,433,430,432,434,431,431,432,432,430,433,430,432,432,434,433,430,431,432,431,431,431,434,430,432,430,432,433
 </data>
  </layer>
+ <objectgroup id="14" name="VEnemy">
+  <object id="64" x="900" y="1436" width="32" height="40"/>
+ </objectgroup>
  <layer id="2" name="Rocks" width="80" height="128">
   <data encoding="csv">
 585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,585,
@@ -271,6 +274,12 @@
  <objectgroup id="10" name="DEnemy">
   <object id="61" x="424" y="1416" width="40" height="36"/>
  </objectgroup>
+ <objectgroup id="12" name="Key">
+  <object id="62" x="616" y="1552" width="36" height="32"/>
+ </objectgroup>
+ <objectgroup id="13" name="HEnemy">
+  <object id="63" x="616" y="1492" width="48" height="28"/>
+ </objectgroup>
  <objectgroup id="5" name="DWall">
   <object id="14" x="768" y="1344" width="96" height="48"/>
   <object id="15" x="864" y="1248" width="96" height="48"/>
@@ -280,13 +289,11 @@
   <object id="20" x="816" y="688" width="96" height="64"/>
   <object id="47" x="336" y="1472" width="16" height="16"/>
  </objectgroup>
+ <objectgroup id="13" name="Snow"/>
  <objectgroup id="6" name="Rock">
   <object id="48" x="544" y="688" width="32" height="32"/>
   <object id="49" x="544" y="1040" width="32" height="32"/>
   <object id="50" x="368" y="1344" width="32" height="32"/>
- </objectgroup>
- <objectgroup id="14" name="Snow">
-  <object id="67" x="1240" y="20" width="32" height="36"/>
  </objectgroup>
  <objectgroup id="7" name="Player">
   <object id="51" x="624" y="1696" width="32" height="32"/>
@@ -303,9 +310,6 @@
  </objectgroup>
  <objectgroup id="12" name="VEnemy">
   <object id="65" x="896" y="1328" width="32" height="32"/>
- </objectgroup>
- <objectgroup id="13" name="Key">
-  <object id="66" x="642" y="1474" width="31" height="29"/>
  </objectgroup>
  <objectgroup id="4" name="Wall">
   <object id="1" x="480" y="1104" width="288" height="320"/>

@@ -44,7 +44,6 @@ public class Goal {
     }
 
     public void contact(Player player) {
-        //Once a player come in contact with the goal they win
         player.win = true;
 
     }
