@@ -18,13 +18,13 @@ public class TiledGameMap {
     //public static World world;
     public static Box2DDebugRenderer b2dr;
 
-    public TiledGameMap(String map, Main main) {
+    public TiledGameMap(String map, Main main, Settings game) {
         this.main = main;
         tiledMap = new TmxMapLoader().load(map);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,1/ Settings.PPM);
 
         b2dr = new Box2DDebugRenderer();
-        creator = new B2WorldCreator(main, tiledMap);
+        creator = new B2WorldCreator(main, tiledMap, game);
     }
 
     public void render(OrthographicCamera camera) {

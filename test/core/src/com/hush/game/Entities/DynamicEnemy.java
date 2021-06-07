@@ -26,7 +26,7 @@ public class DynamicEnemy extends Enemy{
     final private Animation<TextureRegion> EnemyRight;
     public Vector2 pos;
     public Vector2 goToPos;
-    public float speed = 0.0075f;
+    public float speed = 0.01f;
     private boolean canMove = true;
     TextureRegion Enemysprite;
 
@@ -45,6 +45,9 @@ public class DynamicEnemy extends Enemy{
         EnemyRight = new Animation<TextureRegion>(1f/5f, ta.findRegions("enemy_right"), Animation.PlayMode.LOOP);
         Enemysprite = EnemyDown.getKeyFrame(0, true);
         setRegion(Enemysprite);
+
+
+
 
     }
 

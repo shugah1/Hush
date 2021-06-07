@@ -1,5 +1,6 @@
 package com.hush.game.Screens;
 
+import ca.error404.bytefyte.constants.Globals;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Sound;
@@ -9,6 +10,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.hush.game.Screens.MainMenu;
 import com.hush.game.UI.Settings;
+import org.ini4j.Wini;
+
+import java.io.File;
+import java.io.IOException;
 
 public class SplashScreen extends ScreenAdapter {
     Settings game;
@@ -37,7 +42,6 @@ public class SplashScreen extends ScreenAdapter {
 
     public SplashScreen(Settings game) {
         this.game = game;
-
         titleText = new Texture("Text/titleText.png");
         splashText = new Texture("Text/splashText.png");
         namesText = new Texture("Text/namesText.png");
@@ -45,6 +49,7 @@ public class SplashScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
         Settings.music = game.newSong("TitleTheme");
+        Settings.music.setVolume(Settings.musicVolume / 10f);
         Settings.music.play();
     }
 
@@ -66,6 +71,37 @@ public class SplashScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        // Set game.music volume
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            Settings.musicVolume = Settings.musicVolume < 10 ? Settings.musicVolume + 1 : 10;
+
+            // Writes data to the settings file
+            File settings = new File(Globals.workingDirectory + "settings.ini");
+            game.music.setVolume(Settings.musicVolume / 10f);
+
+            try {
+                Wini ini = new Wini(settings);
+                ini.add("Settings", "music volume", Settings.musicVolume);
+                ini.store();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+            Settings.musicVolume = Settings.musicVolume > 0 ? Settings.musicVolume - 1 : 0;
+            game.music.setVolume(Settings.musicVolume / 10f);
+
+            // Writes data to the settings file
+            File settings = new File(Globals.workingDirectory + "settings.ini");
+
+            try {
+                Wini ini = new Wini(settings);
+                ini.add("Settings", "music volume", Settings.musicVolume);
+                ini.store();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

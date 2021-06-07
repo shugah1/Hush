@@ -1,22 +1,17 @@
 package com.hush.game.UI;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.Main;
 
@@ -39,11 +34,9 @@ public class HUD  {
     SpriteBatch batch = new SpriteBatch();
 
     Label countdownLabel;
-    Label scoreLabel;
     Label timeLabel;
     Label levelLabel;
     Label worldLabel;
-    Label hushLabel;
     private static Label stunLabel;
     private static Label invisLabel;
 

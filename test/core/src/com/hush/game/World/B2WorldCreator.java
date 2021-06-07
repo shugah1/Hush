@@ -14,7 +14,7 @@ public class B2WorldCreator {
 
     private Main main;
 
-    public B2WorldCreator(Main world, TiledMap map) {
+    public B2WorldCreator(Main world, TiledMap map, Settings game) {
         this.main = world;
 
         //Generates all structures, enemies and the player
@@ -39,7 +39,7 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get("Player").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            main.player = new Player(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM);
+            main.player = new Player(main.world, world, rect.getX()/Settings.PPM, rect.getY()/Settings.PPM, game);
         }
 
         for (MapObject object : map.getLayers().get("SEnemy").getObjects().getByType(RectangleMapObject.class)) {
