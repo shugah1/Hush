@@ -815,7 +815,7 @@
   <object id="424" x="1104" y="1104" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="9" name="Goal"/>
- <objectgroup id="5" name="DWall">
+ <objectgroup id="5" name="Rock">
   <object id="95" x="-100" y="1972" width="32" height="100"/>
   <object id="242" x="1520" y="1536" width="64" height="32"/>
   <object id="243" x="1568" y="1616" width="64" height="32"/>
