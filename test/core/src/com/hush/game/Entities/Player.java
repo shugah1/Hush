@@ -156,7 +156,7 @@ public class Player extends GameObject {
 
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            if (!armored && armourInv != 0){
+            if (!armored && stunInv != 0){
                 HUD.stunCounter();
                 armored = true;
             }
