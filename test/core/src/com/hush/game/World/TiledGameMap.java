@@ -3,7 +3,6 @@ package com.hush.game.World;
 import ca.error404.bytefyte.shaders.GrayscaleShader;
 import com.hush.game.UI.Settings;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.*;

@@ -37,7 +37,7 @@ public class HUD  {
     Label timeLabel;
     Label levelLabel;
     Label worldLabel;
-    private static Label stunLabel;
+    private static Label armourLabel;
     private static Label invisLabel;
 
     public HUD (Main game){
@@ -60,7 +60,7 @@ public class HUD  {
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        stunLabel = new Label(String.format("%01d", armourInv), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        armourLabel = new Label(String.format("%01d", armourInv), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         invisLabel = new Label(String.format("%01d", invisInv), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //Adds labels to table
@@ -70,7 +70,7 @@ public class HUD  {
         table.row();
         table.add(levelLabel).expandX();
         table.add(countdownLabel).expandX();
-        table.add(stunLabel).expandX();
+        table.add(armourLabel).expandX();
         stage.addActor(table);
     }
 
@@ -87,7 +87,7 @@ public class HUD  {
         //Reduces the armour counter by 1
         if (armourInv > 0){
             armourInv -= 1;
-            stunLabel.setText(String.format("%01d", armourInv));
+            armourLabel.setText(String.format("%01d", armourInv));
         }
     }
     public static void invisCounter() {
@@ -109,7 +109,7 @@ public class HUD  {
         batch.draw(SoundCrop, 10, 70, SoundCrop.getRegionWidth() * 10, SoundCrop.getRegionHeight() * 10);
 
         //Draws the icons for the armour and invisibility
-        batch.draw(armourImage, stunLabel.getX() * 2.5f, stunLabel.getY() * 2.66f, 40, 40);
+        batch.draw(armourImage, armourLabel.getX() * 2.5f, armourLabel.getY() * 2.66f, 40, 40);
         batch.draw(invisImage, invisLabel.getX() * 2.5f, invisLabel.getY() * 2.66f, 40, 40);
         batch.end();
     }

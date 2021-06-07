@@ -175,6 +175,8 @@ public class Player extends GameObject {
 
         if (!recharing && !moveVector.isZero()) {
             running = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
+            walkSound =false;
+            runSound = true;
         }
     }
 
@@ -218,6 +220,7 @@ public class Player extends GameObject {
                 }
             }
 
+            Main.gameObject.clear();
             // Sets screen size
             if (ScreenSizes.fullScreen) {
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
@@ -303,6 +306,8 @@ public class Player extends GameObject {
                 sprite = walkLeft.getKeyFrame(0, false);
             }
         }
+        walkSound = false;
+        runSound = false;
     }
 
     public void walk() {
@@ -318,6 +323,8 @@ public class Player extends GameObject {
             sprite = walkRight.getKeyFrame(elapsedTime, true);
         }
         facing = moveVector.cpy();
+        walkSound = true;
+        runSound = false;
     }
 
     public void die() {

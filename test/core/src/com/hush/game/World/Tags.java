@@ -15,4 +15,5 @@ public class Tags {
     public static final int GOAL_BIT = 256;
     public static final int KEY_BIT = 512;
     public static final int SWALL_BIT = 1024;
+
 }

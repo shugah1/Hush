@@ -1,6 +1,5 @@
 package com.hush.game;
 
-import ca.error404.bytefyte.shaders.GrayscaleShader;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,7 +26,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import ca.error404.bytefyte.constants.Globals;
 import org.ini4j.Wini;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -39,7 +37,6 @@ public class Main implements Screen {
     private Viewport gamePort;
     private Settings game;
     private Box2DDebugRenderer b2dr;
-    private TextureAtlas atlas;
     private HUD hud;
     public Rock rock;
     public static ArrayList<GameObject> gameObject = new ArrayList<>();
@@ -56,9 +53,9 @@ public class Main implements Screen {
     Texture returnText;
     Sound sound;
     boolean paused = false;
-    float buttonWidth = Gdx.graphics.getWidth() / 5;
-    float buttonHeight = Gdx.graphics.getHeight() / 9;
-    float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
+    float buttonWidth = Gdx.graphics.getWidth() / 5f;
+    float buttonHeight = Gdx.graphics.getHeight() / 9f;
+    float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
     float pauseY = buttonHeight * 7;
     float resumeY = buttonHeight * 5;
     float restartY = buttonHeight * 3;
@@ -92,7 +89,7 @@ public class Main implements Screen {
         if (!Settings.songName.equalsIgnoreCase(LevelSelect.mapSelect) ) {
             Settings.music = game.newSong(LevelSelect.mapSelect);
 
-          if (Settings.music == null) { Settings.music = game.newSong("menu weird"); }
+            if (Settings.music == null) { Settings.music = game.newSong("menu weird"); }
         }
         Settings.music.play();
         game.music.setVolume(Settings.musicVolume / 10f);
@@ -129,15 +126,15 @@ public class Main implements Screen {
             game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
         }
 
-        for(GameObject gO : gameObject ){
-            if (gO.remove){
+        for( int i = 0; i < gameObject.size(); i++){
+            if (gameObject.get(i).remove){
                 try{
-                    world.destroyBody(gO.b2body);
+                    world.destroyBody(gameObject.get(i).b2body);
                 }catch (Exception e){
                 }
-                gameObjectBye.add(gO);
+                gameObjectBye.add(gameObject.get(i));
             }else{
-                gO.update(dt);
+                gameObject.get(i).update(dt);
             }
         }
 
