@@ -6,7 +6,7 @@ import com.hush.game.Entities.Player;
 import com.hush.game.Objects.DamageWall;
 import com.hush.game.Objects.Goal;
 import com.hush.game.Objects.Key;
-import com.hush.game.Objects.MovingWall;
+import com.hush.game.Objects.Rock;
 import com.hush.game.UI.Settings;
 
 public class WorldContactListener implements ContactListener {
@@ -23,7 +23,7 @@ public class WorldContactListener implements ContactListener {
 
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         DamageWall damageWall;
-        MovingWall movingWall;
+        Rock rock;
         Goal goal;
         Enemy enemy;
         Player player;
@@ -97,18 +97,18 @@ public class WorldContactListener implements ContactListener {
 
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
         DamageWall damageWall;
-        MovingWall movingWall;
+        Rock rock;
         Player player;
         switch (cDef) {
             case Tags.PLAYER_BIT | Tags.WALL_BIT:
                 if (fixA.getFilterData().categoryBits == Tags.PLAYER_BIT) {
-                    movingWall = ((MovingWall) fixB.getUserData());
+                    rock = ((Rock) fixB.getUserData());
                     player = ((Player) fixA.getUserData());
                 } else {
-                    movingWall = ((MovingWall) fixA.getUserData());
+                    rock = ((Rock) fixA.getUserData());
                     player = ((Player) fixB.getUserData());
                 }
-                movingWall.contact(player);
+                rock.contact(player);
                 break;
         }
     }

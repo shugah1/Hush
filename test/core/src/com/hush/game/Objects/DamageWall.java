@@ -6,8 +6,10 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
+/**
+ * similar to Wall class, but on contact kills the player.
+ */
 public class DamageWall {
-    Settings game;
 
     //declaring and initializing variables
     public World world;
@@ -18,6 +20,15 @@ public class DamageWall {
     public Fixture fix;
     public Body b2body;
 
+    /**
+     * constructor for the DamageWall
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param screen
+     * determines the sprite, position, and creates the b2body.
+     */
     public DamageWall(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
         this.x = x;
@@ -25,7 +36,7 @@ public class DamageWall {
         this.w = w;
         this.h = h;
 
-        //Defining the damage wall body
+        //creates the b2body and collision masks
         BodyDef bdef = new BodyDef();
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
         bdef.type = BodyDef.BodyType.StaticBody;
@@ -43,8 +54,11 @@ public class DamageWall {
         b2body.createFixture(fdef).setUserData(this);
     }
 
+    /**
+     * On contact with the player, the player will die.
+     * @param player
+     */
     public void contact(Player player) {
-        //Once a player come in contact with a damage wall they die
         player.pDead = true;
         player.die();
     }

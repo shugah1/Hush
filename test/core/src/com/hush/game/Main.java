@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
-import com.hush.game.Objects.MovingWall;
+import com.hush.game.Objects.Rock;
 import com.hush.game.Screens.LevelSelect;
 import com.hush.game.Screens.LoseScreen;
 import com.hush.game.Screens.*;
@@ -28,7 +28,6 @@ import ca.error404.bytefyte.constants.Globals;
 import org.ini4j.Wini;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class Main implements Screen {
@@ -41,7 +40,7 @@ public class Main implements Screen {
     private Box2DDebugRenderer b2dr;
     private TextureAtlas atlas;
     private HUD hud;
-    public MovingWall movingWall;
+    public Rock rock;
     public static ArrayList<GameObject> gameObject = new ArrayList<>();
     public static ArrayList<GameObject> gameObjectAdd = new ArrayList<>();
     public static ArrayList<GameObject> gameObjectBye = new ArrayList<>();

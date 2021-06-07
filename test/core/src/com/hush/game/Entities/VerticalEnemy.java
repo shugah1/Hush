@@ -31,6 +31,7 @@ public class VerticalEnemy extends Enemy{
     public void update(float dt) {
 
         super.update(dt);
+        detecRadius = 20 + player.sound;
         walk();
 
         //Creates a timer than changes the direction of the enemy

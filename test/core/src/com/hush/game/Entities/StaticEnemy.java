@@ -26,7 +26,7 @@ public class StaticEnemy extends Enemy{
     @Override
     public void update(float dt) {
         super.update(dt);
-        elapsedTime += dt;
+        detecRadius = 20 + player.sound;
         setRegion(idle.getKeyFrame(elapsedTime,true));
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }
