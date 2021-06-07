@@ -17,6 +17,7 @@ import com.hush.game.Main;
 
 
 public class HUD  {
+    //Initializing and defining Variables
     public Stage stage;
     private Viewport viewport;
     public static Integer worldTimer;
@@ -40,6 +41,7 @@ public class HUD  {
     private static Label invisLabel;
 
     public HUD (Main game){
+        //Defining some Variables
         worldTimer = 0;
         timeCount = 0;
         stunInv = 3;
@@ -48,10 +50,12 @@ public class HUD  {
         viewport = new FitViewport(Settings.V_WIDTH, Settings.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport);
 
+        //Creates and sets parameters of table
         Table table = new Table();
         table.top();
         table.setFillParent(true);
 
+        //Creates labels
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -59,18 +63,19 @@ public class HUD  {
         stunLabel = new Label(String.format("%01d", stunInv), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         invisLabel = new Label(String.format("%01d", invisInv), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
+        //Adds labels to table
         table.add(worldLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
         table.add(invisLabel).expandX().padTop(10);
         table.row();
         table.add(levelLabel).expandX();
         table.add(countdownLabel).expandX();
-
         table.add(stunLabel).expandX();
-
         stage.addActor(table);
     }
+
     public void update(float dt){
+        //Counts the time and updates the time count label
         timeCount += dt;
         if (timeCount > 1){
             worldTimer ++;
@@ -79,6 +84,7 @@ public class HUD  {
         }
     }
     public static void stunCounter() {
+        //Reduces the armour counter by 1
         if (stunInv > 0){
             stunInv -= 1;
             stunLabel.setText(String.format("%01d", stunInv));
@@ -86,20 +92,24 @@ public class HUD  {
         }
     }
     public static void invisCounter() {
+        //Reduces the invisibility counter by 1
         if (invisInv > 0){
             invisInv -= 1;
             invisLabel.setText(String.format("%01d", invisInv));
         }
+
     }
     public void render(){
+        //Draws the stamina and sound bar
         batch.begin();
         TextureRegion StaminaRedCrop = new TextureRegion(StaminaRed, 0, 0, (int)((18 * (player.stamina / player.maxStamina))), 4);
         batch.draw(Stamina, 10, 20, Stamina.getWidth() * 10, Stamina.getHeight() * 10);
         batch.draw(StaminaRedCrop, 10, 20, StaminaRedCrop.getRegionWidth() * 10, StaminaRedCrop.getRegionHeight() * 10);
-
         TextureRegion SoundCrop = new TextureRegion(Sound, 0, 0, (int)((18 * (player.sound / player.maxSound))), 4);
         batch.draw(Stamina, 10, 70, Stamina.getWidth() * 10, Stamina.getHeight() * 10);
         batch.draw(SoundCrop, 10, 70, SoundCrop.getRegionWidth() * 10, SoundCrop.getRegionHeight() * 10);
+
+        //Draws the icons for the armour and invisibility
         batch.draw(stunImage, stunLabel.getX() * 2.5f, stunLabel.getY() * 2.66f, 40, 40);
         batch.draw(invisImage, invisLabel.getX() * 2.5f, invisLabel.getY() * 2.66f, 40, 40);
         batch.end();
