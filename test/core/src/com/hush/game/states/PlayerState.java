@@ -13,6 +13,7 @@ public enum PlayerState implements State<Player> {
         }
 
         public void update(Player player) {
+            player.elapsedTime += player.deltaTime;
             if (!player.moveVector.equals(new Vector2(0, 0))) {
                 if (!player.running) {
                     player.state.changeState(WALK);
