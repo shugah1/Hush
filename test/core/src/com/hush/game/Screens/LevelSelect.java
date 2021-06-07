@@ -82,7 +82,7 @@ public class LevelSelect extends ScreenAdapter {
                     if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
-                            mapSelect = "Tutorial(MidPoint)";
+                            mapSelect = "RealTutorial";
                             Settings.music.stop();
                             game.setScreen(new Main(game));
                         }
