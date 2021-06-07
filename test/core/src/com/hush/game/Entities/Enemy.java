@@ -81,7 +81,7 @@ public abstract class Enemy extends GameObject {
 
         fdef.density = 10000f;
         fdef.filter.categoryBits = Tags.ENEMY_BIT;
-        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT | Tags.PLAYER_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT | Tags.PLAYER_BIT | Tags.SWALL_BIT;
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
 
@@ -124,7 +124,6 @@ public abstract class Enemy extends GameObject {
 
     public void update(float dt) {
         elapsedTime += dt;
-
         resetCol();
 
     }

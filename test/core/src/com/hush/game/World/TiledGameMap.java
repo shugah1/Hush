@@ -1,5 +1,6 @@
 package com.hush.game.World;
 
+import ca.error404.bytefyte.shaders.GrayscaleShader;
 import com.hush.game.UI.Settings;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -27,9 +28,15 @@ public class TiledGameMap {
         creator = new B2WorldCreator(main, tiledMap, game);
     }
 
-    public void render(OrthographicCamera camera) {
+    public void render(OrthographicCamera camera, boolean grayscale) {
+        if (grayscale) { tiledMapRenderer.getBatch().setShader(GrayscaleShader.grayscaleShader); }
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
+        tiledMapRenderer.getBatch().setShader(null);
+    }
+
+    public void render(OrthographicCamera camera) {
+        render(camera, false);
     }
 
 

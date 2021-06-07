@@ -24,6 +24,7 @@ public class HorizontalEnemy extends Enemy{
         //Defines different sprites according to direction
         SpriteLeft = new Animation<TextureRegion>(1f/5f, ta.findRegions("HEnemyLeft"), Animation.PlayMode.LOOP);
         SpriteRight = new Animation<TextureRegion>(1f/5f, ta.findRegions("HEnemyRight"), Animation.PlayMode.LOOP);
+
         Horizontalsprite = SpriteRight.getKeyFrame(0, true);
         setRegion(Horizontalsprite);
 

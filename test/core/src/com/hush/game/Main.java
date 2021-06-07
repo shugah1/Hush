@@ -1,5 +1,6 @@
 package com.hush.game;
 
+import ca.error404.bytefyte.shaders.GrayscaleShader;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -259,7 +260,7 @@ public class Main implements Screen {
             Gdx.gl.glClearColor(0, 0, 0, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-            gameMap.render(cam);
+            gameMap.render(cam, player.invis);
 
             game.batch.begin();
             for (GameObject gO : gameObject) {

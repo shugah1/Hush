@@ -132,7 +132,7 @@ public class Player extends GameObject {
 
         fdef.filter.categoryBits = Tags.PLAYER_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.DAMAGE_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT
-                | Tags.WALL_BIT | Tags.SENSOR_BIT | Tags.GOAL_BIT | Tags.KEY_BIT;
+                | Tags.WALL_BIT | Tags.SENSOR_BIT | Tags.GOAL_BIT | Tags.KEY_BIT | Tags.SWALL_BIT;
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
