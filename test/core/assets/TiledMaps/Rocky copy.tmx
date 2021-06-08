@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="192">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="198">
  <tileset firstgid="1" source="TilesetFloor.tsx"/>
  <tileset firstgid="573" source="TilesetHouse.tsx"/>
  <tileset firstgid="1240" source="TilesetLogic.tsx"/>
@@ -109,7 +109,13 @@
 </data>
  </layer>
  <objectgroup id="14" name="Key">
-  <object id="191" x="820" y="1172" width="36" height="20"/>
+  <object id="191" x="767" y="1104" width="16.5" height="15.5"/>
+ </objectgroup>
+ <objectgroup id="17" name="Lock">
+  <object id="192" x="784" y="384" width="16" height="16"/>
+  <object id="193" x="800" y="384" width="16" height="16"/>
+  <object id="194" x="816" y="384" width="16" height="16"/>
+  <object id="195" x="832" y="384" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="6" name="Wall">
   <object id="33" x="704" y="1216" width="32" height="48"/>
@@ -459,12 +465,10 @@
  <objectgroup id="12" name="HEnemy">
   <object id="175" x="800" y="704" width="32" height="16"/>
   <object id="184" x="432" y="704" width="32" height="16"/>
+  <object id="196" x="544" y="416" width="16" height="16"/>
+  <object id="197" x="1040" y="384" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="10" name="DEnemy">
-  <object id="178" x="608" y="448" width="16" height="16"/>
-  <object id="179" x="1184.53" y="577.073" width="14.9338" height="30.927"/>
-  <object id="186" x="1136" y="368.909" width="15.5087" height="15.0907"/>
- </objectgroup>
+ <objectgroup id="10" name="DEnemy"/>
  <objectgroup id="8" name="Rock">
   <object id="158" x="688" y="576" width="32" height="32"/>
   <object id="159" x="736" y="528" width="32" height="32"/>

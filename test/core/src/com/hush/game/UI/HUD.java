@@ -45,8 +45,8 @@ public class HUD  {
         //Defining some Variables
         worldTimer = 0;
         timeCount = 0;
-        armourInv = 3;
-        invisInv = 3;
+        armourInv = 1;
+        invisInv = 1;
         player = game.player;
         viewport = new FitViewport(Settings.V_WIDTH, Settings.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport);

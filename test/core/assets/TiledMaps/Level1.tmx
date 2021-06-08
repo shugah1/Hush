@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="136" height="136" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="486">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="136" height="136" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="490">
  <tileset firstgid="1" source="TilesetFloor.tsx"/>
  <tileset firstgid="573" source="TilesetNature.tsx"/>
  <tileset firstgid="861" source="TilesetHouse.tsx"/>
@@ -815,6 +815,12 @@
   <object id="422" x="1248" y="656" width="32" height="27"/>
   <object id="423" x="1040" y="704" width="32" height="32"/>
   <object id="424" x="1104" y="1104" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="15" name="Lock">
+  <object id="486" x="368" y="976" width="16" height="16"/>
+  <object id="487" x="368" y="992" width="16" height="16"/>
+  <object id="488" x="368" y="1008" width="16" height="16"/>
+  <object id="489" x="368" y="1024" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="9" name="Goal">
   <object id="483" x="320" y="992" width="32" height="32"/>

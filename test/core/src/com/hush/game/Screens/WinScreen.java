@@ -1,5 +1,6 @@
 package com.hush.game.Screens;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -11,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.hush.game.Main;
-import com.hush.game.Screens.MainMenu;
+
 import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 import ca.error404.bytefyte.constants.Globals;
