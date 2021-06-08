@@ -133,7 +133,7 @@ public class LevelSelect extends ScreenAdapter {
                         if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
                             if (Gdx.input.isTouched()) {
                                 sound.play(0.25f);
-                                mapSelect = "";
+                                mapSelect = "Green copy";
                                 Settings.music.stop();
                                 game.setScreen(new Main(game));
                             }
