@@ -30,13 +30,14 @@ public class HUD  {
     Texture Stamina = new Texture("test/core/assets/HUD/LifeBarMiniUnder.png");
     Texture StaminaRed = new Texture("test/core/assets/HUD/LifeBarMiniProgress.png");
     Texture Sound = new Texture("test/core/assets/HUD/SoundBarMiniProgressCut.png");
+    Texture Key = new Texture("test/core/assets/HUD/Key.png");
 
     SpriteBatch batch = new SpriteBatch();
 
     Label countdownLabel;
     Label timeLabel;
-    Label levelLabel;
-    Label worldLabel;
+    Label keyLabel;
+    Label hushLabel;
     private static Label armourLabel;
     private static Label invisLabel;
 
@@ -58,17 +59,17 @@ public class HUD  {
         //Creates labels
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        keyLabel = new Label(" ", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        hushLabel = new Label("HUSH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         armourLabel = new Label(String.format("%01d", armourInv), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         invisLabel = new Label(String.format("%01d", invisInv), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //Adds labels to table
-        table.add(worldLabel).expandX().padTop(10);
+        table.add(hushLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
         table.add(invisLabel).expandX().padTop(10);
         table.row();
-        table.add(levelLabel).expandX();
+        table.add(keyLabel).expandX();
         table.add(countdownLabel).expandX();
         table.add(armourLabel).expandX();
         stage.addActor(table);
@@ -77,6 +78,7 @@ public class HUD  {
     public void update(float dt){
         //Counts the time and updates the time count label
         timeCount += dt;
+
         if (timeCount > 1){
             worldTimer ++;
             countdownLabel.setText(String.format("%03d", worldTimer));
@@ -111,6 +113,9 @@ public class HUD  {
         //Draws the icons for the armour and invisibility
         batch.draw(armourImage, armourLabel.getX() * 2.5f, armourLabel.getY() * 2.66f, 40, 40);
         batch.draw(invisImage, invisLabel.getX() * 2.5f, invisLabel.getY() * 2.66f, 40, 40);
+        if(player.hasKey){
+            batch.draw(Key, armourLabel.getX() * 0.53f, armourLabel.getY() * 2.66f, 40, 40);
+        }
         batch.end();
     }
 }
