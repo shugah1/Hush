@@ -206,6 +206,11 @@ public class LevelSelect extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        //Loops song
+        if (game.music.getPosition() >= game.songLoopEnd) {
+            game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
+        }
+
         // Set game.music volume
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             Settings.musicVolume = Settings.musicVolume < 10 ? Settings.musicVolume + 1 : 10;
