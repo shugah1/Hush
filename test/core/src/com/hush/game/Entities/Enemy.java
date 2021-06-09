@@ -55,7 +55,7 @@ public abstract class Enemy extends GameObject {
     }
     /**
      * Creates and defines the enemy b2body
-     * Shape of b2body
+     * Shape, density, which bits interact of b2body
      */
     public void defineEnemy(){
         //Enemy body
@@ -84,6 +84,9 @@ public abstract class Enemy extends GameObject {
         b2body.createFixture(fdef).setUserData(this);
 
     }
+    /**
+     * Updates the b2body so the game doesn't crash
+     */
     public void resetFixture() {
         for (Fixture fixture : b2body.getFixtureList()) {
             b2body.destroyFixture(fixture);
