@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.hush.game.Entities.Player;
 import com.hush.game.Main;
 import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
@@ -158,7 +157,6 @@ public class LoseScreen extends ScreenAdapter {
             font.draw(batch, hsMinutes + hsSeconds, buttonX + buttonWidth * 0.75f, buttonHeight * 3.5f + buttonHeight * 0.8f);
         }
         batch.end();
-
     }
 
     @Override
