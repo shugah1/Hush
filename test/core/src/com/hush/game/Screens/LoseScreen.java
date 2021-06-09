@@ -153,7 +153,7 @@ public class LoseScreen extends ScreenAdapter {
         batch.draw(returnText, buttonX, returnY, buttonWidth, buttonHeight);
         batch.draw(scoreText, buttonX - buttonWidth, scoreY, buttonWidth, buttonHeight);
         font.draw(batch, minutes + seconds, buttonX + buttonWidth * 0.75f, scoreY + buttonHeight * 0.8f);
-        if (Settings.highScore.get(LevelSelect.mapSelect) != 999) {
+        if (Settings.highScore.get(LevelSelect.mapSelect) != Integer.MAX_VALUE) {
             batch.draw(oldHighScoreText, buttonX - buttonWidth, buttonHeight * 3.5f, buttonWidth, buttonHeight);
             font.draw(batch, hsMinutes + hsSeconds, buttonX + buttonWidth * 0.75f, buttonHeight * 3.5f + buttonHeight * 0.8f);
         }
