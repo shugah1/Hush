@@ -12,7 +12,9 @@ import com.hush.game.UI.Settings;
 import com.hush.game.World.Tags;
 
 import java.util.Random;
-
+/**
+ * extends the parent enemy class and adds Dynamic Enemy characteristics.
+ */
 public class DynamicEnemy extends Enemy{
     //Initializing and defining Variables
     private boolean closeEnough = true;
@@ -30,6 +32,14 @@ public class DynamicEnemy extends Enemy{
     private boolean canMove = true;
     TextureRegion Enemysprite;
 
+    /**
+     * constructor for the Enemy parent class
+     * @param world
+     * @param screen
+     * @param x
+     * @param y
+     * determines the sprite, position, sensor and creates the b2body of enemy.
+     */
     public DynamicEnemy(World world, Main screen, float x, float y) {
         //Defining some Variables
         super(world, screen, x, y);
@@ -50,7 +60,11 @@ public class DynamicEnemy extends Enemy{
 
 
     }
-
+    /**
+     * Every frame the enemy region is being updated, and is getting a new position
+     * @param dt
+     * Increases sensor range and finds a new position
+     */
     @Override
     public void update(float dt) {
         super.update(dt);
@@ -78,6 +92,11 @@ public class DynamicEnemy extends Enemy{
         setRegion(Enemysprite);
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }
+    /**
+     * Checks if area is blocked or not by a wall
+     * @param toPoint
+     * returns true or false if wall is blocking or not
+     */
     public boolean findPos(Vector2 toPoint){
 
         RayCastCallback callback = new RayCastCallback() {
@@ -97,6 +116,9 @@ public class DynamicEnemy extends Enemy{
         System.out.println(canMove);
         return canMove;
     }
+    /**
+     * Updates the enemy sprite based on its movement
+     */
     public void walk() {
 
         //Checks the enemy's current and next position to find the direction it is going, then sets the sprite to the corresponding direction

@@ -9,6 +9,9 @@ import com.hush.game.UI.Settings;
 import com.hush.game.World.Tags;
 import javax.swing.text.html.HTML;
 
+/**
+ * parent class of all enemies.
+ */
 public abstract class Enemy extends GameObject {
     //Initializing and defining Variables
     protected World world;
@@ -25,6 +28,14 @@ public abstract class Enemy extends GameObject {
     protected float elapsedTime = 0f;
     public float detecRadius;
 
+    /**
+     * constructor for the Enemy parent class
+     * @param world
+     * @param screen
+     * @param x
+     * @param y
+     * determines the sprite, position, sensor and creates the b2body of enemy.
+     */
     public Enemy(World world, Main screen, float x, float y){
         //Defining some Variables
         this.world = world;
@@ -42,10 +53,12 @@ public abstract class Enemy extends GameObject {
 
 
     }
-
+    /**
+     * Creates and defines the enemy b2body
+     * Shape of b2body
+     */
     public void defineEnemy(){
         //Enemy body
-
         BodyDef bdef = new BodyDef();
         bdef.position.set(x, y);
         bdef.type = BodyDef.BodyType.DynamicBody;

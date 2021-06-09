@@ -6,7 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.hush.game.Main;
 import com.hush.game.UI.Settings;
-
+/**
+ * extends the parent enemy class and adds Vertical Enemy characteristics.
+ */
 public class VerticalEnemy extends Enemy{
     //Initializing and defining Variables
     private float speed = 1f;
@@ -18,6 +20,14 @@ public class VerticalEnemy extends Enemy{
     final private Animation<TextureRegion> SpriteDown;
     TextureRegion Verticalsprite;
 
+    /**
+     * constructor for the Enemy parent class
+     * @param world
+     * @param screen
+     * @param x
+     * @param y
+     * determines the sprite, position, sensor and creates the b2body of enemy.
+     */
     public VerticalEnemy(World world, Main screen, float x, float y) {
         super(world, screen, x, y);
 

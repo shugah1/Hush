@@ -7,6 +7,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.hush.game.Main;
 import com.hush.game.UI.Settings;
 
+/**
+ * extends the parent enemy class and adds Horizontal Enemy characteristics.
+ */
 public class HorizontalEnemy extends Enemy{
     //Initializing and defining Variables
     private float speed = 1f;
@@ -18,6 +21,14 @@ public class HorizontalEnemy extends Enemy{
     final private Animation<TextureRegion> SpriteRight;
     TextureRegion Horizontalsprite;
 
+    /**
+     * constructor for the Enemy parent class
+     * @param world
+     * @param screen
+     * @param x
+     * @param y
+     * determines the sprite, position, sensor and creates the b2body of enemy.
+     */
     public HorizontalEnemy(World world, Main screen, float x, float y) {
         super(world, screen, x, y);
 
