@@ -26,12 +26,12 @@ public class HUD  {
     public static Integer armourInv;
     public static Integer invisInv;
     private Player player;
-    Texture armourImage = new Texture("test/core/assets/HUD/Shield.png");
-    Texture invisImage = new Texture("test/core/assets/HUD/invisibility-hush.png");
-    Texture Stamina = new Texture("test/core/assets/HUD/LifeBarMiniUnder.png");
-    Texture StaminaRed = new Texture("test/core/assets/HUD/LifeBarMiniProgress.png");
-    Texture Sound = new Texture("test/core/assets/HUD/SoundBarMiniProgressCut.png");
-    Texture Key = new Texture("test/core/assets/HUD/Key.png");
+    Texture armourImage = new Texture("HUD/Shield.png");
+    Texture invisImage = new Texture("HUD/invisibility-hush.png");
+    Texture Stamina = new Texture("HUD/LifeBarMiniUnder.png");
+    Texture StaminaRed = new Texture("HUD/LifeBarMiniProgress.png");
+    Texture Sound = new Texture("HUD/SoundBarMiniProgressCut.png");
+    Texture Key = new Texture("HUD/Key.png");
 
     SpriteBatch batch = new SpriteBatch();
 

@@ -82,13 +82,13 @@ public class Main implements Screen {
      */
     public Main(Settings game) {
         //loads atlas
-        Settings.manager.load("sprites/player.atlas", TextureAtlas.class);
+        Settings.manager.load("Sprites/player.atlas", TextureAtlas.class);
         Settings.manager.finishLoading();
         this.game = game;
         //creates camera and world
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
-        gameMap = new TiledGameMap("test/core/assets/TiledMaps/" + LevelSelect.mapSelect + ".tmx", this, game);
+        gameMap = new TiledGameMap("TiledMaps/" + LevelSelect.mapSelect + ".tmx", this, game);
 
         // loads save data and assigns variables
         File settings = new File(Globals.workingDirectory + "settings.ini");
@@ -125,7 +125,7 @@ public class Main implements Screen {
         restartText = new Texture("Text/restartText.png");
         helpText = new Texture("Text/helpText.png");
         returnText = new Texture("Text/returnText.png");
-        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("SoundEffects/Menu1.wav"));
 
         notificationText1 = new Texture("Text/notificationText1.png");
         notificationText2 = new Texture("Text/notificationText2.png");

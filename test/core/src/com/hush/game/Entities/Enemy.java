@@ -43,7 +43,7 @@ public abstract class Enemy extends GameObject {
         this.player = screen.player;
         this.x = x;
         this.y = y;
-        ta = Settings.manager.get("sprites/enemies.atlas");
+        ta = Settings.manager.get("Sprites/enemies.atlas");
         ring = new Animation<TextureRegion>(1/5f, ta.findRegions("detec_circle"), Animation.PlayMode.LOOP);
         detecRadius = 40 + player.sound;
 

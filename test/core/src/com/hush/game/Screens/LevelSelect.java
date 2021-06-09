@@ -57,10 +57,10 @@ public class LevelSelect extends ScreenAdapter {
         this.game = game;
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
-        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("SoundEffects/Menu1.wav"));
 
         // Text Variables
-        testBackground = new Texture(("test/core/assets/bg.png"));
+        testBackground = new Texture(("main.png"));
         selectText = new Texture("Text/selectText.png");
         tutorialText = new Texture("Text/tutorialText.png");
         level1Text = new Texture("Text/level1Text.png");

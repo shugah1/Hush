@@ -42,7 +42,6 @@ public class DynamicEnemy extends Enemy{
         //Defining some Variables
         super(world, screen, x, y);
         r = new Random();
-        ta = Settings.manager.get("sprites/enemies.atlas");
         pos = new Vector2(x, y);
         goToPos = pos;
 

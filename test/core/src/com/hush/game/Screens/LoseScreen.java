@@ -56,10 +56,10 @@ public class LoseScreen extends ScreenAdapter {
         this.game = game;
         batch = new SpriteBatch();
         font = new BitmapFont();
-        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("SoundEffects/Menu1.wav"));
 
         // Text Variables
-        testBackground = new Texture(("test/core/assets/another.png"));
+        testBackground = new Texture(("another.png"));
         endText = new Texture("Text/loseText.png");
         scoreText = new Texture(("Text/scoreText.png"));
         oldHighScoreText = new Texture("Text/oldHighScoreText.png");

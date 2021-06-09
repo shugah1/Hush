@@ -87,7 +87,7 @@ public class Player extends GameObject {
         state = new DefaultStateMachine<>(this, PlayerState.IDLE);
 
         //animation states
-        TextureAtlas textureAtlas = Settings.manager.get("sprites/player.atlas", TextureAtlas.class);
+        TextureAtlas textureAtlas = Settings.manager.get("Sprites/player.atlas", TextureAtlas.class);
 
         walkDown = new Animation<TextureRegion>(1f/5f, textureAtlas.findRegions("walk_down"), Animation.PlayMode.LOOP);
         walkUp = new Animation<TextureRegion>(1f/5f, textureAtlas.findRegions("walk_up"), Animation.PlayMode.LOOP);

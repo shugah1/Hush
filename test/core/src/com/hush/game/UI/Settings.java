@@ -55,7 +55,7 @@ public class Settings extends Game {
 		batch = new SpriteBatch();
 		highScore = new Hashtable<>();
 		reloadControllers();
-		manager.load("sprites/enemies.atlas", TextureAtlas.class);
+		manager.load("Sprites/enemies.atlas", TextureAtlas.class);
 		manager.finishLoading();
 		setScreen(new SplashScreen(this));
 	}

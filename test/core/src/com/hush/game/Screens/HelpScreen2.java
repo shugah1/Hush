@@ -52,10 +52,10 @@ public class HelpScreen2 extends ScreenAdapter {
         this.game = game;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("SoundEffects/Menu1.wav"));
 
         // Text Variables
-        testBackground = new Texture(("test/core/assets/bg.png"));
+        testBackground = new Texture(("bg.png"));
         titleText = new Texture("Text/titleText.png");
         invisHelp = new Texture("Text/invisHelp.png");
         armourHelp = new Texture("Text/armourHelp.png");

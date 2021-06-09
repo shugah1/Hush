@@ -46,13 +46,13 @@ public class SplashScreen extends ScreenAdapter {
     public SplashScreen(Settings game) {
         // Assigns variables
         this.game = game;
-        testBackground = new Texture(("test/core/assets/TitleTheme.png"));
+        testBackground = new Texture(("TitleTheme.png"));
         titleText = new Texture("Text/titleText.png");
         splashText = new Texture("Text/splashText.png");
         namesText = new Texture("Text/namesText.png");
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
-        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("SoundEffects/Menu1.wav"));
         Settings.music = game.newSong("TitleTheme");
         Settings.music.setVolume(Settings.musicVolume / 10f);
         Settings.music.play();
