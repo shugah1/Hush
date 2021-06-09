@@ -43,7 +43,7 @@ public abstract class Enemy extends GameObject {
         this.player = screen.player;
         this.x = x;
         this.y = y;
-        ta = new TextureAtlas("Sprites/enemies.atlas");
+        ta = Settings.manager.get("sprites/enemies.atlas");
         ring = new Animation<TextureRegion>(1/5f, ta.findRegions("detec_circle"), Animation.PlayMode.LOOP);
         detecRadius = 40 + player.sound;
 
@@ -56,7 +56,7 @@ public abstract class Enemy extends GameObject {
     /*Pre: N/A
       Post:
      * Creates and defines the enemy b2body
-     * Shape of b2body
+     * Shape, density, which bits interact of b2body
      */
     public void defineEnemy(){
         //Enemy body
@@ -171,9 +171,11 @@ public abstract class Enemy extends GameObject {
     @Override
     public void draw(Batch batch) {
         super.draw(batch);
+    }
+
+    public void drawRing(Batch batch) {
         TextureRegion image = ring.getKeyFrame(elapsedTime);
         batch.draw(image, b2body.getPosition().x - image.getRegionWidth() * (detecRadius * 2 / 28) / Settings.PPM / 2f, b2body.getPosition().y - image.getRegionHeight() * (detecRadius * 2 / 28) / Settings.PPM / 2f, image.getRegionWidth() * (detecRadius * 2 / 28) / Settings.PPM, image.getRegionHeight() * (detecRadius * 2 / 28) / Settings.PPM);
 
     }
-
 }

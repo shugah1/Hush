@@ -8,6 +8,7 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.hush.game.Main;
 import com.hush.game.Screens.SplashScreen;
@@ -53,6 +54,8 @@ public class Settings extends Game {
 		batch = new SpriteBatch();
 		highScore = new Hashtable<>();
 		reloadControllers();
+		manager.load("sprites/enemies.atlas", TextureAtlas.class);
+		manager.finishLoading();
 		setScreen(new SplashScreen(this));
 	}
 
