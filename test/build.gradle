@@ -73,6 +73,7 @@ project(":core") {
         api "com.rafaskoberg.gdx:typing-label:$typingLabelVersion"
 
         implementation "com.badlogicgames.gdx-video:gdx-video:$gdxVideoVersion"
+        api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         implementation "org.ini4j:ini4j:0.5.4"
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"

@@ -6,7 +6,9 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
-
+/**
+ * Goal to reach to beat the level.
+ */
 public class Goal {
     //declaring and initializing variables
     public World world;
@@ -25,7 +27,7 @@ public class Goal {
         this.w = w;
         this.h = h;
 
-
+        //creates b2body and collision masks
         BodyDef bdef = new BodyDef();
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
         bdef.type = BodyDef.BodyType.StaticBody;
@@ -37,15 +39,19 @@ public class Goal {
         fdef.friction = 0;
 
         fdef.filter.categoryBits = Tags.GOAL_BIT;
-        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT;
+        fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT | Tags.SWALL_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
+    /*
+     * Pre: When the player comes into contact with the goal
+     * @param player
+     * Post: Player collects the goal on contact. Allows them to finish the level
+     */
 
     public void contact(Player player) {
         player.win = true;
-        System.out.println("GG");
 
     }
 }

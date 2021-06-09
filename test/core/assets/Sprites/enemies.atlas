@@ -1,9 +1,121 @@
 
 enemies.png
-size: 256, 64
+size: 512, 64
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
+HEnemyLeft
+  rotate: false
+  xy: 288, 46
+  size: 15, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+HEnemyLeft
+  rotate: false
+  xy: 466, 47
+  size: 15, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+HEnemyLeft
+  rotate: false
+  xy: 306, 28
+  size: 14, 16
+  orig: 16, 16
+  offset: 1, 0
+  index: 1
+HEnemyLeft
+  rotate: false
+  xy: 356, 30
+  size: 14, 15
+  orig: 16, 16
+  offset: 1, 0
+  index: 2
+HEnemyRight
+  rotate: false
+  xy: 305, 46
+  size: 15, 16
+  orig: 16, 16
+  offset: 1, 0
+  index: 4
+HEnemyRight
+  rotate: false
+  xy: 483, 47
+  size: 15, 15
+  orig: 16, 16
+  offset: 1, 0
+  index: 3
+HEnemyRight
+  rotate: false
+  xy: 322, 29
+  size: 14, 16
+  orig: 16, 16
+  offset: 1, 0
+  index: 1
+HEnemyRight
+  rotate: false
+  xy: 372, 30
+  size: 14, 15
+  orig: 16, 16
+  offset: 1, 0
+  index: 2
+VEnemyDown
+  rotate: false
+  xy: 216, 46
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+VEnemyDown
+  rotate: false
+  xy: 216, 46
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+VEnemyDown
+  rotate: false
+  xy: 322, 47
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 1
+  index: 2
+VEnemyDown
+  rotate: false
+  xy: 340, 47
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 1
+  index: 4
+VEnemyUp
+  rotate: false
+  xy: 234, 46
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+VEnemyUp
+  rotate: false
+  xy: 234, 46
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+VEnemyUp
+  rotate: false
+  xy: 252, 46
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+VEnemyUp
+  rotate: false
+  xy: 270, 46
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
 detec_circle
   rotate: false
   xy: 2, 2
@@ -27,119 +139,119 @@ detec_circle
   index: 2
 detec_circle
   rotate: false
-  xy: 30, 18
+  xy: 500, 52
   size: 10, 10
   orig: 32, 32
   offset: 11, 11
   index: 1
 enemy_down
   rotate: false
-  xy: 216, 47
+  xy: 358, 47
   size: 16, 15
   orig: 16, 16
   offset: 0, 0
   index: 1
 enemy_down
   rotate: false
-  xy: 216, 47
+  xy: 358, 47
   size: 16, 15
   orig: 16, 16
   offset: 0, 0
   index: 3
 enemy_down
   rotate: false
-  xy: 234, 47
+  xy: 376, 47
   size: 16, 15
   orig: 16, 16
   offset: 0, 0
   index: 2
 enemy_down
   rotate: false
-  xy: 216, 31
+  xy: 216, 30
   size: 16, 14
   orig: 16, 16
   offset: 0, 0
   index: 4
+enemy_left
+  rotate: false
+  xy: 394, 47
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+enemy_left
+  rotate: false
+  xy: 394, 47
+  size: 16, 15
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
 enemy_left
   rotate: false
   xy: 234, 30
-  size: 16, 15
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-enemy_left
-  rotate: false
-  xy: 234, 30
-  size: 16, 15
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-enemy_left
-  rotate: false
-  xy: 30, 2
   size: 16, 14
   orig: 16, 16
   offset: 0, 0
   index: 2
 enemy_left
   rotate: false
-  xy: 102, 13
+  xy: 252, 30
   size: 16, 14
   orig: 16, 16
   offset: 0, 0
   index: 4
 enemy_right
   rotate: false
-  xy: 48, 12
+  xy: 412, 47
   size: 16, 15
   orig: 16, 16
   offset: 0, 0
   index: 1
 enemy_right
   rotate: false
-  xy: 48, 12
+  xy: 412, 47
   size: 16, 15
   orig: 16, 16
   offset: 0, 0
   index: 3
 enemy_right
   rotate: false
-  xy: 160, 18
+  xy: 270, 30
   size: 16, 14
   orig: 16, 16
   offset: 0, 0
   index: 2
 enemy_right
   rotate: false
-  xy: 178, 18
+  xy: 288, 30
   size: 16, 14
   orig: 16, 16
   offset: 0, 0
   index: 4
 enemy_up
   rotate: false
-  xy: 66, 12
+  xy: 430, 47
   size: 16, 15
   orig: 16, 16
   offset: 0, 0
   index: 1
 enemy_up
   rotate: false
-  xy: 66, 12
+  xy: 430, 47
   size: 16, 15
   orig: 16, 16
   offset: 0, 0
   index: 3
 enemy_up
   rotate: false
-  xy: 84, 12
+  xy: 448, 47
   size: 16, 15
   orig: 16, 16
   offset: 0, 0
   index: 2
 enemy_up
   rotate: false
-  xy: 196, 22
+  xy: 338, 31
   size: 16, 14
   orig: 16, 16
   offset: 0, 0

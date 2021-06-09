@@ -24,3 +24,6 @@ hs_err_pid*
 /test/core/build/*
 /test/.gradle/*
 /test/desktop/build/*
+/test/core/build/
+/test/.gradle/
+/test/desktop/build/
