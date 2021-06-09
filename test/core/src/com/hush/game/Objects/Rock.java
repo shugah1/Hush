@@ -77,6 +77,14 @@ public class Rock extends GameObject {
         b2body.setLinearVelocity(0f,0f);
     }
 
+    /*
+     * Pre: When the rock comes into contact with the rock
+     * @param player
+     * Post: Stops the rock once the rock stops touching it
+     */
+    public void contact(Rock rock){
+        b2body.setLinearVelocity(0f,0f);
+    }
     /*Pre:
      * @param deltaTime
      * Post: Every frame the rocks region is being updated, and is getting a new position
