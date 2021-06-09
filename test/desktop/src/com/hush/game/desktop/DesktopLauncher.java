@@ -33,14 +33,14 @@ public class DesktopLauncher {
 			Wini ini = new Wini(settings);
 			ini.add("Settings", "music volume", Settings.musicVolume);
 
-			ini.add("Completion", "Tutorial", 0);
+			ini.add("Completion", "RealTutorial", 0);
 			ini.add("Completion", "Level 1", 0);
 			ini.add("Completion", "Level 2", 0);
 			ini.add("Completion", "Level 3", 0);
 			ini.add("Completion", "Level 4", 0);
 			ini.add("Completion", "Level 5", 0);
 
-			ini.add("High Score", "Tutorial", 999);
+			ini.add("High Score", "RealTutorial", 999);
 			ini.add("High Score", "Level 1", 999);
 			ini.add("High Score", "Level 2", 999);
 			ini.add("High Score", "Level 3", 999);
@@ -70,14 +70,14 @@ public class DesktopLauncher {
 				ca.error404.bytefyte.Main.bill = Boolean.parseBoolean(ini.get("Menu", "bill"));
 				ca.error404.bytefyte.Main.stamina = Boolean.parseBoolean(ini.get("Menu", "stamina"));
 
-				Settings.highScore.put("Tutorial", Integer.parseInt(ini.get("High Score", "Tutorial")));
+				Settings.highScore.put("RealTutorial", Integer.parseInt(ini.get("High Score", "RealTutorial")));
 				Settings.highScore.put("Level 1", Integer.parseInt(ini.get("High Score", "Level 1")));
 				Settings.highScore.put("Level 2", Integer.parseInt(ini.get("High Score", "Level 2")));
 				Settings.highScore.put("Level 3", Integer.parseInt(ini.get("High Score", "Level 3")));
 				Settings.highScore.put("Level 4", Integer.parseInt(ini.get("High Score", "Level 4")));
 				Settings.highScore.put("Level 5", Integer.parseInt(ini.get("High Score", "Level 5")));
 
-				Settings.completion.put("Tutorial", Integer.parseInt(ini.get("Completion", "Tutorial")));
+				Settings.completion.put("RealTutorial", Integer.parseInt(ini.get("Completion", "RealTutorial")));
 				Settings.completion.put("Level 1", Integer.parseInt(ini.get("Completion", "Level 1")));
 				Settings.completion.put("Level 2", Integer.parseInt(ini.get("Completion", "Level 2")));
 				Settings.completion.put("Level 3", Integer.parseInt(ini.get("Completion", "Level 3")));

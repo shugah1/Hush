@@ -46,7 +46,7 @@ public class SplashScreen extends ScreenAdapter {
     public SplashScreen(Settings game) {
         // Assigns variables
         this.game = game;
-        testBackground = new Texture(("TestBackground"));
+        testBackground = new Texture(("test/core/assets/TitleTheme.png"));
         titleText = new Texture("Text/titleText.png");
         splashText = new Texture("Text/splashText.png");
         namesText = new Texture("Text/namesText.png");

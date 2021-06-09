@@ -15,15 +15,11 @@ import com.hush.game.Main;
 
 import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
-import com.hush.game.constants.Globals;
 import org.ini4j.Wini;
 import ca.error404.bytefyte.constants.Globals;
-import org.ini4j.Wini;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.logging.Level;
 
 // Win Screen Class
 public class WinScreen extends ScreenAdapter {
@@ -128,7 +124,7 @@ public class WinScreen extends ScreenAdapter {
                     if (cursorY > nextY && cursorY < nextY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             switch (LevelSelect.mapSelect) {
-                                case "Tutorial":
+                                case "RealTutorial":
                                     LevelSelect.mapSelect = "Level 1";
                                     break;
                                 case "Level 1":

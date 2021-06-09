@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import com.hush.game.UI.Settings;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.hush.game.constants.Globals;
 import org.ini4j.Wini;
 
 import java.io.File;

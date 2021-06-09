@@ -310,7 +310,7 @@ public class Main implements Screen {
         }
 
         // Notification
-        else if (Settings.completion.get("Tutorial") == 0 && notification){
+        else if (Settings.completion.get("RealTutorial") == 0 && notification){
             Gdx.input.setInputProcessor(new InputAdapter() {
                 // Notification Menu Input
                 @Override
