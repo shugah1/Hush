@@ -1,5 +1,6 @@
 package com.hush.game;
 
+// Imports libraries
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,8 +28,9 @@ import org.ini4j.Wini;
 import java.io.*;
 import java.util.ArrayList;
 
+// Main Screen Class
 public class Main implements Screen {
-
+    // Initializes variables
     public static World world;
     private OrthographicCamera cam;
     public Player player;
@@ -70,6 +72,7 @@ public class Main implements Screen {
     float returnY = buttonHeight;
 
     public Main(Settings game){
+        //
         Settings.manager.load("sprites/player.atlas", TextureAtlas.class);
         Settings.manager.finishLoading();
         this.game = game;

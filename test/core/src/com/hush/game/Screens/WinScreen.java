@@ -118,28 +118,30 @@ public class WinScreen extends ScreenAdapter {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
                 // Next Level Button
-                if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
-                    if (cursorY > nextY && cursorY < nextY + buttonHeight) {
-                        if (Gdx.input.isTouched()) {
-                            switch (LevelSelect.mapSelect) {
-                                case "Tutorial":
-                                    LevelSelect.mapSelect = "Level 1";
-                                    break;
-                                case "Level 1":
-                                    LevelSelect.mapSelect = "Level 2";
-                                    break;
-                                case "Level 2":
-                                    LevelSelect.mapSelect = "Level 3";
-                                    break;
-                                case "Level 3":
-                                    LevelSelect.mapSelect = "Level 4";
-                                    break;
-                                case "Level 4":
-                                    LevelSelect.mapSelect = "Level 5";
-                                    break;
+                if (!LevelSelect.mapSelect.equals("Level 5")) {
+                    if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
+                        if (cursorY > nextY && cursorY < nextY + buttonHeight) {
+                            if (Gdx.input.isTouched()) {
+                                switch (LevelSelect.mapSelect) {
+                                    case "Tutorial":
+                                        LevelSelect.mapSelect = "Level 1";
+                                        break;
+                                    case "Level 1":
+                                        LevelSelect.mapSelect = "Level 2";
+                                        break;
+                                    case "Level 2":
+                                        LevelSelect.mapSelect = "Level 3";
+                                        break;
+                                    case "Level 3":
+                                        LevelSelect.mapSelect = "Level 4";
+                                        break;
+                                    case "Level 4":
+                                        LevelSelect.mapSelect = "Level 5";
+                                        break;
+                                }
+                                sound.play(0.25f);
+                                game.setScreen(new Main(game));
                             }
-                            sound.play(0.25f);
-                            game.setScreen(new Main(game));
                         }
                     }
                 }
@@ -177,10 +179,12 @@ public class WinScreen extends ScreenAdapter {
         batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(endText, buttonX, winY, buttonWidth, buttonHeight);
         batch.draw(scoreText, buttonX - buttonWidth, scoreY, buttonWidth, buttonHeight);
-        batch.draw(nextLevelText, buttonX, nextY, buttonWidth, buttonHeight);
         batch.draw(restartText, buttonX, restartY, buttonWidth, buttonHeight);
         batch.draw(returnText, buttonX, returnY, buttonWidth, buttonHeight);
         font.draw(batch, minutes + seconds, buttonX + buttonWidth * 0.75f, scoreY + buttonHeight * 0.8f);
+        if (!LevelSelect.mapSelect.equals("Level 5")) {
+            batch.draw(nextLevelText, buttonX, nextY, buttonWidth, buttonHeight);
+        }
 
         // Checks and prints New High Score notification
         if (newHighScore) {
