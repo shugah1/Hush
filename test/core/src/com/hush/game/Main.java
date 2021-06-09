@@ -80,7 +80,7 @@ public class Main implements Screen {
     Pre: settings to get setup
     Post: loads in everything.
      */
-    public Main(Settings game){
+    public Main(Settings game) {
         //loads atlas
         Settings.manager.load("sprites/player.atlas", TextureAtlas.class);
         Settings.manager.finishLoading();
@@ -149,7 +149,6 @@ public class Main implements Screen {
             }
             else {
                 game.setScreen(new WinScreen(game));
-                Settings.music.stop();
                 player.win = false;
                 gameObject.clear();
             }
@@ -161,10 +160,6 @@ public class Main implements Screen {
             gameObject.clear();
         }
 
-        //Loops song
-        if (game.music.getPosition() >= game.songLoopEnd) {
-            game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
-        }
         //loops through all the game objects and destroys, adds or updates them.
         for( int i = 0; i < gameObject.size(); i++){
             if (gameObject.get(i).remove){
@@ -239,6 +234,11 @@ public class Main implements Screen {
      */
     @Override
     public void render(float delta) {
+        //Loops song
+        if (game.music.getPosition() >= game.songLoopEnd) {
+            game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
+        }
+
         // Pause Menu Loop
         if (paused) {
             Gdx.input.setInputProcessor(new InputAdapter() {
@@ -261,7 +261,6 @@ public class Main implements Screen {
                         if (cursorY > restartY && cursorY < restartY + buttonHeight) {
                             if (Gdx.input.isTouched()) {
                                 sound.play(0.25f);
-                                Settings.music.stop();
                                 gameObject.clear();
                                 paused = false;
                                 game.setScreen(new Main(game));
