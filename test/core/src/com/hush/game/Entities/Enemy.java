@@ -173,6 +173,10 @@ public abstract class Enemy extends GameObject {
         super.draw(batch);
     }
 
+    /*
+    Pre: Batch
+    Post: Draws ring on top of enemy.
+     */
     public void drawRing(Batch batch) {
         TextureRegion image = ring.getKeyFrame(elapsedTime);
         batch.draw(image, b2body.getPosition().x - image.getRegionWidth() * (detecRadius * 2 / 28) / Settings.PPM / 2f, b2body.getPosition().y - image.getRegionHeight() * (detecRadius * 2 / 28) / Settings.PPM / 2f, image.getRegionWidth() * (detecRadius * 2 / 28) / Settings.PPM, image.getRegionHeight() * (detecRadius * 2 / 28) / Settings.PPM);
