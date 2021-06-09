@@ -26,7 +26,6 @@ public class StaticEnemy extends Enemy{
     public StaticEnemy(World world, Main screen, float x, float y) {
         //Defining some Variables
         super(world, screen, x, y);
-        TextureAtlas ta = new TextureAtlas("Sprites/enemies.atlas");
 
         //Defines different sprites according to direction
         idle = new Animation<TextureRegion>(1/5f, ta.findRegions("kevin_idle"), Animation.PlayMode.LOOP);

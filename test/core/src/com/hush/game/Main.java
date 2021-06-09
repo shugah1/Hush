@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.hush.game.Entities.Enemy;
 import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.Rock;
@@ -262,6 +263,12 @@ public class Main implements Screen {
             game.batch.begin();
             for (GameObject gO : gameObject) {
                 gO.draw(game.batch);
+            }
+            for (GameObject go : gameObject) {
+                try {
+                    Enemy enem = (Enemy) go;
+                    enem.drawRing(game.batch);
+                } catch (Exception ignored) {}
             }
             game.batch.setProjectionMatrix(cam.combined);
             b2dr.render(world, cam.combined);
