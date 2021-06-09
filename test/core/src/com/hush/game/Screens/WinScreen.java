@@ -20,6 +20,7 @@ import ca.error404.bytefyte.constants.Globals;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 // Win Screen Class
 public class WinScreen extends ScreenAdapter {
@@ -142,6 +143,7 @@ public class WinScreen extends ScreenAdapter {
                                         break;
                                 }
                                 sound.play(0.25f);
+                                Settings.music.stop();
                                 game.setScreen(new Main(game));
                             }
                         }
