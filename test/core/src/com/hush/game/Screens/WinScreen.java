@@ -36,6 +36,9 @@ public class WinScreen extends ScreenAdapter {
     Texture returnText;
     BitmapFont font;
     Sound sound;
+    boolean newHighScore = false;
+    int cursorX;
+    int cursorY;
 
     // Formats timestamp scores
     String minutes = String.format("%02d : ", HUD.worldTimer / 60);
@@ -43,13 +46,10 @@ public class WinScreen extends ScreenAdapter {
     String hsMinutes = String.format("%02d : ", Settings.highScore.get(LevelSelect.mapSelect) / 60);
     String hsSeconds = String.format("%02d s", Settings.highScore.get(LevelSelect.mapSelect) % 60);
 
-    int cursorX;
-    int cursorY;
+    // Sets button variables to scale with screen
     float buttonWidth = Gdx.graphics.getWidth() / 5f;
     float buttonHeight = Gdx.graphics.getHeight() / 9f;
     float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2f;
-
-    boolean newHighScore = false;
     float winY = buttonHeight * 7;
     float scoreY = buttonHeight * 5;
     float nextY = buttonHeight * 2.5f;
@@ -61,6 +61,8 @@ public class WinScreen extends ScreenAdapter {
         this.game = game;
         batch = new SpriteBatch();
         testBackground = new Texture(("TestBackground"));
+
+        // Assigns song and volume
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         // Text Variables
@@ -119,7 +121,7 @@ public class WinScreen extends ScreenAdapter {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
-                // Next Level Button
+                // Next Level Button, assigns next level and sends to Main game
                 if (!LevelSelect.mapSelect.equals("Level 5")) {
                     if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                         if (cursorY > nextY && cursorY < nextY + buttonHeight) {
@@ -148,7 +150,7 @@ public class WinScreen extends ScreenAdapter {
                     }
                 }
 
-                // Restart Button
+                // Restart Button, sends to Main game again
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > restartY && cursorY < restartY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -157,7 +159,8 @@ public class WinScreen extends ScreenAdapter {
                         }
                     }
                 }
-                // Return Button
+
+                // Return Button, sends to Main Menu
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > returnY && cursorY < returnY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -207,7 +210,6 @@ public class WinScreen extends ScreenAdapter {
         // Renders Win Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.begin();
         batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(endText, buttonX, winY, buttonWidth, buttonHeight);
@@ -215,11 +217,13 @@ public class WinScreen extends ScreenAdapter {
         batch.draw(restartText, buttonX, restartY, buttonWidth, buttonHeight);
         batch.draw(returnText, buttonX, returnY, buttonWidth, buttonHeight);
         font.draw(batch, minutes + seconds, buttonX + buttonWidth * 0.75f, scoreY + buttonHeight * 0.8f);
+
+        // Doesn't render next level on final level
         if (!LevelSelect.mapSelect.equals("Level 5")) {
             batch.draw(nextLevelText, buttonX, nextY, buttonWidth, buttonHeight);
         }
 
-        // Checks and prints New High Score notification
+        // Checks and prints New High Score notification, else prints old high score
         if (newHighScore) {
             batch.draw(newHighScoreText, buttonX, buttonHeight * 3.5f, buttonWidth, buttonHeight);
         }

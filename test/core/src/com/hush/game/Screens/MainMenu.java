@@ -31,6 +31,8 @@ public class MainMenu extends ScreenAdapter {
 
     int cursorX;
     int cursorY;
+
+    // Sets button variables to scale with screen
     float buttonWidth = Gdx.graphics.getWidth() / 5f;
     float buttonHeight = Gdx.graphics.getHeight() / 9f;
     float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
@@ -44,6 +46,8 @@ public class MainMenu extends ScreenAdapter {
         // Initializes variables
         this.game = game;
         batch = new SpriteBatch();
+
+        // Assigns song and volume
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         // Text Variables
@@ -59,7 +63,6 @@ public class MainMenu extends ScreenAdapter {
 
     @Override
     public void show(){
-        // MainMenu Input Check
         if (!Settings.songName.equalsIgnoreCase("TitleTheme")) {
             Settings.music.stop();
             Settings.music = game.newSong("TitleTheme");
@@ -67,13 +70,14 @@ public class MainMenu extends ScreenAdapter {
             Settings.music.play();
         }
 
+        // MainMenu Input Check, assigns cursor position
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
 
-                // Start Button
+                // Start Button, sends to Level Select
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > startY && cursorY < startY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -83,7 +87,7 @@ public class MainMenu extends ScreenAdapter {
                     }
                 }
 
-                // Settings Button
+                // Settings Button, sends to Settings Screen
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > settingsY && cursorY < settingsY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -93,7 +97,7 @@ public class MainMenu extends ScreenAdapter {
                     }
                 }
 
-                // Help Button
+                // Help Button, sends to Help Screen
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > helpY && cursorY < helpY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -103,7 +107,7 @@ public class MainMenu extends ScreenAdapter {
                     }
                 }
 
-                // Quit Button
+                // Quit Button, exits application
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > quitY && cursorY < quitY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -153,7 +157,6 @@ public class MainMenu extends ScreenAdapter {
         // Renders Main Menu Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.begin();
         batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(titleText, buttonX, titleY, buttonWidth, buttonHeight);

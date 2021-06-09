@@ -22,13 +22,13 @@ public class CreditScreen extends ScreenAdapter {
     Texture thanksText;
     Texture continueText;
     Sound sound;
-
     int cursorX;
     int cursorY;
+
+    // Sets button variables to scale with screen
     float buttonWidth = Gdx.graphics.getWidth() / 5f;
     float buttonHeight = Gdx.graphics.getHeight() / 9f;
     float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2f;
-
     float continueY = buttonHeight;
 
     public CreditScreen(Settings game) {
@@ -36,6 +36,8 @@ public class CreditScreen extends ScreenAdapter {
         this.game = game;
         batch = new SpriteBatch();
         testBackground = new Texture("testBackground");
+
+        // Assigns song and volume
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         // Text Variables
@@ -72,7 +74,6 @@ public class CreditScreen extends ScreenAdapter {
         // Renders Credits Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.begin();
         batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(congratulationsText, buttonX * 0.9f, buttonHeight * 6.5f, buttonWidth * 1.5f, buttonHeight * 2);

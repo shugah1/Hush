@@ -1,6 +1,6 @@
 package com.hush.game.Screens;
 
-// Imports Variables
+// Imports Libraries
 import ca.error404.bytefyte.constants.Globals;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -42,10 +42,11 @@ public class LoseScreen extends ScreenAdapter {
 
     int cursorX;
     int cursorY;
+
+    // Sets button variables to scale with screen
     float buttonWidth = Gdx.graphics.getWidth() / 5f;
     float buttonHeight = Gdx.graphics.getHeight() / 9f;
     float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
-
     float endY = buttonHeight * 7;
     float scoreY = buttonHeight * 5;
     float restartY = buttonHeight * 2.25f;
@@ -56,6 +57,8 @@ public class LoseScreen extends ScreenAdapter {
         this.game = game;
         batch = new SpriteBatch();
         font = new BitmapFont();
+
+        // Assigns song and volume
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         // Text Variables
@@ -84,7 +87,7 @@ public class LoseScreen extends ScreenAdapter {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
 
-                // Restart Button
+                // Restart Button, resends to Main game
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > restartY && cursorY < restartY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -94,7 +97,7 @@ public class LoseScreen extends ScreenAdapter {
                     }
                 }
 
-                // Return Button
+                // Return Button, sends to Main Menu
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > returnY && cursorY < returnY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -144,7 +147,6 @@ public class LoseScreen extends ScreenAdapter {
         // Renders Lose Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.begin();
         batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(endText, buttonX, endY, buttonWidth, buttonHeight);
@@ -152,6 +154,8 @@ public class LoseScreen extends ScreenAdapter {
         batch.draw(returnText, buttonX, returnY, buttonWidth, buttonHeight);
         batch.draw(scoreText, buttonX - buttonWidth, scoreY, buttonWidth, buttonHeight);
         font.draw(batch, minutes + seconds, buttonX + buttonWidth * 0.75f, scoreY + buttonHeight * 0.8f);
+
+        // Checks if there is a previous high score to display
         if (Settings.highScore.get(LevelSelect.mapSelect) != Integer.MAX_VALUE) {
             batch.draw(oldHighScoreText, buttonX - buttonWidth, buttonHeight * 3.5f, buttonWidth, buttonHeight);
             font.draw(batch, hsMinutes + hsSeconds, buttonX + buttonWidth * 0.75f, buttonHeight * 3.5f + buttonHeight * 0.8f);

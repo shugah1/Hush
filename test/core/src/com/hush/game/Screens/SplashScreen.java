@@ -29,12 +29,13 @@ public class SplashScreen extends ScreenAdapter {
 
     int cursorX;
     int cursorY;
+
+    // Sets button variables to scale with screen
     float buttonWidth = Gdx.graphics.getWidth() / 5f;
     float buttonHeight = Gdx.graphics.getHeight() / 9f;
     float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
     float splashWidth = (Gdx.graphics.getWidth() / 5f) * 2;
     float splashX = Gdx.graphics.getWidth() / 2f - splashWidth / 2;
-
     float titleX = buttonX;
     float titleY = buttonHeight * 7;
     float splashY = buttonHeight;
@@ -52,6 +53,8 @@ public class SplashScreen extends ScreenAdapter {
         namesText = new Texture("Text/namesText.png");
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
+
+        // Assigns song and volume
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
         Settings.music = game.newSong("TitleTheme");
         Settings.music.setVolume(Settings.musicVolume / 10f);
@@ -60,12 +63,14 @@ public class SplashScreen extends ScreenAdapter {
 
     @Override
     public void show(){
-        // SplashScreen Input Check
+        // SplashScreen Input Check, assigns cursor position
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
+
+                // Splash Screen Button, sends to Main Menu
                 if (Gdx.input.isTouched()) {
                     sound.play(0.25f);
                     game.setScreen(new MainMenu(game));
@@ -111,7 +116,6 @@ public class SplashScreen extends ScreenAdapter {
         // Renders Splash Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.begin();
         batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(titleText, titleX, titleY, buttonWidth, buttonHeight);

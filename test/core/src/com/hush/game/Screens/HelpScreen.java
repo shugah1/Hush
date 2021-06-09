@@ -28,7 +28,6 @@ public class HelpScreen extends ScreenAdapter {
     Texture helpText;
     Texture nextText;
     Texture quitText;
-
     Texture wasdImage;
     Texture enemyImage;
     Texture goalImage;
@@ -39,6 +38,8 @@ public class HelpScreen extends ScreenAdapter {
 
     int cursorX;
     int cursorY;
+
+    // Sets button variables to scale with screen
     float buttonWidth = Gdx.graphics.getWidth() / 5f;
     float buttonHeight = Gdx.graphics.getHeight() / 9f;
     float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
@@ -53,6 +54,8 @@ public class HelpScreen extends ScreenAdapter {
         this.game = game;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
+
+        // Assigns song and volume
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         // Text Variables
@@ -85,7 +88,7 @@ public class HelpScreen extends ScreenAdapter {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
 
-                // Next Button
+                // Next Button, sends to Help Screen 2
                 if (cursorX > column2 * 1.4f && cursorX < column2 * 1.4f + buttonWidth) {
                     if (cursorY > buttonHeight && cursorY < buttonHeight + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -95,7 +98,7 @@ public class HelpScreen extends ScreenAdapter {
                     }
                 }
 
-                // Quit Button
+                // Quit Button, sends to Main Menu
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > quitY && cursorY < quitY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -111,19 +114,18 @@ public class HelpScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        // Renders Help Screen 1
+        // Renders Help Screen 1 Background
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.begin();
         batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
-
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0.25f, 0.25f, 0.25f, 1);
         shapeRenderer.rect(column1, buttonHeight, buttonWidth * 4f, helpHeight * 6);
         shapeRenderer.end();
 
+        // Renders Tips and Images
         batch.begin();
         batch.draw(helpText, buttonX, helpY, buttonWidth, buttonHeight);
         batch.draw(quitText, buttonX, quitY, buttonWidth, buttonHeight);
@@ -131,13 +133,11 @@ public class HelpScreen extends ScreenAdapter {
         batch.draw(enemyHelp, column2, buttonHeight * 2 + helpHeight * 2, buttonWidth * 2f, helpHeight);
         batch.draw(keyHelp, column1, buttonHeight * 2 + helpHeight, buttonWidth * 2f, helpHeight);
         batch.draw(goalHelp, column2, buttonHeight * 2, buttonWidth * 2f, helpHeight);
-
         batch.draw(wasdImage, column2 * 1.25f, buttonHeight * 2 + helpHeight * 3, buttonWidth * 0.75f, helpHeight);
         batch.draw(enemyImage, column1 * 2.2f, buttonHeight * 2 + helpHeight * 2, buttonWidth * 0.75f, helpHeight);
         batch.draw(keyImage, column2 * 1.1f, buttonHeight * 2 + helpHeight, buttonWidth, helpHeight);
         batch.draw(lockImage, column2 * 1.5f, buttonHeight * 2 + helpHeight, buttonWidth * 0.5f, helpHeight);
         batch.draw(goalImage, column1 * 2.2f, buttonHeight * 2, buttonWidth * 0.75f, helpHeight);
-
         batch.draw(nextText, column2 * 1.4f, buttonHeight, buttonWidth, buttonHeight);
         batch.end();
     }

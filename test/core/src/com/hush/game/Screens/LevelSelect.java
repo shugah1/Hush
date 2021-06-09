@@ -37,9 +37,11 @@ public class LevelSelect extends ScreenAdapter {
     Texture quitText;
     Sound sound;
     BitmapFont font;
-
+    public static String mapSelect;
     int cursorX;
     int cursorY;
+
+    // Sets button variables to scale with screen
     float buttonWidth = Gdx.graphics.getWidth() / 5f;
     float buttonHeight = Gdx.graphics.getHeight() / 9f;
     float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
@@ -50,13 +52,13 @@ public class LevelSelect extends ScreenAdapter {
     float quitX = buttonX;
     float quitY = buttonHeight;
 
-    public static String mapSelect;
-
     public LevelSelect(Settings game) {
         // Assigns variables
         this.game = game;
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
+
+        // Assigns song and volume
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         // Text Variables
@@ -74,6 +76,7 @@ public class LevelSelect extends ScreenAdapter {
         File settings = new File(Globals.workingDirectory + "settings.ini");
         try {
             Wini ini = new Wini(settings);
+            // Loads Completion Data
             Settings.completion.put("RealTutorial", Integer.parseInt(ini.get("Completion", "RealTutorial")));
             Settings.completion.put("Level 1", Integer.parseInt(ini.get("Completion", "Level 1")));
             Settings.completion.put("Level 2", Integer.parseInt(ini.get("Completion", "Level 2")));
@@ -81,6 +84,7 @@ public class LevelSelect extends ScreenAdapter {
             Settings.completion.put("Level 4", Integer.parseInt(ini.get("Completion", "Level 4")));
             Settings.completion.put("Level 5", Integer.parseInt(ini.get("Completion", "Level 5")));
 
+            // Loads High Score Data
             Settings.highScore.put("RealTutorial", Integer.parseInt(ini.get("High Score", "RealTutorial")));
             Settings.highScore.put("Level 1", Integer.parseInt(ini.get("High Score", "Level 1")));
             Settings.highScore.put("Level 2", Integer.parseInt(ini.get("High Score", "Level 2")));
@@ -108,7 +112,7 @@ public class LevelSelect extends ScreenAdapter {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
 
-                // Tutorial Button
+                // Tutorial Button, assigns Tutorial map and sends to Main game
                 if (cursorX >=  buttonX - buttonWidth * 1.5f && cursorX <=  buttonX - buttonWidth * 1.5f + buttonWidth) {
                     if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -120,7 +124,7 @@ public class LevelSelect extends ScreenAdapter {
                     }
                 }
 
-                // Level 1 Button and Tutorial Completion Check
+                // Level 1 Button and Tutorial Completion Check, assigns Level 1 map and sends to Main game
                 if (Settings.completion.get("RealTutorial") == 1) {
                     if (cursorX >= buttonX && cursorX <= buttonX + buttonWidth) {
                         if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
@@ -134,7 +138,7 @@ public class LevelSelect extends ScreenAdapter {
                     }
                 }
 
-                // Level 2 Button and Level 1 Completion Check
+                // Level 2 Button and Level 1 Completion Check, assigns Level 2 map and sends to Main game
                 if (Settings.completion.get("Level 1") == 1) {
                     if (cursorX >= buttonX + buttonWidth * 1.5f && cursorX <= buttonX + buttonWidth * 1.5f + buttonWidth) {
                         if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
@@ -148,7 +152,7 @@ public class LevelSelect extends ScreenAdapter {
                     }
                 }
 
-                // Level 3 Button and Level 2 Completion Check
+                // Level 3 Button and Level 2 Completion Check, assigns Level 3 map and sends to Main game
                 if (Settings.completion.get("Level 2") == 1) {
                     if (cursorX >= buttonX - buttonWidth * 1.5f && cursorX <= buttonX - buttonWidth * 1.5f + buttonWidth) {
                         if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
@@ -162,7 +166,7 @@ public class LevelSelect extends ScreenAdapter {
                     }
                 }
 
-                // Level 4 Button and Level 3 Completion Check
+                // Level 4 Button and Level 3 Completion Check, assigns Level 4 map and sends to Main game
                 if (Settings.completion.get("Level 3") == 1) {
                     if (cursorX >= buttonX && cursorX <= buttonX + buttonWidth) {
                         if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
@@ -176,7 +180,7 @@ public class LevelSelect extends ScreenAdapter {
                     }
                 }
 
-                // Level 5 Button and Level 4 Completion Check
+                // Level 5 Button and Level 4 Completion Check, assigns Level 5 map and sends to Main game
                 if (Settings.completion.get("Level 4") == 1) {
                     if (cursorX >= buttonX + buttonWidth * 1.5f && cursorX <= buttonX + buttonWidth * 1.5f + buttonWidth) {
                         if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
@@ -190,7 +194,7 @@ public class LevelSelect extends ScreenAdapter {
                     }
                 }
 
-                // Quit Button
+                // Quit Button, sends to Main Menu
                 if (cursorX > quitX && cursorX < quitX + buttonWidth) {
                     if (cursorY > quitY && cursorY < quitY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -240,12 +244,12 @@ public class LevelSelect extends ScreenAdapter {
         // Renders Level Select Menu
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.begin();
         batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(selectText, selectX, selectY, buttonWidth, buttonHeight);
         batch.draw(tutorialText, buttonX - buttonWidth * 1.5f, row1Y, buttonWidth, buttonHeight);
 
+        // If Statements to check Progression, renders new level buttons and high scores
         if (Settings.completion.get("RealTutorial") == 1) {
             batch.draw(level1Text, buttonX, row1Y, buttonWidth, buttonHeight);
             String hsMinutes = String.format("%02d : ", Settings.highScore.get("RealTutorial") / 60);

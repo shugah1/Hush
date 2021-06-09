@@ -66,6 +66,8 @@ public class Main implements Screen {
 
     public static boolean paused = false;
     boolean notification = true;
+
+    // Sets button variables to scale with screen
     float buttonWidth = Gdx.graphics.getWidth() / 5f;
     float buttonHeight = Gdx.graphics.getHeight() / 9f;
     float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
