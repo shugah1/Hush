@@ -1,5 +1,6 @@
 package com.hush.game.Screens;
 
+// Imports libraries
 import ca.error404.bytefyte.constants.Globals;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.ScreenAdapter;
@@ -14,10 +15,13 @@ import org.ini4j.Wini;
 import java.io.File;
 import java.io.IOException;
 
+// Splash Screen Class
 public class SplashScreen extends ScreenAdapter {
+    // Initializes and assigns variables
     Settings game;
     ShapeRenderer shapeRenderer;
     SpriteBatch batch;
+    Texture testBackground;
     Texture titleText;
     Texture splashText;
     Texture namesText;
@@ -25,22 +29,24 @@ public class SplashScreen extends ScreenAdapter {
 
     int cursorX;
     int cursorY;
-    float buttonWidth = Gdx.graphics.getWidth() / 5;
-    float buttonHeight = Gdx.graphics.getHeight() / 9;
-    float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
-    float splashWidth = (Gdx.graphics.getWidth() / 5) * 2;
-    float splashX = Gdx.graphics.getWidth() / 2 - splashWidth / 2;
+    float buttonWidth = Gdx.graphics.getWidth() / 5f;
+    float buttonHeight = Gdx.graphics.getHeight() / 9f;
+    float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
+    float splashWidth = (Gdx.graphics.getWidth() / 5f) * 2;
+    float splashX = Gdx.graphics.getWidth() / 2f - splashWidth / 2;
 
     float titleX = buttonX;
     float titleY = buttonHeight * 7;
     float splashY = buttonHeight;
-    float namesWidth = Gdx.graphics.getWidth() / 6;
-    float namesHeight = Gdx.graphics.getHeight() / 4;
+    float namesWidth = Gdx.graphics.getWidth() / 6f;
+    float namesHeight = Gdx.graphics.getHeight() / 4f;
     float namesX = Gdx.graphics.getWidth() - namesWidth;
     float namesY = Gdx.graphics.getHeight() - namesHeight;
 
     public SplashScreen(Settings game) {
+        // Assigns variables
         this.game = game;
+        testBackground = new Texture(("TestBackground"));
         titleText = new Texture("Text/titleText.png");
         splashText = new Texture("Text/splashText.png");
         namesText = new Texture("Text/namesText.png");
@@ -54,6 +60,7 @@ public class SplashScreen extends ScreenAdapter {
 
     @Override
     public void show(){
+        // SplashScreen Input Check
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -101,10 +108,12 @@ public class SplashScreen extends ScreenAdapter {
             }
         }
 
+        // Renders Splash Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(titleText, titleX, titleY, buttonWidth, buttonHeight);
         batch.draw(splashText, splashX, splashY, splashWidth, buttonHeight);
         batch.draw(namesText, namesX, namesY, namesWidth, namesHeight);

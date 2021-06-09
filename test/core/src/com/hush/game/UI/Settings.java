@@ -43,8 +43,9 @@ public class Settings extends Game {
 	public static AssetManager audioManager = new AssetManager();
 	public static AssetManager manager = new AssetManager();
 
-	public static Hashtable<String, Integer> highScore;
-	public static Integer completion = 0;
+	public static Hashtable<String, Integer> highScore = new Hashtable<>();
+	public static Hashtable<String, Integer> completion = new Hashtable<>();
+
 	/*
 	Pre: n/a
 	Post: creates the sprite batch and table holding highscore value.

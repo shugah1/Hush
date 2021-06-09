@@ -54,16 +54,27 @@ public class Main implements Screen {
     Texture pauseText;
     Texture resumeText;
     Texture restartText;
+    Texture helpText;
     Texture returnText;
+    Texture notificationText1;
+    Texture notificationText2;
+    Texture startText;
+    Texture finalImage;
     Sound sound;
-    boolean paused = false;
+
+    public static boolean paused = false;
+    boolean notification = true;
     float buttonWidth = Gdx.graphics.getWidth() / 5f;
     float buttonHeight = Gdx.graphics.getHeight() / 9f;
     float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
+    float column1 = buttonWidth * 0.5f;
+    float helpHeight = buttonHeight * 1.25f;
     float pauseY = buttonHeight * 7;
-    float resumeY = buttonHeight * 5;
-    float restartY = buttonHeight * 3;
+    float resumeY = buttonHeight * 4.75f;
+    float restartY = buttonHeight * 3.5f;
+    float helpY = buttonHeight * 2.25f;
     float returnY = buttonHeight;
+
     /*
     Pre: settings to get setup
     Post: loads in everything.
@@ -111,8 +122,14 @@ public class Main implements Screen {
         pauseText = new Texture("Text/pauseText.png");
         resumeText = new Texture("Text/resumeText.png");
         restartText = new Texture("Text/restartText.png");
+        helpText = new Texture("Text/helpText.png");
         returnText = new Texture("Text/returnText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+
+        notificationText1 = new Texture("Text/notificationText1.png");
+        notificationText2 = new Texture("Text/notificationText2.png");
+        startText = new Texture("Text/startText.png");
+        finalImage = new Texture("finalImage.png");
     }
 
     @Override
@@ -126,9 +143,15 @@ public class Main implements Screen {
     public void update(float dt) {
         //checks if player wins
         if (player.win) {
-            game.setScreen(new WinScreen(game));
-            player.win = false;
-            gameObject.clear();
+            if (Settings.completion.get("Level 5") == 0 && LevelSelect.mapSelect.equals("Level 5")) {
+                game.setScreen(new CreditScreen(game));
+            }
+            else {
+                game.setScreen(new WinScreen(game));
+                Settings.music.stop();
+                player.win = false;
+                gameObject.clear();
+            }
         }
         //checks if player loses.
         if (player.pDead) {
@@ -136,6 +159,7 @@ public class Main implements Screen {
             player.pDead = false;
             gameObject.clear();
         }
+
         //Loops song
         if (game.music.getPosition() >= game.songLoopEnd) {
             game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
@@ -187,9 +211,8 @@ public class Main implements Screen {
         // Set Pause Menu
         if (!paused && Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             paused = true;
-            System.out.println("Paused");
         }
-        //world time
+
         world.step(1/60f,6,2);
         //tells the camera to follow the player.
         try {
@@ -215,7 +238,7 @@ public class Main implements Screen {
      */
     @Override
     public void render(float delta) {
-        //shows the pause screen.
+        // Pause Menu Loop
         if (paused) {
             Gdx.input.setInputProcessor(new InputAdapter() {
                 // Pause Menu Input
@@ -239,10 +262,22 @@ public class Main implements Screen {
                                 sound.play(0.25f);
                                 Settings.music.stop();
                                 gameObject.clear();
+                                paused = false;
                                 game.setScreen(new Main(game));
                             }
                         }
                     }
+
+                    // Help Button Check
+                    if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
+                        if (cursorY > helpY && cursorY < helpY + buttonHeight) {
+                            if (Gdx.input.isTouched()) {
+                                sound.play(0.25f);
+                                game.setScreen(new HelpScreen(game));
+                            }
+                        }
+                    }
+
                     // Return Button Check
                     if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                         if (cursorY > returnY && cursorY < returnY + buttonHeight) {
@@ -250,6 +285,7 @@ public class Main implements Screen {
                                 sound.play(0.25f);
                                 Settings.music.stop();
                                 gameObject.clear();
+                                paused = false;
                                 game.setScreen(new MainMenu(game));
                             }
                         }
@@ -268,10 +304,40 @@ public class Main implements Screen {
             batch.draw(pauseText, buttonX, pauseY, buttonWidth, buttonHeight);
             batch.draw(resumeText, buttonX, resumeY, buttonWidth, buttonHeight);
             batch.draw(restartText, buttonX, restartY, buttonWidth, buttonHeight);
+            batch.draw(helpText, buttonX, helpY, buttonWidth, buttonHeight);
             batch.draw(returnText, buttonX, returnY, buttonWidth, buttonHeight);
             batch.end();
         }
-        // if not paused, renders the world
+
+        // Notification
+        else if (Settings.completion.get("Tutorial") == 0 && notification){
+            Gdx.input.setInputProcessor(new InputAdapter() {
+                // Notification Menu Input
+                @Override
+                public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                    if (Gdx.input.isTouched()) {
+                        sound.play(0.25f);
+                        notification = false;
+                    }
+                    return true;
+                }
+            });
+
+            // Renders Notification
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.setColor(0.25f, 0.25f, 0.25f, 1);
+            shapeRenderer.rect(column1, buttonHeight, buttonWidth * 4f, helpHeight * 6);
+            shapeRenderer.end();
+
+            batch.begin();
+            batch.draw(notificationText1, buttonX * 0.75f, buttonHeight * 6.5f, buttonWidth * 2f, buttonHeight * 2);
+            batch.draw(finalImage, buttonX, buttonHeight * 4, buttonWidth, buttonHeight * 2.5f);
+            batch.draw(notificationText2, buttonX * 0.75f, buttonHeight * 2, buttonWidth * 2f, buttonHeight * 2);
+            batch.draw(startText, buttonX, buttonHeight, buttonWidth, buttonHeight);
+            batch.end();
+        }
+
+        // Normal Update Loop
         else {
             update(delta);
             Gdx.gl.glClearColor(0, 0, 0, 1);
