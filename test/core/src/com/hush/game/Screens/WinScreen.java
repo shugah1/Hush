@@ -126,7 +126,7 @@ public class WinScreen extends ScreenAdapter {
                         if (cursorY > nextY && cursorY < nextY + buttonHeight) {
                             if (Gdx.input.isTouched()) {
                                 switch (LevelSelect.mapSelect) {
-                                    case "Tutorial":
+                                    case "RealTutorial":
                                         LevelSelect.mapSelect = "Level 1";
                                         break;
                                     case "Level 1":
