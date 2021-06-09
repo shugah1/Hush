@@ -60,7 +60,7 @@ public class WinScreen extends ScreenAdapter {
         // Assign Variables
         this.game = game;
         batch = new SpriteBatch();
-        testBackground = new Texture(("TestBackground"));
+        testBackground = new Texture(("test/core/assets/win.png"));
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         // Text Variables

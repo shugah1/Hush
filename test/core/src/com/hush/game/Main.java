@@ -346,7 +346,7 @@ public class Main implements Screen {
                 } catch (Exception ignored) {}
             }
             game.batch.setProjectionMatrix(cam.combined);
-            b2dr.render(world, cam.combined);
+            //b2dr.render(world, cam.combined);
             hud.stage.draw();
             game.batch.end();
             hud.render();

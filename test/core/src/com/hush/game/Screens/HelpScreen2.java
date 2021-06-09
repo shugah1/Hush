@@ -55,7 +55,7 @@ public class HelpScreen2 extends ScreenAdapter {
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         // Text Variables
-        testBackground = new Texture(("test/core/assets/main.png"));
+        testBackground = new Texture(("test/core/assets/bg.png"));
         titleText = new Texture("Text/titleText.png");
         invisHelp = new Texture("Text/invisHelp.png");
         armourHelp = new Texture("Text/armourHelp.png");

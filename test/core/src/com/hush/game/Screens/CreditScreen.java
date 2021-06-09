@@ -35,7 +35,7 @@ public class CreditScreen extends ScreenAdapter {
         // Assigns Variables
         this.game = game;
         batch = new SpriteBatch();
-        testBackground = new Texture("testBackground");
+        testBackground = new Texture("test/core/assets/main.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         // Text Variables

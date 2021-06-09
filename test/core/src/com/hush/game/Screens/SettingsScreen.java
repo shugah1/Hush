@@ -56,7 +56,7 @@ public class SettingsScreen extends ScreenAdapter {
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         // Text Variables
-        testBackground = new Texture(("test/core/assets/main.png"));
+        testBackground = new Texture(("test/core/assets/bg.png"));
         settingsText = new Texture("Text/settingsText.png");
         audioText = new Texture("Text/audioText.png");
         videoText = new Texture("Text/videoText.png");
