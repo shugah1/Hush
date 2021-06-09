@@ -65,9 +65,8 @@ public class Main implements Screen {
     float column1 = buttonWidth * 0.5f;
     float helpHeight = buttonHeight * 1.25f;
     float pauseY = buttonHeight * 7;
-    float resumeY = buttonHeight * 4.75f;
-    float restartY = buttonHeight * 3.5f;
-    float helpY = buttonHeight * 2.25f;
+    float resumeY = buttonHeight * 4f;
+    float restartY = buttonHeight * 2.5f;
     float returnY = buttonHeight;
 
     public Main(Settings game){
@@ -238,16 +237,6 @@ public class Main implements Screen {
                         }
                     }
 
-                    // Help Button Check
-                    if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
-                        if (cursorY > helpY && cursorY < helpY + buttonHeight) {
-                            if (Gdx.input.isTouched()) {
-                                sound.play(0.25f);
-                                game.setScreen(new HelpScreen(game));
-                            }
-                        }
-                    }
-
                     // Return Button Check
                     if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                         if (cursorY > returnY && cursorY < returnY + buttonHeight) {
@@ -274,7 +263,6 @@ public class Main implements Screen {
             batch.draw(pauseText, buttonX, pauseY, buttonWidth, buttonHeight);
             batch.draw(resumeText, buttonX, resumeY, buttonWidth, buttonHeight);
             batch.draw(restartText, buttonX, restartY, buttonWidth, buttonHeight);
-            batch.draw(helpText, buttonX, helpY, buttonWidth, buttonHeight);
             batch.draw(returnText, buttonX, returnY, buttonWidth, buttonHeight);
             batch.end();
         }
