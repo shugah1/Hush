@@ -40,12 +40,12 @@ public class DesktopLauncher {
 			ini.add("Completion", "Level 4", 0);
 			ini.add("Completion", "Level 5", 0);
 
-			ini.add("High Score", "RealTutorial", 999);
-			ini.add("High Score", "Level 1", 999);
-			ini.add("High Score", "Level 2", 999);
-			ini.add("High Score", "Level 3", 999);
-			ini.add("High Score", "Level 4", 999);
-			ini.add("High Score", "Level 5", 999);
+			ini.add("High Score", "RealTutorial", Integer.MAX_VALUE);
+			ini.add("High Score", "Level 1", Integer.MAX_VALUE);
+			ini.add("High Score", "Level 2", Integer.MAX_VALUE);
+			ini.add("High Score", "Level 3", Integer.MAX_VALUE);
+			ini.add("High Score", "Level 4", Integer.MAX_VALUE);
+			ini.add("High Score", "Level 5", Integer.MAX_VALUE);
 
 			ini.add("Settings", "screen size", ScreenSizes.screenSize);
 			ini.add("Settings", "music volume", ca.error404.bytefyte.Main.musicVolume);

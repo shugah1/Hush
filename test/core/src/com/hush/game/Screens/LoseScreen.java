@@ -141,6 +141,7 @@ public class LoseScreen extends ScreenAdapter {
                 e.printStackTrace();
             }
         }
+
         // Renders Lose Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -148,14 +149,14 @@ public class LoseScreen extends ScreenAdapter {
         batch.begin();
         batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(endText, buttonX, endY, buttonWidth, buttonHeight);
-        batch.draw(scoreText, buttonX - buttonWidth, scoreY, buttonWidth, buttonHeight);
         batch.draw(restartText, buttonX, buttonHeight * 2.25f, buttonWidth, buttonHeight);
         batch.draw(returnText, buttonX, returnY, buttonWidth, buttonHeight);
-
+        batch.draw(scoreText, buttonX - buttonWidth, scoreY, buttonWidth, buttonHeight);
         font.draw(batch, minutes + seconds, buttonX + buttonWidth * 0.75f, scoreY + buttonHeight * 0.8f);
-
-        batch.draw(oldHighScoreText, buttonX - buttonWidth, buttonHeight * 3.5f, buttonWidth, buttonHeight);
-        font.draw(batch, hsMinutes + hsSeconds, buttonX + buttonWidth * 0.75f, buttonHeight * 3.5f + buttonHeight * 0.8f);
+        if (Settings.highScore.get(LevelSelect.mapSelect) != Integer.MAX_VALUE) {
+            batch.draw(oldHighScoreText, buttonX - buttonWidth, buttonHeight * 3.5f, buttonWidth, buttonHeight);
+            font.draw(batch, hsMinutes + hsSeconds, buttonX + buttonWidth * 0.75f, buttonHeight * 3.5f + buttonHeight * 0.8f);
+        }
         batch.end();
 
     }
