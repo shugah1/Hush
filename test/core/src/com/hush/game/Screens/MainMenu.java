@@ -47,7 +47,7 @@ public class MainMenu extends ScreenAdapter {
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         // Text Variables
-        testBackground = new Texture(("TestBackground"));
+        testBackground = new Texture(("test/core/assets/main.png"));
         titleText = new Texture("Text/titleText.png");
         startText = new Texture("Text/startText.png");
         settingsText = new Texture("Text/settingsText.png");
