@@ -1,5 +1,6 @@
 package com.hush.game.Screens;
 
+// Imports libraries
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
@@ -18,7 +19,9 @@ import org.ini4j.Wini;
 import java.io.File;
 import java.io.IOException;
 
+// Win Screen Class
 public class WinScreen extends ScreenAdapter {
+    // Initializes variables
     Settings game;
     SpriteBatch batch;
     Texture testBackground;
@@ -32,9 +35,9 @@ public class WinScreen extends ScreenAdapter {
     BitmapFont font;
     Sound sound;
 
+    // Formats timestamp scores
     String minutes = String.format("%02d : ", HUD.worldTimer / 60);
     String seconds = String.format("%02d s", HUD.worldTimer % 60);
-
     String hsMinutes = String.format("%02d : ", Settings.highScore.get(LevelSelect.mapSelect) / 60);
     String hsSeconds = String.format("%02d s", Settings.highScore.get(LevelSelect.mapSelect) % 60);
 
@@ -52,9 +55,13 @@ public class WinScreen extends ScreenAdapter {
     float returnY = 0;
 
     public WinScreen(Settings game) {
+        // Assign Variables
         this.game = game;
         batch = new SpriteBatch();
         testBackground = new Texture(("TestBackground"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+
+        // Text Variables
         endText = new Texture("Text/winText.png");
         scoreText = new Texture(("Text/scoreText.png"));
         newHighScoreText = new Texture("Text/newHighScoreText.png");
@@ -62,8 +69,8 @@ public class WinScreen extends ScreenAdapter {
         nextLevelText = new Texture("Text/nextLevelText.png");
         restartText = new Texture("Text/restartText.png");
         returnText = new Texture("Text/returnText.png");
-        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
+        // Initializes Free Typer and assigns parameters
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Cyberverse Condensed Bold Italic.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = (int) buttonHeight;
@@ -104,7 +111,7 @@ public class WinScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        Main.gameObject.clear();
+        // Win Screen Input Check
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -162,6 +169,7 @@ public class WinScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        // Renders Win Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

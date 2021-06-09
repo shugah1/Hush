@@ -1,18 +1,19 @@
 package com.hush.game.Screens;
 
+// Imports Variables
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.hush.game.UI.Settings;
 
+// Help Screen Page 2 Class
 public class HelpScreen2 extends ScreenAdapter {
+    // Initializes Variables
     Settings game;
     SpriteBatch batch;
     Texture testBackground;
@@ -47,8 +48,13 @@ public class HelpScreen2 extends ScreenAdapter {
     float quitY = buttonHeight;
 
     public HelpScreen2(Settings game) {
+        // Assigns Variables
         this.game = game;
         batch = new SpriteBatch();
+        shapeRenderer = new ShapeRenderer();
+        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+
+        // Text Variables
         testBackground = new Texture(("TestBackground"));
         titleText = new Texture("Text/titleText.png");
         invisHelp = new Texture("Text/invisHelp.png");
@@ -61,22 +67,25 @@ public class HelpScreen2 extends ScreenAdapter {
         backText = new Texture("Text/backText.png");
         quitText = new Texture("Text/quitText.png");
 
+        // Images Variables
         invisImage = new Texture("HUD/invisibility-hush.png");
         armourImage = new Texture("armourImage.png");
         soundImage = new Texture("HUD/SoundBarMiniProgressCut.png");
         soundUnderImage = new Texture("HUD/LifeBarMiniUnder.png");
         timeImage = new Texture("timeImage.png");
-        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
-        shapeRenderer = new ShapeRenderer();
+
     }
 
     @Override
     public void show(){
+        // Help Screen 2 Input Check
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
+
+                // Back Button
                 if (cursorX > column1 && cursorX < column1 + buttonWidth) {
                     if (cursorY > buttonHeight && cursorY < buttonHeight + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -85,6 +94,7 @@ public class HelpScreen2 extends ScreenAdapter {
                         }
                     }
                 }
+
                 // Quit Button
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > quitY && cursorY < quitY + buttonHeight) {
@@ -101,14 +111,12 @@ public class HelpScreen2 extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        // Renders Help Screen 2
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
-
         batch.begin();
         batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
         batch.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -126,7 +134,6 @@ public class HelpScreen2 extends ScreenAdapter {
 
         batch.draw(invisImage, column2 * 1.25f, buttonHeight * 2 + helpHeight * 3, buttonWidth * 0.75f, helpHeight);
         batch.draw(armourImage, column1 * 2.2f, buttonHeight * 2 + helpHeight * 2, buttonWidth * 0.75f, helpHeight);
-
         batch.draw(soundUnderImage, column2 * 1.1f, buttonHeight * 2 + helpHeight, buttonWidth * 1.5f, helpHeight);
         batch.draw(soundImage, column2 * 1.1f, buttonHeight * 2 + helpHeight, buttonWidth * 1.5f, helpHeight);
         batch.draw(timeImage, column1 * 2.2f, buttonHeight * 2, buttonWidth * 0.9f, helpHeight);

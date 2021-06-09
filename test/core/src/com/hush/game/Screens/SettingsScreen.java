@@ -1,5 +1,6 @@
 package com.hush.game.Screens;
 
+// Imports libraries
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
@@ -7,17 +8,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.hush.game.Screens.MainMenu;
 import com.hush.game.UI.Settings;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.hush.game.constants.Globals;
 import org.ini4j.Wini;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+// Settings Screen Class
 public class SettingsScreen extends ScreenAdapter {
+    // Initializes variables
     Settings game;
     SpriteBatch batch;
     ShapeRenderer shapeRenderer;
@@ -42,23 +43,24 @@ public class SettingsScreen extends ScreenAdapter {
     float settingsY = buttonHeight * 7;
     float setX = buttonX + buttonWidth * 0.75f;
     float audioY = buttonHeight * 5;
-    float videoX = buttonX;
-    float videoY = buttonHeight * 3;
     float sliderY = buttonHeight * 5;
     float quitX = buttonX;
     float quitY = buttonHeight;
 
     public SettingsScreen(Settings game) {
+        // Assigns variables
         this.game = game;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
+        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+
+        // Text Variables
         testBackground = new Texture(("TestBackground"));
         settingsText = new Texture("Text/settingsText.png");
         audioText = new Texture("Text/audioText.png");
         videoText = new Texture("Text/videoText.png");
         settingsButtons = new Texture("Text/settingsButtons.png");
         quitText = new Texture("Text/quitText.png");
-        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Cyberverse Condensed Bold Italic.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -69,6 +71,7 @@ public class SettingsScreen extends ScreenAdapter {
 
     @Override
     public void show(){
+        // Settings Screen Input Check
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -139,6 +142,7 @@ public class SettingsScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        // Renders Settings Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();

@@ -1,5 +1,6 @@
 package com.hush.game.Screens;
 
+// Imports libraries
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Sound;
@@ -7,10 +8,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.hush.game.Screens.MainMenu;
 import com.hush.game.UI.Settings;
 
+// Splash Screen Class
 public class SplashScreen extends ScreenAdapter {
+    // Initializes and assigns variables
     Settings game;
     ShapeRenderer shapeRenderer;
     SpriteBatch batch;
@@ -37,8 +39,8 @@ public class SplashScreen extends ScreenAdapter {
     float namesY = Gdx.graphics.getHeight() - namesHeight;
 
     public SplashScreen(Settings game) {
+        // Assigns variables
         this.game = game;
-
         testBackground = new Texture(("TestBackground"));
         titleText = new Texture("Text/titleText.png");
         splashText = new Texture("Text/splashText.png");
@@ -52,6 +54,7 @@ public class SplashScreen extends ScreenAdapter {
 
     @Override
     public void show(){
+        // SplashScreen Input Check
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -68,6 +71,7 @@ public class SplashScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        // Renders Splash Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

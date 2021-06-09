@@ -1,5 +1,6 @@
 package com.hush.game.Screens;
 
+// Imports Variables
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
@@ -14,7 +15,9 @@ import com.hush.game.Main;
 import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 
+// Lose Screen Class
 public class LoseScreen extends ScreenAdapter {
+    // Initializes variables
     Settings game;
     SpriteBatch batch;
     Texture testBackground;
@@ -26,6 +29,7 @@ public class LoseScreen extends ScreenAdapter {
     BitmapFont font;
     Sound sound;
 
+    // Formats score time stamps
     String minutes = String.format("%02d : ", HUD.worldTimer / 60);
     String seconds = String.format("%02d s", HUD.worldTimer % 60);
     String hsMinutes = String.format("%02d : ", Settings.highScore.get(LevelSelect.mapSelect) / 60);
@@ -43,9 +47,13 @@ public class LoseScreen extends ScreenAdapter {
     float returnY = buttonHeight;
 
     public LoseScreen(Settings game) {
+        // Assigns variables
         this.game = game;
         batch = new SpriteBatch();
         font = new BitmapFont();
+        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+
+        // Text Variables
         testBackground = new Texture(("TestBackground"));
         endText = new Texture("Text/loseText.png");
         scoreText = new Texture(("Text/scoreText.png"));
@@ -53,8 +61,7 @@ public class LoseScreen extends ScreenAdapter {
         restartText = new Texture("Text/restartText.png");
         returnText = new Texture("Text/returnText.png");
 
-        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
-
+        // Initializes Free Typer and assigns parameters
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Cyberverse Condensed Bold Italic.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = (int)buttonHeight; // font size
@@ -65,12 +72,14 @@ public class LoseScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        Player.pDead = false;
+        // Lose Screen Input Check
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
+
+                // Restart Button
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > restartY && cursorY < restartY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -79,6 +88,8 @@ public class LoseScreen extends ScreenAdapter {
                         }
                     }
                 }
+
+                // Return Button
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > returnY && cursorY < returnY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -94,6 +105,7 @@ public class LoseScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        // Renders Lose Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

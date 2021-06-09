@@ -1,5 +1,6 @@
 package com.hush.game.Screens;
 
+// Imports libraries
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
@@ -10,7 +11,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.hush.game.Main;
 import com.hush.game.UI.Settings;
 
+// Credit Screen Class
 public class CreditScreen extends ScreenAdapter {
+    // Initializes Variables
     Settings game;
     SpriteBatch batch;
     Texture testBackground;
@@ -29,26 +32,28 @@ public class CreditScreen extends ScreenAdapter {
     float continueY = buttonHeight;
 
     public CreditScreen(Settings game) {
+        // Assigns Variables
         this.game = game;
         batch = new SpriteBatch();
         testBackground = new Texture("testBackground");
+        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+
+        // Text Variables
         congratulationsText = new Texture("Text/congratulationsText.png");
         finalImage = new Texture("finalImage.png");
         thanksText = new Texture("Text/thanksText.png");
-
         continueText = new Texture("Text/continueText.png");
-        sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
-
     }
 
     @Override
     public void show() {
-        Main.gameObject.clear();
+        // Credit Screen Input Check
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
+                // Continue Button
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > continueY && cursorY < continueY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -64,6 +69,7 @@ public class CreditScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        // Renders Credits Screen
         Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
