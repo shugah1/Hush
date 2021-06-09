@@ -6,6 +6,9 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
+/**
+ * All the boundaries within the game
+ */
 public class Wall {
 
     //declaring and initializing variables
@@ -18,14 +21,14 @@ public class Wall {
     public Body b2body;
     private Vector2 moveVector = new Vector2();
 
-    /**
-     * constructor for the Rock
+    /*Pre:
+     * constructor for the Wall
      * @param x
      * @param y
      * @param w
      * @param h
      * @param screen
-     * determines the sprite, position, and creates the b2body.
+     * Post: determines the sprite, position, and creates the b2body.
      */
     public Wall(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;

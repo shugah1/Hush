@@ -15,12 +15,14 @@ public class StaticEnemy extends Enemy{
     private Animation<TextureRegion> idle;
     private float elapsedTime = 0f;
 
-    /**
-     * constructor for the Enemy parent class
+    /*
+     * constructor for the StaticEnemy class
+     * Pre:
      * @param world
      * @param screen
      * @param x
      * @param y
+     * Post:
      * determines the sprite, position, sensor and creates the b2body of enemy.
      */
     public StaticEnemy(World world, Main screen, float x, float y) {
@@ -32,11 +34,17 @@ public class StaticEnemy extends Enemy{
         idle = new Animation<TextureRegion>(1/5f, ta.findRegions("kevin_idle"), Animation.PlayMode.LOOP);
         setRegion(idle.getKeyFrame(elapsedTime,true));
     }
-
+    /*
+    Pre: Takes in the parameter delta time, which is every frame change
+    Post: Updates the enemy position, radius and size every frame.
+     */
     @Override
     public void update(float dt) {
+        //takes in everything in parent
         super.update(dt);
+        //radius size
         detecRadius = 20 + player.sound;
+        //Sprite changes.
         setRegion(idle.getKeyFrame(elapsedTime,true));
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }

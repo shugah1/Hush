@@ -11,6 +11,9 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
+/**
+ * Necessary key to beat the level.
+ */
 public class Key extends GameObject {
 
     //declaring and initializing variables
@@ -22,14 +25,15 @@ public class Key extends GameObject {
     private TextureAtlas ta;
     private Animation<TextureRegion> key;
     private TextureRegion sprite;
-    /**
-     * constructor for the Rock
+
+    /*
+     * Pre: constructor for the Rock
      * @param x - gets x
      * @param y - gets y
      * @param w - gets width
      * @param h - gets height
      * @param screen - gets the game location
-     * determines the sprite, position, and creates the b2body.
+     * Post: determines the sprite, position, and creates the b2body.
      */
     public Key(int x, int y, float w, float h, Main screen) {
         super();
@@ -50,11 +54,11 @@ public class Key extends GameObject {
         bdef.position.set(this.x / Settings.PPM, this.y / Settings.PPM);
         bdef.type = BodyDef.BodyType.StaticBody;
         b2body = world.createBody(bdef);
-
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(getRegionWidth() / Settings.PPM,getRegionHeight() / Settings.PPM);
         fdef.friction = 0;
+        //collision
         fdef.filter.categoryBits = Tags.KEY_BIT;
         fdef.filter.maskBits = Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT | Tags.SWALL_BIT;
         fdef.shape = shape;
@@ -62,19 +66,20 @@ public class Key extends GameObject {
 
     }
 
-    /**
-     * When the player comes into contact with the key
+    /*
+     *Pre:  When the player comes into contact with the key
      * @param player
-     * Player collects the key on contact. Allows them to finish the level
+     * Post: Player collects the key on contact. Allows them to finish the level
      */
     public void contact(Player player){
         player.hasKey = true;
         remove = true;
     }
 
-    /**
-     * Every frame the rocks region is being updated, and is getting a new position
+    /*
+     * Pre:
      * @param deltaTime
+     * Post: Every frame the rocks region is being updated, and is getting a new position
      */
     public void update(float deltaTime){
         setRegion(sprite);

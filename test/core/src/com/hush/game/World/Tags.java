@@ -1,5 +1,10 @@
 package com.hush.game.World;
 
+/**
+ * Essential class in collision
+ * Pre: N/A
+ * Post: can assign each variable into a collision mask. Determines what will collide with what, and what happens.
+ */
 public class Tags {
 
     //Defines which object is which using bits

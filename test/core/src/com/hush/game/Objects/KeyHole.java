@@ -13,6 +13,9 @@ import com.hush.game.Main;
 import com.hush.game.UI.Settings;
 import com.hush.game.World.Tags;
 
+/**
+ * Unlocks a path, once key is had.
+ */
 public class KeyHole extends GameObject {
 
     //declaring and initializing variables
@@ -26,14 +29,14 @@ public class KeyHole extends GameObject {
     private TextureRegion sprite;
     private Player player;
 
-    /**
-     * constructor for the KeyHole
+    /*
+     * Pre: constructor for the KeyHole
      * @param x
      * @param y
      * @param w
      * @param h
      * @param screen
-     * determines the sprite, position, and creates the b2body.
+     * Post: determines the sprite, position, and creates the b2body.
      */
     public KeyHole(int x, int y, float w, float h, Main screen){
         this.world = Main.world;
@@ -61,6 +64,7 @@ public class KeyHole extends GameObject {
         fdef.density = 300f;
         fdef.friction = 0f;
         b2body.setFixedRotation(true);
+        //collision
         fdef.filter.categoryBits = Tags.DEFAULT_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT | Tags.SWALL_BIT;
 
@@ -68,14 +72,16 @@ public class KeyHole extends GameObject {
         b2body.createFixture(fdef).setUserData(this);
 
     }
-
+    /*Pre:
+     * @param deltaTime
+     * Post: Every frame checks if the player has the key. If they do. removes it.
+     */
     @Override
     public void update(float dt) {
         if(player.hasKey){
             remove = true;
         }
         setRegion(sprite);
-        //setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, w/Settings.PPM*2,h/Settings.PPM*2);
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }
 

@@ -18,7 +18,11 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Hashtable;
 
+/**
+ * Necessary variables needed to start the game, and setup.
+ */
 public class Settings extends Game {
+	//defines variables.
 	public SpriteBatch batch;
 	public static final int V_WIDTH = 480;
 	public static final int V_HEIGHT = 270;
@@ -40,55 +44,22 @@ public class Settings extends Game {
 
 	public static Hashtable<String, Integer> highScore;
 	public static Integer completion = 0;
-
+	/*
+	Pre: n/a
+	Post: creates the sprite batch and table holding highscore value.
+	 */
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		highScore = new Hashtable<>();
-		System.out.println(musicVolume);
 		reloadControllers();
 		setScreen(new SplashScreen(this));
 	}
 
-	public static void reloadControllers() {
-		// makes sure that there are controllers plugged in
-		if (Controllers.getControllers().size > 0) {
-			int currentController = 0;
-
-			// loops through all controllers
-			for (int i=0; i < Controllers.getControllers().size; i++) {
-				Controller cont = Controllers.getControllers().get(i);
-
-				// Checks for Xbox controllers
-				if (ControllerButtons.isXboxController(cont)) {
-					if (currentController < 4) {
-						ca.error404.bytefyte.Main.controllers[currentController] = cont;
-						currentController += 1;
-						ca.error404.bytefyte.Main.recentButtons.put(cont, new Array<Integer>());
-
-						// Creates controller
-						cont.addListener(new ControllerAdapter() {
-							public boolean buttonDown(Controller controller, int buttonIndex) {
-								ca.error404.bytefyte.Main.recentButtons.get(controller).add(buttonIndex);
-								return false;
-							}
-						});
-					}
-
-					// Add controller to controller array
-					ca.error404.bytefyte.Main.allControllers.add(cont);
-					ca.error404.bytefyte.Main.recentButtons.put(cont, new Array<Integer>());
-					cont.addListener(new ControllerAdapter() {
-						public boolean buttonDown(Controller controller, int buttonIndex) {
-							ca.error404.bytefyte.Main.recentButtons.get(controller).add(buttonIndex);
-							return false;
-						}
-					});
-				}
-			}
-		}
-	}
-
+	/*
+	Pre: n/a
+	post: renders everything in the game.
+	 */
 	@Override
 	public void render () {
 		super.render();
@@ -101,7 +72,7 @@ public class Settings extends Game {
 		//
 	}
 
-	/**
+	/*
 	 * Pre: Song Title
 	 * Post: Loads the song to be played
 	 */
@@ -155,4 +126,62 @@ public class Settings extends Game {
 		return music;
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*
+	Pre:called in create
+	Post: gets controller inputs.
+	 */
+	public static void reloadControllers() {
+		// makes sure that there are controllers plugged in
+		if (Controllers.getControllers().size > 0) {
+			int currentController = 0;
+
+			// loops through all controllers
+			for (int i=0; i < Controllers.getControllers().size; i++) {
+				Controller cont = Controllers.getControllers().get(i);
+
+				// Checks for Xbox controllers
+				if (ControllerButtons.isXboxController(cont)) {
+					if (currentController < 4) {
+						ca.error404.bytefyte.Main.controllers[currentController] = cont;
+						currentController += 1;
+						ca.error404.bytefyte.Main.recentButtons.put(cont, new Array<Integer>());
+
+						// Creates controller
+						cont.addListener(new ControllerAdapter() {
+							public boolean buttonDown(Controller controller, int buttonIndex) {
+								ca.error404.bytefyte.Main.recentButtons.get(controller).add(buttonIndex);
+								return false;
+							}
+						});
+					}
+
+					// Add controller to controller array
+					ca.error404.bytefyte.Main.allControllers.add(cont);
+					ca.error404.bytefyte.Main.recentButtons.put(cont, new Array<Integer>());
+					cont.addListener(new ControllerAdapter() {
+						public boolean buttonDown(Controller controller, int buttonIndex) {
+							ca.error404.bytefyte.Main.recentButtons.get(controller).add(buttonIndex);
+							return false;
+						}
+					});
+				}
+			}
+		}
+	}
 }

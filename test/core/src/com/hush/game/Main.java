@@ -29,8 +29,11 @@ import org.ini4j.Wini;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * main class that runs the game.
+ */
 public class Main implements Screen {
-
+    //variables
     public static World world;
     private OrthographicCamera cam;
     public Player player;
@@ -60,15 +63,20 @@ public class Main implements Screen {
     float resumeY = buttonHeight * 5;
     float restartY = buttonHeight * 3;
     float returnY = buttonHeight;
-
+    /*
+    Pre: settings to get setup
+    Post: loads in everything.
+     */
     public Main(Settings game){
+        //loads atlas
         Settings.manager.load("sprites/player.atlas", TextureAtlas.class);
         Settings.manager.finishLoading();
         this.game = game;
+        //creates camera and world
         cam = new OrthographicCamera();
         world = new World(new Vector2(0, 0/ Settings.PPM), true);
-
         gameMap = new TiledGameMap("test/core/assets/TiledMaps/" + LevelSelect.mapSelect + ".tmx", this, game);
+
         // loads save data and assigns variables
         File settings = new File(Globals.workingDirectory + "settings.ini");
         try {
@@ -78,14 +86,15 @@ public class Main implements Screen {
         } catch (Exception ignored) {
             Settings.highScore.put(LevelSelect.mapSelect, Integer.MAX_VALUE);
         }
-
+        //creates the gameport and cam position.
         gamePort = new StretchViewport(Settings.V_WIDTH / Settings.PPM,Settings.V_HEIGHT / Settings.PPM,cam);
         cam.position.set(gamePort.getWorldWidth() /2, gamePort.getWorldHeight() / 2, 0);
         cam.update();
 
         b2dr = new Box2DDebugRenderer();
+        //calls the collision.
         world.setContactListener(new WorldContactListener());
-
+        //gets song name in regards to each level.
         if (!Settings.songName.equalsIgnoreCase(LevelSelect.mapSelect) ) {
             Settings.music = game.newSong(LevelSelect.mapSelect);
 
@@ -109,13 +118,18 @@ public class Main implements Screen {
     public void show() {
         //
     }
-
+    /*
+    Pre: dt
+    Post: Updates everthing in the game.
+     */
     public void update(float dt) {
+        //checks if player wins
         if (player.win) {
             game.setScreen(new WinScreen(game));
             player.win = false;
             gameObject.clear();
         }
+        //checks if player loses.
         if (player.pDead) {
             game.setScreen(new LoseScreen(game));
             player.pDead = false;
@@ -125,7 +139,7 @@ public class Main implements Screen {
         if (game.music.getPosition() >= game.songLoopEnd) {
             game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
         }
-
+        //loops through all the game objects and destroys, adds or updates them.
         for( int i = 0; i < gameObject.size(); i++){
             if (gameObject.get(i).remove){
                 try{
@@ -174,9 +188,9 @@ public class Main implements Screen {
             paused = true;
             System.out.println("Paused");
         }
-
+        //world time
         world.step(1/60f,6,2);
-
+        //tells the camera to follow the player.
         try {
             cam.position.x = player.b2body.getTransform().getPosition().x;
             cam.position.y = player.b2body.getTransform().getPosition().y;
@@ -186,7 +200,7 @@ public class Main implements Screen {
         }
 
         cam.update();
-
+        //updates the gameobjects list.
         gameObject.addAll(gameObjectAdd);
         gameObject.removeAll(gameObjectBye);
         gameObjectAdd.clear();
@@ -194,9 +208,13 @@ public class Main implements Screen {
 
         hud.update(dt);
     }
-
+    /*
+    Pre:delta time
+    Post: renders everything in the game.
+     */
     @Override
     public void render(float delta) {
+        //shows the pause screen.
         if (paused) {
             Gdx.input.setInputProcessor(new InputAdapter() {
                 // Pause Menu Input
@@ -252,6 +270,7 @@ public class Main implements Screen {
             batch.draw(returnText, buttonX, returnY, buttonWidth, buttonHeight);
             batch.end();
         }
+        // if not paused, renders the world
         else {
             update(delta);
             Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -270,7 +289,10 @@ public class Main implements Screen {
             hud.render();
         }
     }
-
+    /*
+    Pre: width, height.
+    Post: updates the games width and height.
+     */
     @Override
     public void resize(int width, int height) {
         gamePort.update(width,height);
@@ -291,7 +313,10 @@ public class Main implements Screen {
     public void hide() {
 
     }
-
+    /*
+    Pre: N/A
+    Post: disposes everything.
+     */
     @Override
     public void dispose() {
         game.batch.dispose();

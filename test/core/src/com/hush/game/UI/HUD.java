@@ -1,6 +1,5 @@
 package com.hush.game.UI;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,7 +14,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.hush.game.Entities.Player;
 import com.hush.game.Main;
 
-
+/**
+ * shows information on the screen. i.e time, powerups.
+ */
 public class HUD  {
     //Initializing and defining Variables
     public Stage stage;
@@ -40,7 +41,10 @@ public class HUD  {
     Label hushLabel;
     private static Label armourLabel;
     private static Label invisLabel;
-
+    /*
+    Pre: Main, to be put on the world
+    Post: adds everything onto the screen.
+     */
     public HUD (Main game){
         //Defining some Variables
         worldTimer = 0;
@@ -74,7 +78,10 @@ public class HUD  {
         table.add(armourLabel).expandX();
         stage.addActor(table);
     }
-
+    /*
+    Pre: dt
+    Post: updates the counter every frame.
+     */
     public void update(float dt){
         //Counts the time and updates the time count label
         timeCount += dt;
@@ -85,6 +92,10 @@ public class HUD  {
             timeCount = 0;
         }
     }
+    /*
+    Pre: stun called.
+    Post: Decreases the counter on the stun.
+     */
     public static void stunCounter() {
         //Reduces the armour counter by 1
         if (armourInv > 0){
@@ -92,6 +103,10 @@ public class HUD  {
             armourLabel.setText(String.format("%01d", armourInv));
         }
     }
+    /*
+    Pre: invis called.
+    Post: decreases the invis counter
+     */
     public static void invisCounter() {
         //Reduces the invisibility counter by 1
         if (invisInv > 0){
@@ -100,6 +115,10 @@ public class HUD  {
         }
 
     }
+    /*
+    Pre: N/A
+    Post: renders all the images necessary for the HUD.
+     */
     public void render(){
         //Draws the stamina and sound bar
         batch.begin();

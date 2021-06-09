@@ -10,6 +10,9 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
+/**
+ * Moveable wall.
+ */
 public class Rock extends GameObject {
 
     //declaring and initializing variables
@@ -22,14 +25,14 @@ public class Rock extends GameObject {
     private Animation<TextureRegion> key;
     private TextureRegion sprite;
 
-    /**
-     * constructor for the Rock
+    /*
+     * Pre: constructor for the Rock
      * @param x
      * @param y
      * @param w
      * @param h
      * @param screen
-     * determines the sprite, position, and creates the b2body.
+     * Post: determines the sprite, position, and creates the b2body.
      */
     public Rock(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
@@ -56,6 +59,7 @@ public class Rock extends GameObject {
         fdef.density = 300f;
         fdef.friction = 0f;
         b2body.setFixedRotation(true);
+        //collision
         fdef.filter.categoryBits = Tags.WALL_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT | Tags.SWALL_BIT;
 
@@ -64,22 +68,21 @@ public class Rock extends GameObject {
 
 
     }
-    /**
-     * When the player comes into contact with the rock
+    /*
+     * Pre: When the player comes into contact with the rock
      * @param player
-     * Stops the rock once the player stops touching it
+     * Post: Stops the rock once the player stops touching it
      */
     public void contact(Player player){
         b2body.setLinearVelocity(0f,0f);
     }
 
-    /**
-     * Every frame the rocks region is being updated, and is getting a new position
+    /*Pre:
      * @param deltaTime
+     * Post: Every frame the rocks region is being updated, and is getting a new position
      */
     public void update(float deltaTime){
         setRegion(sprite);
-        //setBounds(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2, w/Settings.PPM*2,h/Settings.PPM*2);
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);}
 
 }

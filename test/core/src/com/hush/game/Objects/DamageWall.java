@@ -20,14 +20,15 @@ public class DamageWall {
     public Fixture fix;
     public Body b2body;
 
-    /**
+    /*
      * constructor for the DamageWall
+     * Pre:
      * @param x
      * @param y
      * @param w
      * @param h
      * @param screen
-     * determines the sprite, position, and creates the b2body.
+     * Post: determines the sprite, position, and creates the b2body.
      */
     public DamageWall(int x, int y, float w, float h, Main screen) {
         this.world = Main.world;
@@ -46,7 +47,7 @@ public class DamageWall {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(this.w / Settings.PPM,this.h / Settings.PPM);
         fdef.friction = 0;
-
+        //collision.
         fdef.filter.categoryBits = Tags.DAMAGE_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.WALL_BIT | Tags.SWALL_BIT;
 
@@ -54,7 +55,7 @@ public class DamageWall {
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    /**
+    /*
      * On contact with the player, the player will die.
      * @param player
      */

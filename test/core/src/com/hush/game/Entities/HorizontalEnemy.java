@@ -21,12 +21,14 @@ public class HorizontalEnemy extends Enemy{
     final private Animation<TextureRegion> SpriteRight;
     TextureRegion Horizontalsprite;
 
-    /**
-     * constructor for the Enemy parent class
+    /*
+     * constructor for the HorizontalEnemy class
+     * Pre:
      * @param world
      * @param screen
      * @param x
      * @param y
+     * Post:
      * determines the sprite, position, sensor and creates the b2body of enemy.
      */
     public HorizontalEnemy(World world, Main screen, float x, float y) {
@@ -41,11 +43,17 @@ public class HorizontalEnemy extends Enemy{
 
 
     }
+    /*
+    Pre: Takes in the parameter delta time, which is every frame change
+    Post: Updates the enemy position, radius and size every frame.
+     */
     @Override
     public void update(float dt) {
-
+        //parent class update
         super.update(dt);
+        //radius changes
         detecRadius = 20 + player.sound;
+        //calls the walk function
         walk();
 
         //Creates a timer than changes the direction of the enemy
@@ -62,12 +70,18 @@ public class HorizontalEnemy extends Enemy{
         setRegion(Horizontalsprite);
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }
-
+    /*
+    Pre: N/A
+    Post: Causes the enemy to turn around when called.
+     */
     public void changeDir(){
         speed *= -1;
 
-
     }
+    /*
+    Pre:N/A
+    Post: Calls on the function and causes the enemy to walk.
+     */
     public void walk() {
         //Checks the directional vector of the enemy sets the sprite to the corresponding direction
         if (HorizontalVector.x < 0) {

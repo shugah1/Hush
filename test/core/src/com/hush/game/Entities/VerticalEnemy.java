@@ -20,12 +20,14 @@ public class VerticalEnemy extends Enemy{
     final private Animation<TextureRegion> SpriteDown;
     TextureRegion Verticalsprite;
 
-    /**
-     * constructor for the Enemy parent class
+    /*
+     * constructor for the VerticalEnemy class
+     * Pre:
      * @param world
      * @param screen
      * @param x
      * @param y
+     * Post:
      * determines the sprite, position, sensor and creates the b2body of enemy.
      */
     public VerticalEnemy(World world, Main screen, float x, float y) {
@@ -37,10 +39,15 @@ public class VerticalEnemy extends Enemy{
         Verticalsprite = SpriteDown.getKeyFrame(0, true);
         setRegion(Verticalsprite);
     }
+    /*
+    Pre: Takes in the parameter delta time, which is every frame change
+    Post: Updates the enemy position, radius and size every frame.
+     */
     @Override
     public void update(float dt) {
-
+        //updates based on the parent
         super.update(dt);
+        //updates the radius.
         detecRadius = 20 + player.sound;
         walk();
 
@@ -59,12 +66,17 @@ public class VerticalEnemy extends Enemy{
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
 
     }
-
+    /*
+    Pre: N/A
+    Post: Causes the enemy to turn around when called.
+     */
     public void changeDir(){
         speed *= -1;
-
-
     }
+    /*
+   Pre:N/A
+   Post: Calls on the function and causes the enemy to walk.
+    */
     public void walk() {
         //Checks the directional vector of the enemy sets the sprite to the corresponding direction
         if (VerticalVector.y < 0) {

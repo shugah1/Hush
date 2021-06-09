@@ -6,7 +6,9 @@ import com.hush.game.UI.Settings;
 import com.hush.game.Main;
 import com.hush.game.World.Tags;
 
-
+/**
+ * Goal to reach to beat the level.
+ */
 public class Goal {
     //declaring and initializing variables
     public World world;
@@ -42,6 +44,11 @@ public class Goal {
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
     }
+    /*
+     * Pre: When the player comes into contact with the goal
+     * @param player
+     * Post: Player collects the goal on contact. Allows them to finish the level
+     */
 
     public void contact(Player player) {
         player.win = true;

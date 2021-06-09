@@ -1,8 +1,6 @@
 package com.hush.game.Entities;
 
-import com.badlogic.gdx.ai.utils.RaycastCollisionDetector;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -32,8 +30,8 @@ public class DynamicEnemy extends Enemy{
     private boolean canMove = true;
     TextureRegion Enemysprite;
 
-    /**
-     * constructor for the Enemy parent class
+    /*
+     * constructor for the DynamicEnemy class
      * @param world
      * @param screen
      * @param x
@@ -60,17 +58,23 @@ public class DynamicEnemy extends Enemy{
 
 
     }
-    /**
-     * Every frame the enemy region is being updated, and is getting a new position
+    /*
+     * Pre:
      * @param dt
+     * updates what happens to it every frame.
+     * Post: Every frame the enemy region is being updated, and is getting a new position
      * Increases sensor range and finds a new position
      */
     @Override
     public void update(float dt) {
+        //updates from the super.
         super.update(dt);
+        //updates the radius
         detecRadius = 20 + player.sound;
+        // if the enemy is close enough it will go to a position
         closeEnough = pos.dst(goToPos) <= (speed * dt);
         walk();
+        //if close enough, then it grabs a random number from a range, checks if it is possible, and then moves to it.
         if(count == 0 && closeEnough){
             count = countMax;
             float randX = r.nextFloat() * range;
@@ -85,22 +89,26 @@ public class DynamicEnemy extends Enemy{
         } else {
             count = Math.max(0, count-dt);
         }
-
+        // after all the checks, it goes to the position.
         pos.lerp(goToPos, speed);
         b2body.setTransform(pos, 0);
-
+        //updates the sprite and set the bounds.
         setRegion(Enemysprite);
         setBounds(b2body.getPosition().x - getRegionWidth() / Settings.PPM / 2f, b2body.getPosition().y - getRegionHeight() / Settings.PPM / 2f, getRegionWidth() / Settings.PPM, getRegionHeight() / Settings.PPM);
     }
-    /**
-     * Checks if area is blocked or not by a wall
-     * @param toPoint
+    /*
+     * Pre:
+     * @param toPoint, checks the point that the ray hits.
+     * Post: Checks if area is blocked or not by a wall
      * returns true or false if wall is blocking or not
      */
     public boolean findPos(Vector2 toPoint){
-
         RayCastCallback callback = new RayCastCallback() {
             @Override
+            /*
+            Pre: Fixture, point, normal, fraction.
+            Post: Draws the raycast, between the fixture, initial and final point.
+             */
             public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
                 if(fixture.getFilterData().categoryBits == Tags.DEFAULT_BIT || fixture.getFilterData().categoryBits == Tags.DAMAGE_BIT){
                     canMove = false;
@@ -112,12 +120,12 @@ public class DynamicEnemy extends Enemy{
 
             }
         };
+        //calls the raycast.
         world.rayCast(callback, pos, toPoint);
-        System.out.println(canMove);
         return canMove;
     }
-    /**
-     * Updates the enemy sprite based on its movement
+    /*Pre: N/A
+    Post: Updates the enemy sprite based on its movement
      */
     public void walk() {
 

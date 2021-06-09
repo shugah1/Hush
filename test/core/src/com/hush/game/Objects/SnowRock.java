@@ -27,14 +27,14 @@ public class SnowRock extends GameObject {
     private Animation<TextureRegion> key;
     private TextureRegion sprite;
 
-    /**
-     * constructor for the SnowRock
+    /*
+     * Pre: constructor for the SnowRock
      * @param x
      * @param y
      * @param w
      * @param h
      * @param screen
-     * determines the sprite, position, and creates the b2body.
+     * Post: determines the sprite, position, and creates the b2body.
      */
     public SnowRock(int x, int y, float w, float h, Main screen) {
         super();
@@ -62,6 +62,7 @@ public class SnowRock extends GameObject {
         fdef.density = 300f;
         fdef.friction = 0f;
         b2body.setFixedRotation(true);
+        //collision
         fdef.filter.categoryBits = Tags.SWALL_BIT;
         fdef.filter.maskBits = Tags.DEFAULT_BIT | Tags.PLAYER_BIT | Tags.ENEMY_BIT | Tags.PROJECTILE_BIT | Tags.DAMAGE_BIT | Tags.WALL_BIT;
 
@@ -71,18 +72,19 @@ public class SnowRock extends GameObject {
 
     }
 
-    /**
-     * When the player comes into contact with the rock
+    /*
+     * Pre: When the player comes into contact with the rock
      * @param player
-     * Stops the rock once the player stops touching it
+     * Post: Stops the rock once the player stops touching it
      */
     public void contact(Player player){
         b2body.setLinearVelocity(0f,0f);
     }
 
-    /**
-     * Every frame the rocks region is being updated, and is getting a new position
+    /*
+     * Pre:
      * @param deltaTime
+     * Post: Every frame the rocks region is being updated, and is getting a new position
      */
     public void update(float deltaTime){
         setRegion(sprite);
