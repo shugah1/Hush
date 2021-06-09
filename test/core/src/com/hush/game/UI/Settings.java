@@ -30,13 +30,13 @@ public class Settings extends Game {
 	public static AssetManager audioManager = new AssetManager();
 	public static AssetManager manager = new AssetManager();
 
-	public static Hashtable<String, Integer> highScore;
-	public static Integer completion = 0;
+	public static Hashtable<String, Integer> highScore = new Hashtable<>();
+	public static Hashtable<String, Integer> completion = new Hashtable<>();
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		highScore = new Hashtable<>();
+
 		System.out.println(musicVolume);
 		setScreen(new SplashScreen(this));
 	}

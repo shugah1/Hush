@@ -10,51 +10,56 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.hush.game.Main;
-import com.hush.game.Screens.MainMenu;
 import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 import com.hush.game.constants.Globals;
 import org.ini4j.Wini;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.logging.Level;
 
 public class WinScreen extends ScreenAdapter {
     Settings game;
     SpriteBatch batch;
+    Texture testBackground;
     Texture endText;
     Texture scoreText;
     Texture newHighScoreText;
+    Texture oldHighScoreText;
+    Texture nextLevelText;
     Texture restartText;
     Texture returnText;
     BitmapFont font;
     Sound sound;
 
-    int minutes = HUD.worldTimer / 60;
-    int seconds = HUD.worldTimer % 60;
-    String score = minutes + " : " + seconds + " s";
+    String minutes = String.format("%02d : ", HUD.worldTimer / 60);
+    String seconds = String.format("%02d s", HUD.worldTimer % 60);
+
+    String hsMinutes = String.format("%02d : ", Settings.highScore.get(LevelSelect.mapSelect) / 60);
+    String hsSeconds = String.format("%02d s", Settings.highScore.get(LevelSelect.mapSelect) % 60);
+
     int cursorX;
     int cursorY;
-    float buttonWidth = Gdx.graphics.getWidth() / 5;
-    float buttonHeight = Gdx.graphics.getHeight() / 9;
-    float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
+    float buttonWidth = Gdx.graphics.getWidth() / 5f;
+    float buttonHeight = Gdx.graphics.getHeight() / 9f;
+    float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2f;
 
     boolean newHighScore = false;
     float winY = buttonHeight * 7;
     float scoreY = buttonHeight * 5;
-    float restartY = buttonHeight * 3;
-    float returnY = buttonHeight;
+    float nextY = buttonHeight * 2.5f;
+    float restartY = buttonHeight * 1.25f;
+    float returnY = 0;
 
     public WinScreen(Settings game) {
         this.game = game;
         batch = new SpriteBatch();
+        testBackground = new Texture(("TestBackground"));
         endText = new Texture("Text/winText.png");
         scoreText = new Texture(("Text/scoreText.png"));
-        newHighScoreText = new Texture(("Text/newHighScoreText.png"));
+        newHighScoreText = new Texture("Text/newHighScoreText.png");
+        oldHighScoreText = new Texture("Text/oldHighScoreText.png");
+        nextLevelText = new Texture("Text/nextLevelText.png");
         restartText = new Texture("Text/restartText.png");
         returnText = new Texture("Text/returnText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
@@ -83,18 +88,18 @@ public class WinScreen extends ScreenAdapter {
             }
         }
 
-        if (Settings.highScore.get(LevelSelect.mapSelect) > 0) {
-            // Writes Completion to the settings file
-            File settings = new File(Globals.workingDirectory + "settings.ini");
-            try {
-                Wini ini = new Wini(settings);
-                ini.add("Completion", "Completed", Settings.completion += 1);
-                ini.store();
-                System.out.println("ooga booga");
-            } catch (IOException e) {
+        // Writes Completion to the settings file
+        Settings.completion.put(LevelSelect.mapSelect, 1);
+        File settings = new File(Globals.workingDirectory + "settings.ini");
+        try {
+            Wini ini = new Wini(settings);
+            ini.add("Completion", LevelSelect.mapSelect, 1);
+            ini.store();
+            System.out.println("ooga booga");
+        } catch (IOException e) {
                 e.printStackTrace();
-            }
         }
+
     }
 
     @Override
@@ -105,6 +110,34 @@ public class WinScreen extends ScreenAdapter {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
+                // Next Level Button
+                if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
+                    if (cursorY > nextY && cursorY < nextY + buttonHeight) {
+                        if (Gdx.input.isTouched()) {
+                            switch (LevelSelect.mapSelect) {
+                                case "Tutorial":
+                                    LevelSelect.mapSelect = "Level 1";
+                                    break;
+                                case "Level 1":
+                                    LevelSelect.mapSelect = "Level 2";
+                                    break;
+                                case "Level 2":
+                                    LevelSelect.mapSelect = "Level 3";
+                                    break;
+                                case "Level 3":
+                                    LevelSelect.mapSelect = "Level 4";
+                                    break;
+                                case "Level 4":
+                                    LevelSelect.mapSelect = "Level 5";
+                                    break;
+                            }
+                            sound.play(0.25f);
+                            game.setScreen(new Main(game));
+                        }
+                    }
+                }
+
+                // Restart Button
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > restartY && cursorY < restartY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -113,6 +146,7 @@ public class WinScreen extends ScreenAdapter {
                         }
                     }
                 }
+                // Return Button
                 if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > returnY && cursorY < returnY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
@@ -132,15 +166,21 @@ public class WinScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(endText, buttonX, winY, buttonWidth, buttonHeight);
         batch.draw(scoreText, buttonX - buttonWidth, scoreY, buttonWidth, buttonHeight);
+        batch.draw(nextLevelText, buttonX, nextY, buttonWidth, buttonHeight);
         batch.draw(restartText, buttonX, restartY, buttonWidth, buttonHeight);
         batch.draw(returnText, buttonX, returnY, buttonWidth, buttonHeight);
-        font.draw(batch, score, buttonX + buttonWidth * 0.75f, scoreY + buttonHeight * 0.8f);
+        font.draw(batch, minutes + seconds, buttonX + buttonWidth * 0.75f, scoreY + buttonHeight * 0.8f);
 
         // Checks and prints New High Score notification
         if (newHighScore) {
-            batch.draw(newHighScoreText, buttonX, scoreY - buttonHeight * 3/4, buttonWidth, buttonHeight * 3/4);
+            batch.draw(newHighScoreText, buttonX, buttonHeight * 3.5f, buttonWidth, buttonHeight);
+        }
+        else {
+            batch.draw(oldHighScoreText, buttonX - buttonWidth, buttonHeight * 3.5f, buttonWidth, buttonHeight);
+            font.draw(batch, hsMinutes + hsSeconds, buttonX + buttonWidth * 0.75f, buttonHeight * 3.5f + buttonHeight * 0.8f);
         }
         batch.end();
     }

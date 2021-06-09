@@ -17,40 +17,39 @@ import com.hush.game.UI.Settings;
 public class LoseScreen extends ScreenAdapter {
     Settings game;
     SpriteBatch batch;
+    Texture testBackground;
     Texture endText;
     Texture scoreText;
+    Texture oldHighScoreText;
     Texture restartText;
     Texture returnText;
     BitmapFont font;
     Sound sound;
-    HUD hud;
-    Player player;
 
+    String minutes = String.format("%02d : ", HUD.worldTimer / 60);
+    String seconds = String.format("%02d s", HUD.worldTimer % 60);
+    String hsMinutes = String.format("%02d : ", Settings.highScore.get(LevelSelect.mapSelect) / 60);
+    String hsSeconds = String.format("%02d s", Settings.highScore.get(LevelSelect.mapSelect) % 60);
 
-    int minutes = hud.worldTimer / 60;
-    int seconds = hud.worldTimer % 60;
-    String score = minutes + " : " + seconds  + " s";
     int cursorX;
     int cursorY;
-    float buttonWidth = Gdx.graphics.getWidth() / 5;
-    float buttonHeight = Gdx.graphics.getHeight() / 9;
-    float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
+    float buttonWidth = Gdx.graphics.getWidth() / 5f;
+    float buttonHeight = Gdx.graphics.getHeight() / 9f;
+    float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
 
-    float endX = buttonX;
     float endY = buttonHeight * 7;
-    float scoreX = buttonX;
     float scoreY = buttonHeight * 5;
-    float restartX = buttonX;
-    float restartY = buttonHeight * 3;
-    float returnX = buttonX;
+    float restartY = buttonHeight * 2.25f;
     float returnY = buttonHeight;
 
     public LoseScreen(Settings game) {
         this.game = game;
         batch = new SpriteBatch();
         font = new BitmapFont();
+        testBackground = new Texture(("TestBackground"));
         endText = new Texture("Text/loseText.png");
         scoreText = new Texture(("Text/scoreText.png"));
+        oldHighScoreText = new Texture("Text/oldHighScoreText.png");
         restartText = new Texture("Text/restartText.png");
         returnText = new Texture("Text/returnText.png");
 
@@ -72,7 +71,7 @@ public class LoseScreen extends ScreenAdapter {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 cursorX = Gdx.input.getX();
                 cursorY = Gdx.graphics.getHeight() - Gdx.input.getY();
-                if (cursorX > restartX && cursorX < restartX + buttonWidth) {
+                if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > restartY && cursorY < restartY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
@@ -80,7 +79,7 @@ public class LoseScreen extends ScreenAdapter {
                         }
                     }
                 }
-                if (cursorX > returnX && cursorX < returnX + buttonWidth) {
+                if (cursorX > buttonX && cursorX < buttonX + buttonWidth) {
                     if (cursorY > returnY && cursorY < returnY + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
@@ -99,12 +98,16 @@ public class LoseScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(endText, endX, endY, buttonWidth, buttonHeight);
-        batch.draw(scoreText, scoreX - buttonWidth, scoreY, buttonWidth, buttonHeight);
-        batch.draw(restartText, restartX, restartY, buttonWidth, buttonHeight);
-        batch.draw(returnText, returnX, returnY, buttonWidth, buttonHeight);
+        batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.draw(endText, buttonX, endY, buttonWidth, buttonHeight);
+        batch.draw(scoreText, buttonX - buttonWidth, scoreY, buttonWidth, buttonHeight);
+        batch.draw(restartText, buttonX, buttonHeight * 2.25f, buttonWidth, buttonHeight);
+        batch.draw(returnText, buttonX, returnY, buttonWidth, buttonHeight);
 
-        font.draw(batch, score, buttonX + buttonWidth * 0.75f, scoreY + buttonHeight * 0.8f);
+        font.draw(batch, minutes + seconds, buttonX + buttonWidth * 0.75f, scoreY + buttonHeight * 0.8f);
+
+        batch.draw(oldHighScoreText, buttonX - buttonWidth, buttonHeight * 3.5f, buttonWidth, buttonHeight);
+        font.draw(batch, hsMinutes + hsSeconds, buttonX + buttonWidth * 0.75f, buttonHeight * 3.5f + buttonHeight * 0.8f);
         batch.end();
 
     }

@@ -1,11 +1,14 @@
 package com.hush.game.Screens;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.hush.game.Main;
 import com.hush.game.UI.Settings;
@@ -13,11 +16,15 @@ import com.hush.game.constants.Globals;
 import org.ini4j.Wini;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class LevelSelect extends ScreenAdapter {
     Settings game;
     ShapeRenderer shapeRenderer;
     SpriteBatch batch;
+    Texture testBackground;
     Texture selectText;
     Texture tutorialText;
     Texture level1Text;
@@ -27,12 +34,14 @@ public class LevelSelect extends ScreenAdapter {
     Texture level5Text;
     Texture quitText;
     Sound sound;
+    BitmapFont font;
+
 
     int cursorX;
     int cursorY;
-    float buttonWidth = Gdx.graphics.getWidth() / 5;
-    float buttonHeight = Gdx.graphics.getHeight() / 9;
-    float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
+    float buttonWidth = Gdx.graphics.getWidth() / 5f;
+    float buttonHeight = Gdx.graphics.getHeight() / 9f;
+    float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
 
     float selectX = buttonX;
     float selectY = buttonHeight * 7;
@@ -41,12 +50,17 @@ public class LevelSelect extends ScreenAdapter {
     float quitX = buttonX;
     float quitY = buttonHeight;
 
-    public static String mapSelect = "Tutorial(Midpoint)";
+    public static String mapSelect;
+
+
+    String hsMinutes = String.format("%02d : ", Settings.highScore.get("Tutorial") / 60);
+    String hsSeconds = String.format("%02d s", Settings.highScore.get("Tutorial") % 60);
 
     public LevelSelect(Settings game) {
         this.game = game;
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
+        testBackground = new Texture(("TestBackground"));
         selectText = new Texture("Text/selectText.png");
         tutorialText = new Texture("Text/tutorialText.png");
 
@@ -63,10 +77,22 @@ public class LevelSelect extends ScreenAdapter {
         File settings = new File(Globals.workingDirectory + "settings.ini");
         try {
             Wini ini = new Wini(settings);
-            Settings.completion = Integer.parseInt(ini.get("Completion", "Completed"));
+            Settings.completion.put("Tutorial", Integer.parseInt(ini.get("Completion", "Tutorial")));
+            Settings.completion.put("Level 1", Integer.parseInt(ini.get("Completion", "Level 1")));
+            Settings.completion.put("Level 2", Integer.parseInt(ini.get("Completion", "Level 2")));
+            Settings.completion.put("Level 3", Integer.parseInt(ini.get("Completion", "Level 3")));
+            Settings.completion.put("Level 4", Integer.parseInt(ini.get("Completion", "Level 4")));
+            Settings.completion.put("Level 5", Integer.parseInt(ini.get("Completion", "Level 5")));
 
         } catch (Exception ignored) {
+
         }
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Cyberverse Condensed Bold Italic.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = (int) buttonHeight;
+        font = generator.generateFont(parameter);
+        font.setColor(0f, 104f, 255f, 1f);
     }
 
     @Override
@@ -81,71 +107,71 @@ public class LevelSelect extends ScreenAdapter {
                     if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
                         if (Gdx.input.isTouched()) {
                             sound.play(0.25f);
-                            mapSelect = "Tutorial(MidPoint)";
+                            mapSelect = "Tutorial";
                             Settings.music.stop();
                             game.setScreen(new Main(game));
                         }
                     }
                 }
-                // Level 1 Button
-                if (Settings.completion >= 1) {
+                // Level 1 Button and Tutorial Completion Check
+                if (Settings.completion.get("Tutorial") == 1) {
                     if (cursorX >= buttonX && cursorX <= buttonX + buttonWidth) {
                         if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
                             if (Gdx.input.isTouched()) {
                                 sound.play(0.25f);
-                                mapSelect = "Level1";
+                                mapSelect = "Level 1";
                                 Settings.music.stop();
                                 game.setScreen(new Main(game));
                             }
                         }
                     }
                 }
-                // Level 2 Button
-                if (Settings.completion >= 2) {
+                // Level 2 Button and Level 1 Completion Check
+                if (Settings.completion.get("Level 1") == 1) {
                     if (cursorX >= buttonX + buttonWidth * 1.5f && cursorX <= buttonX + buttonWidth * 1.5f + buttonWidth) {
                         if (cursorY >= row1Y && cursorY <= row1Y + buttonHeight) {
                             if (Gdx.input.isTouched()) {
                                 sound.play(0.25f);
-                                mapSelect = "Rocky copy";
+                                mapSelect = "Level 2";
                                 Settings.music.stop();
                                 game.setScreen(new Main(game));
                             }
                         }
                     }
                 }
-                // Level 3 Button
-                if (Settings.completion >= 3) {
+                // Level 3 Button and Level 2 Completion Check
+                if (Settings.completion.get("Level 2") == 1) {
                     if (cursorX >= buttonX - buttonWidth * 1.5f && cursorX <= buttonX - buttonWidth * 1.5f + buttonWidth) {
                         if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
                             if (Gdx.input.isTouched()) {
                                 sound.play(0.25f);
-                                mapSelect = "Winter copy";
+                                mapSelect = "Level 3";
                                 Settings.music.stop();
                                 game.setScreen(new Main(game));
                             }
                         }
                     }
                 }
-                // Level 4 Button
-                if (Settings.completion >= 4) {
+                // Level 4 Button and Level 3 Completion Check
+                if (Settings.completion.get("Level 3") == 1) {
                     if (cursorX >= buttonX && cursorX <= buttonX + buttonWidth) {
                         if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
                             if (Gdx.input.isTouched()) {
                                 sound.play(0.25f);
-                                mapSelect = "";
+                                mapSelect = "Level 4";
                                 Settings.music.stop();
                                 game.setScreen(new Main(game));
                             }
                         }
                     }
                 }
-                // Level 5 Button
-                if (Settings.completion >= 5) {
+                // Level 5 Button and Level 4 Completion Check
+                if (Settings.completion.get("Level 4") == 1) {
                     if (cursorX >= buttonX + buttonWidth * 1.5f && cursorX <= buttonX + buttonWidth * 1.5f + buttonWidth) {
                         if (cursorY >= row2Y && cursorY <= row2Y + buttonHeight) {
                             if (Gdx.input.isTouched()) {
                                 sound.play(0.25f);
-                                mapSelect = "";
+                                mapSelect = "Level 5";
                                 Settings.music.stop();
                                 game.setScreen(new Main(game));
                             }
@@ -173,28 +199,30 @@ public class LevelSelect extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        batch.draw(testBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(selectText, selectX, selectY, buttonWidth, buttonHeight);
         batch.draw(tutorialText, buttonX - buttonWidth * 1.5f, row1Y, buttonWidth, buttonHeight);
 
-        if (Settings.completion >= 1) {
+        if (Settings.completion.get("Tutorial") == 1) {
             batch.draw(level1Text, buttonX, row1Y, buttonWidth, buttonHeight);
+
+            font.draw(batch, hsMinutes + hsSeconds, buttonX, row1Y);
         }
-        if (Settings.completion >= 2) {
+        if (Settings.completion.get("Level 1") == 1) {
             batch.draw(level2Text, buttonX + buttonWidth * 1.5f, row1Y, buttonWidth, buttonHeight);
         }
-        if (Settings.completion >= 3) {
+        if (Settings.completion.get("Level 2") == 1) {
             batch.draw(level3Text, buttonX - buttonWidth * 1.5f, row2Y, buttonWidth, buttonHeight);
         }
-        if (Settings.completion >= 4) {
+        if (Settings.completion.get("Level 3") == 1) {
             batch.draw(level4Text, buttonX, row2Y, buttonWidth, buttonHeight);
         }
-        if (Settings.completion >= 5) {
+        if (Settings.completion.get("Level 4") == 1) {
             batch.draw(level5Text, buttonX + buttonWidth * 1.5f, row2Y, buttonWidth, buttonHeight);
         }
 
         batch.draw(quitText, quitX, quitY, buttonWidth, buttonHeight);
         batch.end();
-
     }
 
     @Override

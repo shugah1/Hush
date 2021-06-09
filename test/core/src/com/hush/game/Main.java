@@ -9,10 +9,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.hush.game.Entities.GameObject;
 import com.hush.game.Entities.Player;
 import com.hush.game.Objects.MovingWall;
-import com.hush.game.Screens.LevelSelect;
-import com.hush.game.Screens.LoseScreen;
-import com.hush.game.Screens.MainMenu;
-import com.hush.game.Screens.WinScreen;
+import com.hush.game.Screens.*;
 import com.hush.game.UI.HUD;
 import com.hush.game.UI.Settings;
 import com.hush.game.World.WorldContactListener;
@@ -28,7 +25,6 @@ import com.hush.game.constants.Globals;
 import org.ini4j.Wini;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class Main implements Screen {
@@ -54,11 +50,19 @@ public class Main implements Screen {
     Texture resumeText;
     Texture restartText;
     Texture returnText;
+    Texture notificationText1;
+    Texture notificationText2;
+    Texture startText;
+    Texture finalImage;
     Sound sound;
+
     boolean paused = false;
-    float buttonWidth = Gdx.graphics.getWidth() / 5;
-    float buttonHeight = Gdx.graphics.getHeight() / 9;
-    float buttonX = Gdx.graphics.getWidth() / 2 - buttonWidth / 2;
+    boolean notification = true;
+    float buttonWidth = Gdx.graphics.getWidth() / 5f;
+    float buttonHeight = Gdx.graphics.getHeight() / 9f;
+    float buttonX = Gdx.graphics.getWidth() / 2f - buttonWidth / 2;
+    float column1 = buttonWidth * 0.5f;
+    float helpHeight = buttonHeight * 1.25f;
     float pauseY = buttonHeight * 7;
     float resumeY = buttonHeight * 5;
     float restartY = buttonHeight * 3;
@@ -101,6 +105,11 @@ public class Main implements Screen {
         restartText = new Texture("Text/restartText.png");
         returnText = new Texture("Text/returnText.png");
         sound = Gdx.audio.newSound(Gdx.files.internal("test/core/assets/SoundEffects/Menu1.wav"));
+
+        notificationText1 = new Texture("Text/notificationText1.png");
+        notificationText2 = new Texture("Text/notificationText2.png");
+        startText = new Texture("Text/startText.png");
+        finalImage = new Texture("finalImage.png");
     }
 
     @Override
@@ -110,10 +119,15 @@ public class Main implements Screen {
 
     public void update(float dt) {
         if (player.win) {
-            game.setScreen(new WinScreen(game));
-            Settings.music.stop();
-            player.win = false;
-            gameObject.clear();
+            if (Settings.completion.get("Level 5") == 0 && LevelSelect.mapSelect.equals("Level 5")) {
+                game.setScreen(new CreditScreen(game));
+            }
+            else {
+                game.setScreen(new WinScreen(game));
+                Settings.music.stop();
+                player.win = false;
+                gameObject.clear();
+            }
         }
         if (player.pDead) {
             game.setScreen(new LoseScreen(game));
@@ -121,6 +135,7 @@ public class Main implements Screen {
             player.pDead = false;
             gameObject.clear();
         }
+
         //Loops song
         if (game.music.getPosition() >= game.songLoopEnd) {
             game.music.setPosition((float) (game.music.getPosition() - (game.songLoopEnd - game.songLoopStart)));
@@ -136,6 +151,7 @@ public class Main implements Screen {
                 gO.update(dt);
             }
         }
+
         // Set game.music volume
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             Settings.musicVolume = Settings.musicVolume < 10 ? Settings.musicVolume + 1 : 10;
@@ -189,6 +205,7 @@ public class Main implements Screen {
 
     @Override
     public void render(float delta) {
+        // Pause Menu Loop
         if (paused) {
             Gdx.input.setInputProcessor(new InputAdapter() {
                 // Pause Menu Input
@@ -244,6 +261,36 @@ public class Main implements Screen {
             batch.draw(returnText, buttonX, returnY, buttonWidth, buttonHeight);
             batch.end();
         }
+
+        // Notification
+        else if (Settings.completion.get("Tutorial") == 0 && notification){
+            Gdx.input.setInputProcessor(new InputAdapter() {
+                // Notification Menu Input
+                @Override
+                public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                    if (Gdx.input.isTouched()) {
+                        sound.play(0.25f);
+                        notification = false;
+                    }
+                    return true;
+                }
+            });
+
+            // Renders Notification
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.setColor(0.25f, 0.25f, 0.25f, 1);
+            shapeRenderer.rect(column1, buttonHeight, buttonWidth * 4f, helpHeight * 6);
+            shapeRenderer.end();
+
+            batch.begin();
+            batch.draw(notificationText1, buttonX * 0.75f, buttonHeight * 6.5f, buttonWidth * 2f, buttonHeight * 2);
+            batch.draw(finalImage, buttonX, buttonHeight * 4, buttonWidth, buttonHeight * 2.5f);
+            batch.draw(notificationText2, buttonX * 0.75f, buttonHeight * 2, buttonWidth * 2f, buttonHeight * 2);
+            batch.draw(startText, buttonX, buttonHeight, buttonWidth, buttonHeight);
+            batch.end();
+        }
+
+        // Normal Update Loop
         else {
             update(delta);
             Gdx.gl.glClearColor(0, 0, 0, 1);
