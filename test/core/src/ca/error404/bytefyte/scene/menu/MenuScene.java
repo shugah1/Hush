@@ -2,12 +2,9 @@ package ca.error404.bytefyte.scene.menu;
 
 
 import ca.error404.bytefyte.Main;
-import ca.error404.bytefyte.constants.Globals;
-import ca.error404.bytefyte.constants.ScreenSizes;
 import ca.error404.bytefyte.ui.Button;
 import ca.error404.bytefyte.ui.MenuCursor;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.Camera;
@@ -18,11 +15,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.hush.game.UI.Settings;
-import org.ini4j.Wini;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Set;
 
 /*
@@ -151,10 +144,6 @@ public class MenuScene implements Screen {
      * Post: handles the update function
      * */
     public void update(float deltaTime) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F5)) {
-            launchHush();
-        }
-
         bgPos.x += xSpeed * deltaTime;
         bgPos.y += ySpeed * deltaTime;
 
@@ -176,63 +165,6 @@ public class MenuScene implements Screen {
         }
 
         for (int i=0; i < Main.transitions.size(); i++) Main.transitions.get(i).update(deltaTime);
-    }
-
-    public void launchHush() {
-        try {
-            // Window settings
-            File settings = new File(Globals.workingDirectory + "settings.ini");
-
-            // Checks for active save data
-            if (!settings.exists()) {
-                // Creates save file and writes default save data
-                File file = new File(Globals.workingDirectory);
-                file.mkdirs();
-
-                settings.createNewFile();
-
-                Wini ini = new Wini(settings);
-                ini.add("Settings", "screen size", ScreenSizes.screenSize);
-                ini.add("Settings", "music volume", ca.error404.bytefyte.Main.musicVolume);
-                ini.add("Settings", "sfx volume", ca.error404.bytefyte.Main.sfxVolume);
-                ini.add("Settings", "cutscene volume", ca.error404.bytefyte.Main.cutsceneVolume);
-                ini.add("Settings", "fullscreen", ScreenSizes.fullScreen);
-                ini.add("Settings", "debug", ca.error404.bytefyte.Main.debug);
-                ini.add("Menu", "bill", ca.error404.bytefyte.Main.bill);
-                ini.add("Menu", "stamina", ca.error404.bytefyte.Main.stamina);
-                ini.store();
-            } else {
-                Wini ini = new Wini(settings);
-                // loads save data and assigns variables
-                try {
-                    ScreenSizes.screenSize = Integer.parseInt(ini.get("Settings", "screen size"));
-                    ca.error404.bytefyte.Main.musicVolume = Integer.parseInt(ini.get("Settings", "music volume"));
-                    ca.error404.bytefyte.Main.cutsceneVolume = Integer.parseInt(ini.get("Settings", "cutscene volume"));
-                    ca.error404.bytefyte.Main.sfxVolume = Integer.parseInt(ini.get("Settings", "sfx volume"));
-                    ScreenSizes.fullScreen = Boolean.parseBoolean(ini.get("Settings", "fullscreen"));
-                    ca.error404.bytefyte.Main.debug = Boolean.parseBoolean(ini.get("Settings", "debug"));
-                    ca.error404.bytefyte.Main.bill = Boolean.parseBoolean(ini.get("Menu", "bill"));
-                    ca.error404.bytefyte.Main.stamina = Boolean.parseBoolean(ini.get("Menu", "stamina"));
-                } catch (Exception ignored) {
-
-                }
-            }
-
-            // Sets screen size
-            Gdx.graphics.setWindowedMode(1280, 720);
-
-            // window title and window icon
-            Gdx.graphics.setTitle("Hush");
-            Gdx.graphics.setResizable(false);
-
-            // Starts app
-            Main.game.create();
-            try {
-                game.music.stop();
-            } catch (Exception ignored) {}
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
