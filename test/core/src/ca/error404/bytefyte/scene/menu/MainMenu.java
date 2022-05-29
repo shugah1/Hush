@@ -137,6 +137,7 @@ public class MainMenu extends MenuScene {
             Random rand = new Random();
             int i = rand.nextInt(100);
 
+
             //handles menu music
             if (Main.bill) {
                 game.music = game.newSong("menu weird");
@@ -149,6 +150,7 @@ public class MainMenu extends MenuScene {
                     game.music = game.newSong("menu");
                 }
             }
+            //game.music = game.newSong("fawful's castle");
             game.music.setVolume(Main.musicVolume / 10f);
             game.music.play();
         }

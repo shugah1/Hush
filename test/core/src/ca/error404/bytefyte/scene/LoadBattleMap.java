@@ -108,6 +108,7 @@ public class LoadBattleMap implements Screen {
         } else {
             game.music = game.newSong();
         }
+        // game.music = game.newSong("putin");
         game.music.setVolume(Main.musicVolume / 10f);
         game.music.play();
 
